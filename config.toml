@@ -55,7 +55,7 @@ locale = "en-GB"
 # CAUTION: The URL's query string (after the '?') must be changed after any edit
 # to the CSL style, otherwise zotero.org might still use a previously cached
 # version of the file.
-csl_style = "https://docs.edtechhub.org/static/dist/csl/eth_apa.xml?202012301815"
+csl_style = "https://docs.opendeved.net/static/dist/csl/eth_apa.xml?202012301815"
 
 item_exclude_re = "^_exclude$"
 
