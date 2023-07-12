@@ -10,17 +10,15 @@ google_analytics_id = "UA-169419325-2"
 
 [kerko.link_groups]
 
-    [kerko.link_groups.breadcrumb_base]
+    [[kerko.link_groups.breadcrumb_base]]
+    text = "Open Development & Education"
+    type = "url"
+    url = "https://opendeved.net"
 
-        [[kerko.link_groups.breadcrumb_base.links]]
-        type = "url"
-        url = "https://opendeved.net"
-        label = "Open Development & Education"
-
-        [[kerko.link_groups.breadcrumb_base.links]]
-        type = "endpoint"
-        label = "Evidence Library"
-        endpoint = "kerko.search"
+    [[kerko.link_groups.breadcrumb_base]]
+    text = "Evidence Library"
+    type = "endpoint"
+    endpoint = "kerko.search"
 
 [kerko.features]
 
