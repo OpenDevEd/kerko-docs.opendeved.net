@@ -1,0 +1,138 @@
+{%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
+{%- from "kerkoapp/_collapse.html.jinja2" import expand_collapse_buttons %}
+
+{%- macro facet_item(
+missing_label,
+item,
+subtree,
+list_id='',
+item_tag='li',
+add_icon='far fa-square',
+add_title=_("Add the '{}' filter"),
+remove_icon='far fa-check-square',
+remove_title=_("Remove the '{}' filter"),
+icon_left='20px',
+icon_top='-1px',
+icon_line_height='1.5',
+expand_icon='fas fa-chevron-right',
+expand_title=_("Expand subfilters"),
+collapse_icon='fas fa-chevron-down',
+collapse_title=_("Collapse subfilters"),
+top_level=False
+)
+-%}
+{%- if item.label or missing_label -%}
+<{{ item_tag }}{% if icon_left %} class="position-relative" {% endif %}{% if top_level and icon_left %}
+    style="margin-left:{{ icon_left }};" {% endif %}>
+    {%- set label = item.label|escape|trim(' _') or (('<em>' + missing_label + '</em>')|safe) -%}
+    {%- if item.remove_url -%}
+    <a class="no-decorate" href="{{ item.remove_url }}" {{ title_aria_label(remove_title.format(label|striptags|escape))
+        }} rel="nofollow">
+        {%- if remove_icon %}<span class="far fa-check-square{% if icon_left %} position-absolute{% endif %}"
+            aria-hidden="true" {% if icon_left %}
+            style="margin-left:1px;{% if icon_top %}top:{{ icon_top }};{% endif %}left:-{{ icon_left }};{% if icon_line_height %}line-height:1.5;{% endif %}"
+            {% endif %}></span>{% endif %}
+        <span class="facet-item-label parent-decorate">{{ label }}</span>{#- No whitespace -#}
+    </a>
+    {%- elif item.add_url -%}
+    <a class="no-decorate" href="{{ item.add_url }}" {{ title_aria_label(add_title.format(label|striptags|escape)) }}
+        rel="nofollow">
+        {%- if add_icon %}<span class="far fa-square{% if icon_left %} position-absolute{% endif %}" aria-hidden="true"
+            {% if icon_left %}
+            style="margin-left:1px;{% if icon_top %}top:{{ icon_top }};{% endif %}left:-{{ icon_left }};{% if icon_line_height %}line-height:1.5;{% endif %}"
+            {% endif %}></span>{% endif %}
+        <span class="facet-item-label parent-decorate">{{ label }}</span>{#- No whitespace -#}
+    </a>
+    {%- else -%}
+    {{- label }}
+    {% endif %}
+    {% if not item.remove_url and item.count > 0 %}<span class="facet-item-count"> ({{ item.count_formatted|safe }})
+    </span>{% endif %}
+    {%- if subtree %}
+    {%- if list_id and item.id %}
+    {{- expand_collapse_buttons(
+    collapse_id=list_id + '-' + item.id|string,
+    btn_class='btn btn-link px-0 py-0 border-0 align-baseline',
+    expand_label='',
+    expand_description=expand_title,
+    expand_icon=expand_icon,
+    collapse_label='',
+    collapse_description=collapse_title,
+    collapse_icon=collapse_icon,
+    icons_width='1rem',
+    expand_default=item.remove_url
+    )
+    -}}
+    {%- endif %}
+    {{ subtree|safe }}
+    {%- endif %}
+</{{ item_tag }}>
+{%- endif -%}
+{%- endmacro %}
+
+{%- macro facet_items(
+missing_label,
+items,
+list_id='',
+list_tag='ul',
+list_class='list-no-bullets',
+list_class_top='list-unstyled',
+item_tag='li',
+top_level=False,
+collapse=False,
+more=False
+)
+-%}
+{%- if items %}
+<{{ list_tag }}{% if list_id %} id="{{ list_id }}{% if more %}-more{% endif %}" {% endif %}
+    class="{{ list_class_top if top_level else list_class }}{% if list_id %} collapse{% if not collapse %} show{% endif %}{% endif %}">
+    {%- for item in items %}
+    {%- if item.children %}
+    {%- set subtree_id = list_id + '-' + item.id|string if list_id and item.id else '' %}
+    {%- set subtree = facet_items(missing_label, item.children, list_id=subtree_id, list_tag=list_tag,
+    item_tag=item_tag, collapse=not item.remove_url, **kwargs) %}
+    {%- else %}
+    {%- set subtree = '' %}
+    {%- endif %}
+    {{- facet_item(missing_label, item, subtree, item_tag=item_tag, list_id=list_id, top_level=top_level, **kwargs) }}
+    {%- endfor %}
+</{{ list_tag }}>
+{%- endif %}
+{%- endmacro %}
+
+{%- macro facet(
+title,
+missing_label,
+items,
+list_id='',
+initial_limit=0,
+initial_limit_leeway=2,
+wrap_tag='div', wrap_class='',
+heading_tag='h3', heading_class='h6 font-weight-bold',
+body_tag='div', body_class='',
+list_class_top='list-unstyled'
+)
+-%}
+{%- if items %}
+<{{ wrap_tag }}{% if wrap_class %} class="{{ wrap_class }}" {% endif %}>
+    <{{ heading_tag }}{% if heading_class %} class="{{ heading_class }}" {% endif %}>
+        {{ title }}
+    </{{ heading_tag }}>
+    <{{ body_tag }}{% if body_class %} class="{{ body_class }}" {% endif %}>
+        {%- if list_id and initial_limit and items|length > initial_limit + initial_limit_leeway %}
+        {#- Note: initial_limit can't be enabled without a list_id, hence the above check. #}
+        {{- facet_items(missing_label, items[:initial_limit], list_id=list_id, list_class_top=[list_class_top, 'mb-0',
+        'continued', 'continued-hint']|join(' '), top_level=True, **kwargs) }}
+        {{- facet_items(missing_label, items[initial_limit:], list_id=list_id, list_class_top=[list_class_top, 'mb-0',
+        'collapse']|join(' '), top_level=True, collapse=True, more=True, **kwargs) }}
+        <div class="mb-3 d-print-none">
+            {{- expand_collapse_buttons(collapse_id=list_id + '-more') -}}
+        </div>
+        {%- else %}
+        {{- facet_items(missing_label, items, list_id=list_id, list_class_top=list_class_top, top_level=True, **kwargs)
+        }}
+        {%- endif %}
+    </{{ body_tag }}>
+</{{ wrap_tag }}>
+{%- endif %}
+{%- endmacro %}

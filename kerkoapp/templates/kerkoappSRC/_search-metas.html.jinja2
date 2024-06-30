@@ -1,0 +1,14 @@
+{%- if is_searching %}
+    <meta name="robots" content="noindex">  {#- Prevent robots from indexing search result pages, which would generate lots of duplicate content. #}
+{%- endif %}
+{%- if pager %}
+    {%- if pager.previous %}
+        <link rel="prev" href="{{ pager.previous[0].url }}">
+    {%- endif %}
+    {%- if pager.next %}
+        <link rel="next" href="{{ pager.next[0].url }}">
+    {%- endif %}
+{%- endif %}
+{%- if atom_feed_url %}
+    <link rel="alternate" type="application/atom+xml" href="{{ atom_feed_url }}" title="{{ atom_feed_title|escape }}" />
+{%- endif %}

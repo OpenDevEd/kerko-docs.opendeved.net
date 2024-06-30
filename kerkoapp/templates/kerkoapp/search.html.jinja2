@@ -1,17 +1,17 @@
 {% extends 'kerko/search.html.jinja2' %}
 
 {% block kerko_search_js %}
-    {%- assets "search_js" %}
-        <script src="{{ ASSET_URL }}"></script>
-    {%- endassets %}
+{%- assets "search_js" %}
+<script src="{{ ASSET_URL }}"></script>
+{%- endassets %}
 {% endblock kerko_search_js %}
 
 {% block kerko_print_js %}
-    {%- if show_print_link %}
-        {%- assets "print_js" %}
-            <script src="{{ ASSET_URL }}"></script>
-        {%- endassets %}
-    {%- endif %}
+{%- if show_print_link %}
+{%- assets "print_js" %}
+<script src="{{ ASSET_URL }}"></script>
+{%- endassets %}
+{%- endif %}
 {% endblock kerko_print_js %}
 
 {% block help_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}
@@ -27,9 +27,9 @@
 {% block sorter_wrapper_classes scoped %}col-auto pl-0 ml-auto mt-3 mb-2 text-right{% endblock %}
 
 {% block search_results_list %}
-    <ul class="mb-4 list-unstyled {% if print_preview %}search-print-preview{% endif %}">
-        {%- for result, result_url in search_results %}
-            {%- include "kerkoapp/_search-result.html.jinja2" %}
-        {%- endfor %}
-    </ul>
+<ul class="mb-4 list-unstyled {% if print_preview %}search-print-preview{% endif %}">
+    {%- for result, result_url in search_results %}
+    {%- include "kerkoapp/_search-result.html.jinja2" %}
+    {%- endfor %}
+</ul>
 {% endblock search_results_list %}
