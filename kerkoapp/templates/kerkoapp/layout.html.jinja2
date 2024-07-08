@@ -1,4 +1,5 @@
 {% extends 'kerko/layout.html.jinja2' %}
+{% from "macros/svgs.jinja2" import menu %}
 
 {% block meta_title_inner -%}
 {%- if title %}{{ title|striptags|escape }} – {% endif %}{{ config.kerko.meta.title|striptags|escape -}}
@@ -20,16 +21,22 @@
 {% endblock styles %}
 
 {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-light bg-white d-print-none">
+<nav class="navbar navbar-expand-lg navbar-light d-print-none">
     <div class="w-100 d-lg-flex px-3 px-lg-5">
         <div class="d-flex align-items-center justify-content-between">
             {%- block navbar_brand %}
             <div class="navbar-brand w-auto">
                 {# <a class="d-block brand-title" href="{{ config.HOME_URL }}">{{ config.HOME_TITLE }}</a> #}
                 <a class="d-block brand-title" href="{{ config.HOME_URL }}">
-                    <img src="{{ url_for('static', filename='dist/images/opendeved-logo.png') }}"
+                    {%- if theme == 'dark' %}
+                    <img src="{{ url_for('static', filename='dist/images/opendeved-logo-light.png') }}"
                         alt="{{ config.HOME_TITLE }}" class="brand-logo">
+                    {%- else %}
+                    <img src="{{ url_for('static', filename='dist/images/opendeved-logo-dark.png') }}"
+                        alt="{{ config.HOME_TITLE }}" class="brand-logo">
+                    {%- endif %}
                 </a>
+
                 {% if config.HOME_SUBTITLE %}<span class="d-block brand-subtitle text-primary">{{ config.HOME_SUBTITLE
                     }}</span>{% endif %}
             </div>
@@ -38,7 +45,9 @@
             <div class="d-lg-none">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
                     aria-controls="navbar-content" aria-expanded="false" aria-label="{{ _('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon">
+                        {{ menu() }}
+                    </span>
                     {# <span class="navbar-toggler-text">{{ _('Menu') }}</span> #}
                 </button>
             </div>
@@ -129,3 +138,59 @@
 <script src="{{ ASSET_URL }}"></script>
 {%- endassets %}
 {% endblock body_scripts %}
+
+
+{%- block main %}
+<main {% block main_attributes %}class="container" {% endblock %}>
+    {# {%- block breadcrumb %} #}
+    {# {{ breadcrumb([title]) }} #}
+    {# {%- endblock breadcrumb %} #}
+    {%- block search_criteria %}
+    <div>
+        <div class="">
+            {%- include "kerkoapp/_breadbox.html.jinja2" %}
+            {%- include "kerkoapp/_search-form.html.jinja2" %}
+        </div>
+    </div>
+    {%- endblock search_criteria %}
+    {%- block main_inner %}
+    <div {% block main_inner_attributes %}class="row" {% endblock %}>
+        {%- block content %}
+        <div {% block content_attributes %}class="col-12 {% if self.sidebar_inner() %}col-lg-8 order-lg-4{% endif %}" {%
+            endblock %}>
+            {%- block content_header %}
+            <div class="row">
+                <div class="col">
+                    <h1 class="{% block content_heading_classes %}h2 my-2{% endblock %}">{{ title|escape }}</h1>
+                </div>
+            </div>
+            {%- endblock content_header %}
+            {%- block messages %}
+            {%- with messages = get_flashed_messages(with_categories=true) %}
+            {%- for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                <a class="close" {{ title_aria_label(_('Remove this message')) }} href="#"
+                    data-dismiss="alert">&times;</a>
+                {{ message }}
+            </div>
+            {%- endfor %}
+            {%- endwith %}
+            {%- endblock messages %}
+            {%- block content_inner %}
+            {%- endblock content_inner %}
+            {%- block content_footer %}
+            {%- endblock content_footer %}
+        </div>
+        {%- endblock content %}
+        {%- block sidebar %}
+        {%- if self.sidebar_inner() %}
+        <div {% block sidebar_attributes %}class="col-12 col-lg-4 order-lg-1" {% endblock %}>
+            {%- block sidebar_inner %}
+            {%- endblock sidebar_inner %}
+        </div>
+        {%- endif %}
+        {%- endblock sidebar %}
+    </div>
+    {%- endblock main_inner %}
+</main>
+{%- endblock main %}

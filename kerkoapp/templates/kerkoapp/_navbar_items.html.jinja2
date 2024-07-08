@@ -1,3 +1,5 @@
+{% from "macros/svgs.jinja2" import moon, sun %}
+
 {% for item in config.kerko_composer.link_groups.navbar.get_ordered_links() %}
 {%- block navbar_items %}
 <li class="nav-item">
@@ -22,5 +24,18 @@
 <li class="nav-item">
     <a class="nav-link" href="https://opendeved.net/contact-us/">{{ _('Contact Us') }}</a>
 </li>
+<li class="nav-item">
+    <div style="width: 20px; height: 100%">
+        <a href="{{ url_for('toggle_theme', current_page='/') }}" class="nav__link" style="width: 20px; height: 20px;">
+            <span class="nav__item">
+                {% if theme == "dark" %}
+                {{ sun("nav__icon") }}
+                {% else %}
+                {{ moon("nav__icon") }}
+                {% endif %}
+            </span>
+    </div>
+</li>
+</a>
 {%- endblock navbar_items %}
 {% endfor %}

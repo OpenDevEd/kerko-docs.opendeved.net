@@ -1,0 +1,96 @@
+{% macro star(class_) %}
+<svg xmlns="http://www.w3.org/2000/svg" class="{{ class_ }}" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+</svg>
+{% endmacro %}
+
+{% macro pencil(class_) %}
+<svg xmlns="http://www.w3.org/2000/svg" class="{{ class_ }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+</svg>
+{% endmacro %}
+
+{% macro moon(class_) %}
+<svg class="{{ class_ }}" viewBox="0 0 25 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M11.9622 2.80157C7.31554 3.29221 3.69482 7.22328 3.69482 12C3.69482 17.1086 7.83619 21.25 12.9448 21.25C17.7215 21.25 21.6526 17.6293 22.1432 12.9826C20.8165 14.6669 18.7574 15.75 16.4448 15.75C12.4407 15.75 9.19482 12.5041 9.19482 8.5C9.19482 6.18738 10.278 4.1283 11.9622 2.80157ZM2.19482 12C2.19482 6.06294 7.00776 1.25 12.9448 1.25C13.6614 1.25 14.0202 1.82126 14.0816 2.27627C14.1408 2.71398 13.979 3.27065 13.4758 3.57467C11.8075 4.5828 10.6948 6.41182 10.6948 8.5C10.6948 11.6756 13.2692 14.25 16.4448 14.25C18.533 14.25 20.362 13.1373 21.3701 11.469C21.6741 10.9658 22.2308 10.804 22.6685 10.8632C23.1235 10.9246 23.6948 11.2834 23.6948 12C23.6948 17.9371 18.8819 22.75 12.9448 22.75C7.00776 22.75 2.19482 17.9371 2.19482 12Z"
+        fill="currentColor" />
+</svg>
+{% endmacro %}
+
+{% macro sun(class_) %}
+<svg class="{{ class_ }}" viewBox="0 0 33 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M16.9447 1.66699C17.4969 1.66699 17.9447 2.11471 17.9447 2.66699V4.00033C17.9447 4.55261 17.4969 5.00033 16.9447 5.00033C16.3924 5.00033 15.9447 4.55261 15.9447 4.00033V2.66699C15.9447 2.11471 16.3924 1.66699 16.9447 1.66699ZM6.80947 5.86514C7.19999 5.47462 7.83317 5.47462 8.22369 5.86514L8.74747 6.38893C9.13799 6.77945 9.13799 7.41261 8.74747 7.80314C8.35694 8.19366 7.72378 8.19366 7.33326 7.80314L6.80947 7.27935C6.41895 6.88883 6.41895 6.25566 6.80947 5.86514ZM27.0795 5.86549C27.47 6.25601 27.47 6.88918 27.0795 7.2797L26.5557 7.80348C26.1652 8.19401 25.532 8.19401 25.1415 7.80348C24.7509 7.41295 24.7509 6.77979 25.1415 6.38927L25.6653 5.86549C26.0559 5.47497 26.6889 5.47497 27.0795 5.86549ZM16.9447 9.00033C13.0787 9.00033 9.94466 12.1343 9.94466 16.0003C9.94466 19.8663 13.0787 23.0003 16.9447 23.0003C20.8107 23.0003 23.9447 19.8663 23.9447 16.0003C23.9447 12.1343 20.8107 9.00033 16.9447 9.00033ZM7.94466 16.0003C7.94466 11.0298 11.9741 7.00033 16.9447 7.00033C21.9152 7.00033 25.9447 11.0298 25.9447 16.0003C25.9447 20.9709 21.9152 25.0003 16.9447 25.0003C11.9741 25.0003 7.94466 20.9709 7.94466 16.0003ZM2.61133 16.0003C2.61133 15.4481 3.05905 15.0003 3.61133 15.0003H4.94466C5.49694 15.0003 5.94466 15.4481 5.94466 16.0003C5.94466 16.5526 5.49694 17.0003 4.94466 17.0003H3.61133C3.05905 17.0003 2.61133 16.5526 2.61133 16.0003ZM27.9447 16.0003C27.9447 15.4481 28.3924 15.0003 28.9447 15.0003H30.278C30.8303 15.0003 31.278 15.4481 31.278 16.0003C31.278 16.5526 30.8303 17.0003 30.278 17.0003H28.9447C28.3924 17.0003 27.9447 16.5526 27.9447 16.0003ZM25.1415 24.1971C25.532 23.8066 26.1652 23.8066 26.5557 24.1971L27.0795 24.721C27.47 25.1115 27.47 25.7446 27.0795 26.1351C26.6889 26.5257 26.0559 26.5257 25.6653 26.1351L25.1415 25.6114C24.7509 25.2209 24.7509 24.5877 25.1415 24.1971ZM8.74747 24.1975C9.13799 24.5881 9.13799 25.2213 8.74747 25.6118L8.22369 26.1355C7.83317 26.5261 7.19999 26.5261 6.80947 26.1355C6.41895 25.745 6.41895 25.1118 6.80947 24.7213L7.33326 24.1975C7.72378 23.807 8.35694 23.807 8.74747 24.1975ZM16.9447 27.0003C17.4969 27.0003 17.9447 27.4481 17.9447 28.0003V29.3337C17.9447 29.8859 17.4969 30.3337 16.9447 30.3337C16.3924 30.3337 15.9447 29.8859 15.9447 29.3337V28.0003C15.9447 27.4481 16.3924 27.0003 16.9447 27.0003Z"
+        fill="currentColor" />
+    <path
+        d="M16.9447 9.00033C13.0787 9.00033 9.94466 12.1343 9.94466 16.0003C9.94466 19.8663 13.0787 23.0003 16.9447 23.0003C20.8107 23.0003 23.9447 19.8663 23.9447 16.0003C23.9447 12.1343 20.8107 9.00033 16.9447 9.00033Z"
+        fill="currentColor" />
+</svg>
+{% endmacro %}
+
+{% macro menu(class_) %}
+<svg class="{{ class_ }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 7H4" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M20 13H4" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M20 19H4" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" />
+</svg>
+{% endmacro %}
+
+{% macro toggleOff(class_) %}
+<svg class="{{ class_ }}" width="32" height="16" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.25" y="0.25" width="31.5" height="15.5" rx="7.75" fill="black" fill-opacity="0.2" stroke="#A4A4A5"
+        stroke-width="0.5" />
+    <circle cx="8" cy="8" r="6" fill="white" fill-opacity="0.8" />
+</svg>
+{% endmacro %}
+
+{% macro toggleOn(class_) %}
+<svg class="{{ class_ }}" width="32" height="16" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.25" y="0.25" width="31.5" height="15.5" rx="7.75" fill="#5CACFD" stroke="#A4A4A5" stroke-width="0.5" />
+    <circle cx="24" cy="8" r="6" fill="white" fill-opacity="0.8" />
+</svg>
+{% endmacro %}
+
+{% macro checkSquare(class_, width, height) %}
+<svg class="{{ class_ }}" width="{{ width }}" height="{{ height }}" viewBox="0 0 24 25" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.125" y="0.145508" width="23.75" height="23.75" rx="5.875" fill="#E68124" stroke="#712916"
+        stroke-width="0.25" />
+    <path d="M7 12.6491L9.69391 15.7348L16.4286 8.02051" stroke="white" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+</svg>
+{% endmacro %}
+
+{% macro noCheckSquare(class_, width, height) %}
+<svg class="{{ class_ }}" width="{{ width }}" height="{{ height }}" viewBox="0 0 28 28" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="26" height="26" rx="5" {% if theme=='dark' %} stroke="#4B5563" {% else %} stroke="#D1D5DB"
+        {% endif %} stroke-opacity="0.6" stroke-width="2" />
+</svg>
+{% endmacro %}
+
+{% macro expandIcon(class_, width, height) %}
+<svg class="{{ class_ }}" width="{{ width }}" height="{{ height }}" viewBox="0 0 32 32" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path d="M25.3332 12L15.9998 20L6.6665 12" stroke="currentColor" stroke-opacity="0.8" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+{% endmacro %}
+
+{% macro helpIcon(class_, width, height) %}
+<svg class="{{ class_ }}" width="{{ width }}" height="{{ height }}" viewBox="0 0 24 24" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+        stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" />
+    <path
+        d="M10.125 8.875C10.125 7.83947 10.9645 7 12 7C13.0355 7 13.875 7.83947 13.875 8.875C13.875 9.56245 13.505 10.1635 12.9534 10.4899C12.478 10.7711 12 11.1977 12 11.75V13"
+        stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" />
+    <path
+        d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z"
+        fill="currentColor" fill-opacity="0.6" />
+</svg>
+{% endmacro %}

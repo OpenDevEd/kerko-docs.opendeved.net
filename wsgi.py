@@ -4,6 +4,7 @@ from flask import redirect, url_for
 from kerko.config_helpers import config_get
 
 from kerkoapp import create_app
+from flask import (redirect, session, request)
 
 try:
     application = app = create_app()
@@ -11,6 +12,15 @@ except RuntimeError as e:
     print(e, file=sys.stderr)
     sys.exit(1)
 
+@app.get("/toggle-theme")
+def toggle_theme():
+    current_theme = session.get("theme")
+    if current_theme == "dark":
+        session["theme"] = "light"
+    else:
+        session["theme"] = "dark"
+
+    return redirect(request.referrer)
 
 @app.route('/')
 def home():

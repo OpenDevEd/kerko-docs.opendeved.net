@@ -17,7 +17,10 @@ from .assets import assets
 from .config import DevelopmentConfig, ProductionConfig, update_composer
 from .config_helpers import KerkoAppModel, load_config_files
 from .extensions import babel, bootstrap
+from flask import (session)
 
+from dateutil import parser
+from typing import List, Dict
 
 def create_app() -> Flask:
     """
@@ -66,7 +69,43 @@ def create_app() -> Flask:
     register_blueprints(app)
     register_errorhandlers(app)
 
+    # Add context processor to make theme available to all templates
+    @app.context_processor
+    def inject_theme():
+        theme = session.get('theme')
+        return {'theme': theme}
+        
     return app
+
+
+def format_date(value):
+    try:
+        date_obj = parser.parse(value)
+    except (ValueError, TypeError):
+        return value  # Return the original value if it can't be parsed
+
+    def ordinal(n):
+        if 10 <= n % 100 <= 20:
+            suffix = 'th'
+        else:
+            suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')
+        return str(n) + suffix
+
+    formatted_date = date_obj.strftime(f'%b {ordinal(date_obj.day)}, %Y')
+    return formatted_date
+     
+
+def format_creators(value: List[Dict[str, str]], maxLen = 20) -> str:
+    creators = ""
+    for i, creator in enumerate(value):
+        if i >= 3: break
+        if creator.get("firstName") and creator.get("lastName"):
+            creators += f"{creator['firstName']} {creator['lastName']}, "
+    # check if the length of creators is greater than maxLen
+    if len(creators) > maxLen:
+        creators = creators[:maxLen] + "..."
+    # Remove the trailing comma and space
+    return creators.rstrip(', ')
 
 
 def register_extensions(app):
@@ -81,6 +120,11 @@ def register_extensions(app):
     assets.init_app(app)
     logging.init_app(app)
     bootstrap.init_app(app)
+    
+    # Register custom Jinja filter
+    app.jinja_env.filters['format_date'] = format_date
+    app.jinja_env.filters['format_creators'] = format_creators
+   
 
 
 def register_blueprints(app):

@@ -1,4 +1,5 @@
 {%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
+{%- from "macros/svgs.jinja2" import expandIcon %}
 
 {%- macro expand_collapse_buttons(
 collapse_id,
@@ -16,15 +17,13 @@ expand_default=False
 <button class="{{ [btn_class, 'btn-expand']|join(' ') }}" data-toggle="collapse" data-target="#{{ collapse_id }}"
     aria-controls="{{ collapse_id }}" aria-expanded="{% if expand_default %}true{% else %}false{% endif %}" {% if
     expand_description %}{{ title_aria_label(expand_description) }}{% endif %}>
-    {%- if expand_icon %}<span class="{{ expand_icon }}" aria-hidden="true" {% if icons_width
-        %}style="width: {{ icons_width }};" {% endif %}></span>{% endif -%}{% if expand_label %} {{ expand_label }}{%
-    endif %}
+    {%- if expand_icon %}
+    {{ expandIcon('expandIcon', 20, 20)}}
+    {% endif %}
 </button>{#- No whitespace -#}
 <button class="{{ [btn_class, 'btn-collapse']|join(' ') }}" data-toggle="collapse" data-target="#{{ collapse_id }}"
     aria-controls="{{ collapse_id }}" aria-expanded="{% if expand_default %}false{% else %}true{% endif %}" {% if
     collapse_description %}{{ title_aria_label(collapse_description) }}{% endif %}>
-    {%- if collapse_icon %}<span class="{{ collapse_icon }}" aria-hidden="true" {% if icons_width
-        %}style="width: {{ icons_width }};" {% endif %}></span>{% endif -%}{% if collapse_label %} {{ collapse_label
-    }}{% endif %}
+    {%- if collapse_icon %}{{ expandIcon('expandIcon-expand', 20, 20)}}{% endif %}
 </button>
 {%- endmacro %}

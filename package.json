@@ -31,11 +31,10 @@
     "clean-css": "^4.2.1",
     "clean-css-cli": "^4.3.0",
     "frontend-dependencies": "^1.1.7",
-    "postcss": "^8.4.4",
+    "postcss": "^8.4.39",
     "postcss-cli": "^9.0.2",
     "postcss-reporter": "^7.0.4"
   },
-  "dependencies": {},
   "frontendDependencies": {
     "target": "static/src/vendor/",
     "packages": {

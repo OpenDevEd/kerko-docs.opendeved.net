@@ -1,5 +1,6 @@
 {%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
 {%- from "kerkoapp/_collapse.html.jinja2" import expand_collapse_buttons %}
+{%- from "macros/svgs.jinja2" import checkSquare, noCheckSquare %}
 
 {%- macro facet_item(
 missing_label,
@@ -28,20 +29,25 @@ top_level=False
     {%- if item.remove_url -%}
     <a class="no-decorate" href="{{ item.remove_url }}" {{ title_aria_label(remove_title.format(label|striptags|escape))
         }} rel="nofollow">
-        {%- if remove_icon %}<span class="far fa-check-square{% if icon_left %} position-absolute{% endif %}"
-            aria-hidden="true" {% if icon_left %}
+        {%- if remove_icon %}
+        <span class="{% if icon_left %} position-absolute{% endif %}" aria-hidden="true" {% if icon_left %}
             style="margin-left:1px;{% if icon_top %}top:{{ icon_top }};{% endif %}left:-{{ icon_left }};{% if icon_line_height %}line-height:1.5;{% endif %}"
-            {% endif %}></span>{% endif %}
-        <span class="facet-item-label parent-decorate">{{ label }}</span>{#- No whitespace -#}
+            {% endif %}>
+            {{- checkSquare('', 20, 20) -}}
+        </span>
+        {% endif %}
+        <span class="facet-item-label parent-decorate ml-2">{{ label }}</span>
     </a>
     {%- elif item.add_url -%}
-    <a class="no-decorate" href="{{ item.add_url }}" {{ title_aria_label(add_title.format(label|striptags|escape)) }}
-        rel="nofollow">
-        {%- if add_icon %}<span class="far fa-square{% if icon_left %} position-absolute{% endif %}" aria-hidden="true"
-            {% if icon_left %}
+    <a class="no-decorate my-2" href="{{ item.add_url }}" {{ title_aria_label(add_title.format(label|striptags|escape))
+        }} rel="nofollow">
+        {%- if add_icon %}<span class="f{% if icon_left %} position-absolute{% endif %}" aria-hidden="true" {% if
+            icon_left %}
             style="margin-left:1px;{% if icon_top %}top:{{ icon_top }};{% endif %}left:-{{ icon_left }};{% if icon_line_height %}line-height:1.5;{% endif %}"
-            {% endif %}></span>{% endif %}
-        <span class="facet-item-label parent-decorate">{{ label }}</span>{#- No whitespace -#}
+            {% endif %}>
+            {{- noCheckSquare('', 20, 20) -}}
+        </span>{% endif %}
+        <span class="facet-item-label parent-decorate ml-2">{{ label }}</span>
     </a>
     {%- else -%}
     {{- label }}

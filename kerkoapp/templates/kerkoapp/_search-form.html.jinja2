@@ -1,34 +1,94 @@
 {%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
+{%- from "macros/svgs.jinja2" import helpIcon %}
+{%- from "macros/searchIcon.jinja2" import searchIcon %}
+{%- from "macros/svgs.jinja2" import expandIcon %}
 
 {%- if search_results %}
-<form method="post" role="search" {% block search_form_attributes %}class="form d-print-none px-0" {% endblock %}>
-    {{- form.hidden_tag() }}
-    <div class="form-row mx-n1">
-        <div class="col-12 col-md px-1 mb-2 mb-md-0">
-            {%- set placeholder = _("Search within results for...") if is_searching else _("Search for...") %}
-            {%- set keywords_validation_class = " is-invalid" if 'keywords' in form.errors else "" %}
-            {%- set scope_validation_class = " is-invalid" if 'scope' in form.errors else "" %}
-            <label for="{{ form.keywords.id }}" class="sr-only">{{ placeholder }}</label>
-            {{- form.keywords(class_="form-control" + keywords_validation_class, placeholder=placeholder) }}
+<div class="d-lg-flex justify-content-between px-0 py-4">
+    <form method="post" role="search" {% block search_form_attributes %}class="form d-print-none w-full" {% endblock %}>
+        <div class="d-lg-flex justify-content-between">
+            <div class="mb-2">
+                {{- form.hidden_tag() }}
+                <div class="form-row mx-n1 d-flex">
+                    {%-
+                    set placeholder = _("Search within results for...")
+                    if is_searching
+                    else _("Search for...")
+                    %}
+                    {%- set keywords_validation_class = " is-invalid" if 'keywords' in form.errors else "" %}
+                    {%- set scope_validation_class = " is-invalid" if 'scope' in form.errors else "" %}
+                    {# <label for="{{ form.keywords.id }}" class="sr-only">{{ placeholder }}</label> #}
+                    {# {{- form.keywords(class_="form-control" + keywords_validation_class, placeholder=placeholder)
+                    }} #}
+                    <div class="search-input-group">
+                        <span class="search-icon">
+                            {{ searchIcon('searchIcon', 22, 22) }}
+                        </span>
+                        <input maxlength="1000" name="keywords" placeholder="Search for..." type="search" value="">
+                    </div>
+                    {# <label for="scope" class="sr-only">{{ _('Search in...') }}</label> #}
+                    {# {{- form.scope(class_="search-select-filter" + scope_validation_class) }} #}
+                    <div class="d-flex filter-searchButton-area">
+                        <div class="search-form-select d-flex align-items-center">
+                            <select name="scope" id="scope" class="form-control">
+                                {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
+                                <option value="{{ scopes.key }}">{{ scopes.selector_label }}</option>
+                                {%- endfor %}
+                            </select>
+                            {{ expandIcon("", 20, 20) }}
+                        </div>
+                        <div class="col-auto px-1 search-submit-button">
+                            <button id="submit" type="submit" {% block search_button_attributes
+                                %}class="{% block search_btn_classes %}btn btn-primary{% endblock %}" {% endblock %} {{
+                                title_aria_label(_('Search')) }}>
+                                <span class="fas fa-search" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {%- if form.errors %}
+                {%- for key, errors in form.errors.items() %}
+                {%- for error in errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+                {%- endfor %}
+                {%- endfor %}
+                {%- endif %}
+            </div>
         </div>
-        <div class="col col-md-5 px-1">
-            <label for="{{ form.scope.id }}" class="sr-only">{{ _('Search in...') }}</label>
-            {{- form.scope(class_="custom-select" + scope_validation_class) }}
+    </form>
+    <div class="d-flex sort-help-container">
+        {%- if is_searching or facet_results %}
+        <div class="col-auto pl-0 ml-auto text-right pr-0">
+            <div class="{% block help_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
+                <button class="{% block help_btn_classes %} helpBtn btn {% endblock %}" data-toggle="modal"
+                    data-target="#search-help">
+                    {{ _("Help") }}
+                    {{ helpIcon('helpIcon', 20, 20) }}
+                </button>
+            </div>
+            {# {%- if facet_results and search_results %}
+            <div
+                class="{% block facets_link_wrapper_classes %}d-inline-block d-lg-none d-print-none mt-0 mb-2{% endblock %}">
+                <button id="facets-modal-toggle" class="{% block facets_btn_classes %}btn btn-primary{% endblock %}">
+                    <span class="fas fa-compass" aria-hidden="true"></span> {{ _("Explore") }}
+                </button>
+            </div>
+            {%- endif %} #}
+            {%- if is_searching %}
+            <div class="{% block reset_link_wrapper_classes %}d-inline-block d-print-none mt-0 mb-2{% endblock %}">
+                <a class="{% block reset_btn_classes %}btn btn-danger{% endblock %}"
+                    href="{{ url_for('kerko.search') }}">
+                    <span class="fas fa-trash-alt" aria-hidden="true"></span> {{ _("Reset search") }}
+                </a>
+            </div>
+            {%- endif %}
         </div>
-        <div class="col-auto px-1">
-            <button id="submit" type="submit" {% block search_button_attributes
-                %}class="{% block search_btn_classes %}btn btn-primary{% endblock %}" {% endblock %} {{
-                title_aria_label(_('Search')) }}>
-                <span class="fas fa-search" aria-hidden="true"></span>
-            </button>
+        {%- endif %}
+        {%- if search_results %}
+        <div class="{% block sorter_wrapper_classes %} {% endblock %}">
+            {%- include "kerkoapp/_sorter.html.jinja2" %}
         </div>
+        {%- endif %}
     </div>
-    {%- if form.errors %}
-    {%- for key, errors in form.errors.items() %}
-    {%- for error in errors %}
-    <div class="invalid-feedback d-block">{{ error }}</div>
-    {%- endfor %}
-    {%- endfor %}
-    {%- endif %}
-</form>
+</div>
 {%- endif %}

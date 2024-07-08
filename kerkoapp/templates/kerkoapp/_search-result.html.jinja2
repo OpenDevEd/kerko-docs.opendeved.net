@@ -1,6 +1,6 @@
 {%- from "kerkoapp/_badges.html.jinja2" import badges %}
 
-<li class="{% block search_list_item_classes %}search-item break-word my-3{% endblock %}">
+<li class="{% block search_list_item_classes %} search-item break-word {% endblock %}" id="searchResultContainer">
     {%- if print_preview -%}
     {%- block search_item_print %}
     {{- badges(result, mode='result') -}}
@@ -11,11 +11,13 @@
     {%- else -%}
     {%- block search_item_display %}
     <div class="d-flex">
-        <a class="{% block search_item_classes %}d-block mw-100 mr-auto{% endblock %}" href="{{ result_url }}"
-            title="{{ _('View details') }}">
+        <a class="{% block search_item_classes %}d-block mw-100 mr-auto{% endblock %} search-title"
+            href="{{ result_url }}" title="{{ _('View details') }}">
             {{- badges(result, mode='result') -}}
             {%- block search_item_formatted_display %}
-            {{- result.preview|safe -}}
+            <span class="search-result-title">
+                {{- result.data['title'] -}}
+            </span>
             {%- endblock search_item_formatted_display %}
         </a>
         {%- if result.coins %}
@@ -23,6 +25,39 @@
         {%- endif %}
     </div>
     {%- endblock search_item_display %}
+
+    {%- block Info %}
+    <div class="info d-flex flex-row flex-wrap">
+
+        {%- if result.data['institution'] %}
+        <div class="d-flex align-items-center institution-class">
+            {%- if result.data['institution'] == "Open Development & Education"%}
+            <img src="{{ url_for('static', filename='dist/images/logo.png') }}" alt="ODE" class="institution-icon"
+                style="width: 20px; height: 20px; margin-right: 4px" />
+            {%- elif result.data['institution'] == "Open Development & Education (ODE)"%}
+            {%- endif %}
+            {{ result.data['institution'] }}
+        </div>
+        <span class="text-muted mx-2">|</span>
+        {%- endif %}
+
+        {%- if result.data['creators']|length %}
+        {{ result.data['creators']|format_creators(40) }}
+        <span class="text-muted mx-2">|</span>
+        {%- endif %}
+
+        {%- if result.data['date'] %}
+        {{ result.data['date']|format_date() }}
+        <span class="text-muted mx-2">|</span>
+        {%- endif %}
+
+        {%- if result.data['itemType'] %}
+        {{ result.data['itemType']|string }}
+        {%- endif %}
+
+    </div>
+    {%- endblock Info %}
+
     {%- endif -%}
     {%- if show_abstracts and result.data['abstractNote']|trim|length %}
     <p class="{% block search_abstract_classes %}search-abstract pre-line my-2{% endblock %}">
@@ -30,9 +65,10 @@
         {{- result.data['abstractNote']|truncate(
         config.kerko.features.results_abstracts_max_length,
         leeway=config.kerko.features.results_abstracts_max_length_leeway
-        )|escape|urlize(target='_blank')|trim -}}
+        )|urlize(target='_blank', rel="noopener noreferrer")|trim -}}
         {%- else %}
-        {{- result.data['abstractNote']|escape|urlize(target='_blank')|trim -}}
+        {{- result.data['abstractNote']|urlize(target='_blank', rel="noopener noreferrer")|trim
+        -}}
         {%- endif %}
     </p>
     {%- endif %}
@@ -55,7 +91,8 @@
                 {%- for attachment in result.attachments %}
                 <a class="dropdown-item"
                     href="{{ url_for('kerko.child_attachment_download', item_id=result.id, attachment_id=attachment['id'], attachment_filename=attachment['data']['filename']) }}"
-                    {% if config.kerko.features.download_attachment_new_window %} target="_blank" {% endif %}>
+                    {% if config.kerko.features.download_attachment_new_window %} target="_blank" rel="noopener" {%
+                    endif %}>
                     {{- attachment['data']['filename']|escape }}
                 </a>
                 {%- endfor %}
@@ -66,17 +103,19 @@
         {%- block search_result_link_single_attachment %}
         <a class="{% block search_item_attachment_btn_classes %}btn btn-sm btn-link text-nowrap{% endblock %}"
             href="{{ url_for('kerko.child_attachment_download', item_id=result.id, attachment_id=result.attachments[0]['id'], attachment_filename=result.attachments[0]['data']['filename']) }}"
-            {% if config.kerko.features.download_attachment_new_window %} target="_blank" {% endif %} {{
+            {% if config.kerko.features.download_attachment_new_window %} target="_blank" rel="noopener" {% endif %} {{
             title_aria_label(_('Read \'{}\'').format(result.attachments[0]['data']['filename']|escape)) }}>
+            <img src="{{ url_for('static', filename='dist/icons/Link.svg') }}" alt="external link" aria-hidden="true" />
             <span class="fas fa-file mr-1" aria-hidden="true"></span>{{ _('Read document') -}}
         </a>
         {%- endblock search_result_link_single_attachment %}
         {%- elif config.kerko.features.results_url_links and result.url|kerko_url_hostname %}
         {%- block search_result_link_url %}
-        <a class="{% block search_item_link_btn_classes %}btn btn-sm btn-link text-nowrap{% endblock %}"
-            href="{{ result.url|kerko_url_sanitize|escape }}" target="_blank">
-            <span class="fas fa-external-link-alt mr-1" aria-hidden="true"></span>{{ _('View on
-            {}').format(result.url|kerko_url_hostname|escape) -}}
+        <a href="{{ result.url|kerko_url_sanitize|escape }}" target="_blank" rel="noopener noreferrer"
+            id="search-item-link">
+            <img src="{{ url_for('static', filename='dist/icons/Link.svg') }}" alt="external link" aria-hidden="true" />
+            <span aria-hidden="true"></span>
+            {{ _('View on {}').format(result.url|kerko_url_hostname|escape) }}
         </a>
         {%- endblock search_result_link_url %}
         {%- endif %}
