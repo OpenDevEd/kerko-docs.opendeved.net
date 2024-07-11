@@ -1,0 +1,68 @@
+{% from "macros/icons/linkedin.jinja2" import linkedin %}
+{% from "macros/icons/facebookIcon.jinja2" import facebookIcon %}
+{% from "macros/icons/xIcon.jinja2" import xIcon %}
+
+{%- block app_footer %}
+<footer class="footer py-4">
+    <div class="container py-4">
+        <div class="info d-lg-flex" style="gap: 30px; flex: 1">
+            <div>
+                <a class="d-block brand-title" href="{{ config.HOME_URL }}">
+                    {%- if theme == 'dark' %}
+                    <img src="{{ url_for('static', filename='dist/images/opendeved-logo-light.png') }}"
+                        alt="{{ config.HOME_TITLE }}" width="190px">
+                    {%- else %}
+                    <img src="{{ url_for('static', filename='dist/images/opendeved-logo-dark.png') }}"
+                        alt="{{ config.HOME_TITLE }}" width="190px">
+                    {%- endif %}
+                </a>
+                <div class="mt-4">
+                    <p style="margin-bottom: 5px;"><span class="text-muted">Email: </span>opendeved@gmail.com</p>
+                    <p style="margin-bottom: 5px;"><span class="text-muted">Phone: </span>+1-123-456-7890</p>
+                    <p style="margin-bottom: 5px;"><span class="text-muted">Office Address: </span>123 Creativity Lane,
+                        Designville</p>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1">
+                <p class="my-4 h5">Quick Links</p>
+
+            </div>
+            <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1">
+                <p class="mb-2 h5">Stay connected</p>
+                <div class="d-flex" style="gap: 18px; color: var(--foreground)">
+                    <a href="https://www.linkedin.com/company/opendeved" target="_blank" rel="noopener"
+                        class="social-icon">
+                        {{ linkedin('social-icon', 28, 28) }}
+                    </a>
+                    <a href="https://www.facebook.com/opendeved" target="_blank" rel="noopener" class="social-icon">
+                        {{ facebookIcon('social-icon', 28, 28) }}
+                    </a>
+                    <a href="https://www.x.com/opendeved" target="_blank" rel="noopener" class="social-icon">
+                        {{ xIcon('social-icon', 28, 28) }}
+                    </a>
+                </div>
+                <p class="my-4 h5">Contact Us</p>
+                <div class="d-flex" style="gap: 18px;">
+                    <button class="btn regular-btn">Contact Us</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4" style="display: flex; justify-content: center; align-items: center; color: var(--dummy);">
+            <a>
+                Privacy Policy
+            </a>
+            <span style="margin: 0 10px;">|</span>
+            <a>
+                Terms of Service
+            </a>
+        </div>
+    </div>
+</footer>
+{%- endblock %}
+
+
+
+{# {%- for f in config.kerko_composer.get_ordered_specs('footer') %}
+{{ f }}
+{%- endfor %} #}

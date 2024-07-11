@@ -1,0 +1,18 @@
+{%- block item_field_attachments %}
+{%- if item.attachments %}
+<div class="row">
+    <div class="col-md-4 col-lg-3 font-weight-bold break-word text-print-left">{% trans
+        count=item.attachments|length %}Document{% pluralize %}Documents{% endtrans %}</div>
+    <div class="col-md-8 col-lg-9 break-word">
+        <ul class="list-unstyled">
+            {%- for attachment in item.attachments %}
+            <li><a href="{{ url_for('kerko.child_attachment_download', item_id=item.id, attachment_id=attachment['id'], attachment_filename=attachment['data']['filename']) }}"
+                    {% if config.kerko.features.download_attachment_new_window %} target="_blank" {% endif %}><span
+                        class="fas fa-file d-print-none no-decorate mr-1" aria-hidden="true"></span>{{
+                    attachment['data']['filename']|escape }}</a></li>
+            {%- endfor %}
+        </ul>
+    </div>
+</div>
+{%- endif %}
+{%- endblock item_field_attachments %}

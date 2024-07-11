@@ -1,0 +1,8 @@
+{%- block item_title %}
+<div class="item-title row px-3 py-2">
+    <h2 class="my-3 clearfix">
+        {{- badges(item, mode='item') -}}
+        {{- title|escape -}}
+    </h2>
+</div>
+{%- endblock %}

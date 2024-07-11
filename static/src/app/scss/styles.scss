@@ -18,6 +18,7 @@ $primary: $accent;
 :root {
   --white: #fff;
   --background: #f4f2ee;
+  --background2: #fff;
   --foreground: #0f0f0f;
   --primary: #e68124;
   --border: rgba(0, 0, 0, 0.1);
@@ -26,8 +27,9 @@ $primary: $accent;
 }
 
 :root.dark-mode {
-  --white: #1e1e1e;
+  --white: rgba(255, 255, 255, 0.02);
   --background: #0f0f0f;
+  --background2: #1b1c1e;
   --foreground: #f4f2ee;
   --primary: #e68124;
   --border: rgba(255, 255, 255, 0.08);
@@ -214,7 +216,7 @@ main {
 
 // general
 .website-body {
-  background-color: var(--background);
+  background-color: var(--background) !important;
 }
 
 // Navbar.
@@ -538,12 +540,14 @@ main {
   font-weight: 400;
   text-transform: capitalize;
 }
-
-.search-result-title {
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  text-transform: capitalize;
+#searchResultContainer {
+  border: 1px solid var(--border);
+  .search-result-title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
 }
 
 // facets
@@ -646,7 +650,7 @@ main {
 }
 
 .dropdown-menu {
-  background-color: var(--white);
+  background-color: var(--background);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 8px;
@@ -679,9 +683,9 @@ main {
   color: var(--foreground);
   width: 100%;
   gap: 8px !important;
-  @include media-breakpoint-up(lg) {
-    width: 450px;
-  }
+  // @include media-breakpoint-up(lg) {
+  //   width: 450px;
+  // }
 
   input {
     font-size: 16px;
@@ -788,6 +792,7 @@ main {
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--white);
+  color: var(--foreground);
 }
 
 .bottom-btns-area {
@@ -796,19 +801,21 @@ main {
 
 // cards
 .card {
-  background: var(--white);
+  background: var(--background);
   border: 1px solid var(--border);
   border-radius: 16px;
 }
 
 // modal dialog scrollable
-
 .modal-dialog-scrollable {
+  .btn-exit {
+    color: var(--foreground);
+  }
   .modal-header {
     border-bottom: 1px solid var(--border);
   }
   .modal-content {
-    background: var(--white);
+    background: var(--background2);
     color: var(--foreground);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -820,6 +827,94 @@ main {
     }
     small {
       color: var(--dummy-secondary);
+    }
+  }
+}
+
+.close-preferences {
+  border-radius: 12px;
+}
+
+.icon-normal {
+  color: var(--foreground);
+}
+
+// pagination
+.pagination {
+  gap: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .page-item {
+    .page-link {
+      display: flex;
+      padding: 8px 14px;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--foreground);
+    }
+  }
+  .page-item.active {
+    .page-link {
+      border: 1.5px solid var(--primary) !important;
+      background: var(--primary) !important;
+      color: #fff !important;
+    }
+  }
+}
+
+.footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  color: var(--foreground);
+  // padding: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  .social-icon {
+    color: var(--foreground);
+    font-size: 24px;
+  }
+}
+
+.nav-tabs {
+  border-bottom: none;
+
+  .nav-item {
+    a {
+      display: flex;
+      width: 135px;
+      padding: 8px 28px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--dummy);
+      &:hover {
+        border: 1px solid var(--border);
+      }
+    }
+    .active {
+      border: 1px solid var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+  }
+  .first-item {
+    a {
+      border-radius: 12px 0px 0px 12px;
+    }
+  }
+  .last-item {
+    a {
+      border-radius: 0px 12px 12px 0px;
     }
   }
 }

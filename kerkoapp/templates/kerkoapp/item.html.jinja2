@@ -6,7 +6,7 @@
 {% macro field(label_text, value_text, field_class=None, value_class=None) %}
 {%- if value_text %}
 <div class="row mb-3 {{ field_class if field_class }}">
-    <div class="col-md-4 col-lg-3 font-weight-bold break-word text-md-right text-print-left">{{ label_text }}</div>
+    <div class="col-md-4 col-lg-3 font-weight-bold break-word text-print-left">{{ label_text }}</div>
     <div class="col-md-8 col-lg-9 break-word {{ value_class if value_class }}">{{ value_text }}</div>
 </div>
 {%- endif %}
@@ -36,9 +36,7 @@ remove_icon=''
 {%- endif %}
 {%- endmacro %}
 
-{% macro permalink(url) -%}
-<a rel="bookmark" title="{{ _('Permanent link to this bibliographic record') }}" href="{{ url }}">{{ url }}</a>
-{%- endmacro -%}
+
 
 {%- block metas %}
 {{- super() }}
@@ -56,169 +54,17 @@ remove_icon=''
 
 {%- block content_inner %}
 <div class="mt-2 mb-4 item-content">
-    <div class="row px-4 py-2">
-        <h2 class="my-3 clearfix">
-            {{- badges(item, mode='item') -}}
-            {{- title|escape -}}
-        </h2>
-    </div>
-    {%- block item_field_resource_type %}
-    {{- facet_field(_("Resource type"), item.item_type_label, 'facet_item_type', add_title=_("Search the '{}' resource
-    type").format(item.item_type_label)) }}
-    {%- endblock item_field_resource_type %}
-    {%- block item_field_creators %}
-    {%- if item.data.creators %}
-    <div class="row">
-        <div class="col-md-4 col-lg-3 font-weight-bold break-word text-md-right text-print-left">{% trans
-            count=item.data.creators|length %}Author/contributor{% pluralize %}Authors/contributors{% endtrans %}</div>
-        <div class="col-md-8 col-lg-9 break-word">
-            <ul class="list-unstyled">
-                {%- for creator in item.data.creators %}
-                <li>
-                    {%- if creator.url %}<a href="{{ creator.url }}" {{ title_aria_label(_('Search
-                        \'{}\'').format(creator.display|escape)) }}>{% endif %}
-                        {{- creator.display|escape }}
-                        {%- if creator.url %}</a>{% endif %}
-                    {%- if creator.label %}
-                    ({{ creator.label }})
-                    {%- endif %}
-                </li>
-                {%- endfor %}
-            </ul>
-        </div>
-    </div>
-    {%- endif %}
-    {%- endblock item_field_creators %}
-    {%- block item_fields_zotero %}
-    {#- Display item fields in proper order. #}
-    {%- for f in item.item_fields %}
-    {%- if item.data[f.field] %}
-    {%- if f.field == 'accessDate' %}
-    {{- field(f.localized, item.data[f.field]|kerko_reformat_date(convert_tz=True)|escape) }}
-    {%- elif f.field in ['date', 'dateDecided', 'dateEnacted', 'filingDate', 'issueDate'] %}
-    {{- field(f.localized, item.data[f.field]|kerko_reformat_date|escape) }}
-    {%- elif f.field == 'DOI' %}
-    {{- field(f.localized, item.data[f.field]|escape|kerko_urlize_doi(target='_blank')) }}
-    {%- elif f.field == 'extra' %}
-    {{- field(f.localized,
-    item.data[f.field]|escape|urlize(target='_blank')|kerko_parse_and_urlize_doi(target='_blank'),
-    value_class='pre-line') }}
-    {%- else %}
-    {{- field(f.localized, item.data[f.field]|escape|urlize(target='_blank'), value_class='pre-line' if f.field ==
-    'abstractNote') }}
-    {%- endif %}
-    {%- endif %}
-    {%- endfor %}
-    {%- endblock item_fields_zotero %}
-    {%- block item_field_links %}
-    {%- if item.links %}
-    <div class="row">
-        <div class="col-md-4 col-lg-3 font-weight-bold break-word text-md-right text-print-left">{% trans
-            count=item.links|length %}Link{% pluralize %}Links{% endtrans %}</div>
-        <div class="col-md-8 col-lg-9 break-word">
-            <ul class="list-unstyled">
-                {%- for link in item.links %}
-                <li><a href="{{ link.url }}" target="_blank">{{ link.title|escape }}</a></li>
-                {%- endfor %}
-            </ul>
-        </div>
-    </div>
-    {%- endif %}
-    {%- endblock item_field_links %}
-    {%- block item_field_notes %}
-    {{- field(_("Notes"), item.notes|join('')|safe) if item.notes }}
-    {%- endblock item_field_notes %}
-    {%- block item_field_citation %}
-    {{- field(_("Citation"), ('<div class="card">
-        <div class="card-body">' + item.bib + '</div>
-    </div>')|safe) }}
-    {%- endblock item_field_citation %}
-    {%- block item_facets %}
-    {%- if item.facet_results %}
-    {%- for f in config.kerko_composer.get_ordered_specs('facets') if f.item_view and f.key in item.facet_results %}
-    {{ f.render(item.facet_results[f.key], 'field') }}
-    {%- endfor %}
-    {%- endif %}
-    {%- endblock item_facets %}
-    {%- block item_field_attachments %}
-    {%- if item.attachments %}
-    <div class="row">
-        <div class="col-md-4 col-lg-3 font-weight-bold break-word text-md-right text-print-left">{% trans
-            count=item.attachments|length %}Document{% pluralize %}Documents{% endtrans %}</div>
-        <div class="col-md-8 col-lg-9 break-word">
-            <ul class="list-unstyled">
-                {%- for attachment in item.attachments %}
-                <li><a href="{{ url_for('kerko.child_attachment_download', item_id=item.id, attachment_id=attachment['id'], attachment_filename=attachment['data']['filename']) }}"
-                        {% if config.kerko.features.download_attachment_new_window %} target="_blank" {% endif %}><span
-                            class="fas fa-file d-print-none no-decorate mr-1" aria-hidden="true"></span>{{
-                        attachment['data']['filename']|escape }}</a></li>
-                {%- endfor %}
-            </ul>
-        </div>
-    </div>
-    {%- endif %}
-    {%- endblock item_field_attachments %}
-    {%- block item_field_permalink %}
-    {{- field(_("Link to this record"), permalink(item_url)) }}
-    {%- endblock item_field_permalink %}
-    {%- block item_field_relations %}
-    {#- Determine which relation tab is to be initially active, if any. #}
-    {%- set relations_ns = namespace(active_tab=None) %}
-    {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
-    {%- if not relations_ns.active_tab %}
-    {%- if item[rel.field.key] %}
-    {%- set relations_ns.active_tab = rel.key %}
-    {%- elif rel.reverse and item[rel.reverse_field_key] %}
-    {%- set relations_ns.active_tab = rel.reverse_key %}
-    {%- endif %}
-    {%- endif %}
-    {%- endfor %}
-    {%- if relations_ns.active_tab %}
-    <div class="row">
-        <div class="col-md-4 col-lg-3 font-weight-bold break-word text-md-right mb-2 mt-md-2 d-print-none">{{
-            _('Relations') }}</div>
-        <div class="col-md-8 col-lg-9 break-word">
-            <ul class="nav nav-tabs d-print-none" role="tablist">
-                {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
-                {%- if item[rel.field.key] %}
-                <li class="nav-item" role="tab">
-                    <a id="tab-{{ rel.key }}" href="#{{ rel.key }}"
-                        class="nav-link {% if rel.key == relations_ns.active_tab %}active{% endif %}" data-toggle="tab"
-                        aria-controls="{{ rel.key }}" {% if rel.key==relations_ns.active_tab %}aria-selected="true" {%
-                        endif %}>{{ rel.label }}</a>
-                </li>
-                {%- endif %}
-                {%- if rel.reverse and item[rel.reverse_field_key] %}
-                <li class="nav-item" role="tab">
-                    <a id="tab-{{ rel.reverse_key }}" href="#{{ rel.reverse_key }}"
-                        class="nav-link {% if rel.reverse_key == relations_ns.active_tab %}active{% endif %}"
-                        data-toggle="tab" aria-controls="{{ rel.reverse_key }}" {% if
-                        rel.reverse_key==relations_ns.active_tab %}aria-selected="true" {% endif %}>{{ rel.reverse_label
-                        }}</a>
-                </li>
-                {%- endif %}
-                {%- endfor %}
-            </ul>
-            <div class="tab-content">
-                {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
-                {%- if item[rel.field.key] %}
-                {%- with key=rel.key, field=rel.field.key, label=rel.label, is_active=rel.key == relations_ns.active_tab
-                %}
-                {%- include "kerkoapp/_item-relations.html.jinja2" %}
-                {%- endwith %}
-                {%- endif %}
-                {%- if rel.reverse and item[rel.reverse_field_key] %}
-                {%- with key=rel.reverse_key, field=rel.reverse_field_key, label=rel.reverse_label,
-                is_active=rel.reverse_key == relations_ns.active_tab %}
-                {%- include "kerkoapp/_item-relations.html.jinja2" %}
-                {%- endwith %}
-                {%- endif %}
-                {%- endfor %}
-            </div>
-        </div>
-    </div>
-    {%- endif %}
-    {%- endblock item_field_relations %}
+    {% include "item/title.jinja2" %}
+    {% include "item/resource-type.jinja2" %}
+    {% include "item/creators.jinja2" %}
+    {% include "item/item_fields_zotero.jinja2" %}
+    {% include "item/item_field_links.jinja2" %}
+    {% include "item/item_field_notes.jinja2" %}
+    {% include "item/item_field_citation.jinja2" %}
+    {% include "item/item_facets.jinja2" %}
+    {% include "item/item_field_attachments.jinja2" %}
+    {% include "item/item_field_permalink.jinja2" %}
+    {% include "item/item_field_relations.jinja2" %}
 </div>
 {%- block embedded_metadata_coins %}
 {{- item.coins|safe }}
@@ -237,37 +83,20 @@ remove_icon=''
 {%- endblock footer_inner %}
 
 {%- block content_header %}
-{%- if not config.kerko.breadcrumb.enabled %}
-{#- The back link is redundant and wastes space if the breadcrumb is present. -#}
-<div class="row">
-    <div class="{% block top_link_wrapper_classes %}col-auto ml-auto my-2 d-print-none{% endblock %}">
-        <a class="{% block top_btn_classes %}btn btn-primary{% endblock %}" href="{{ url_for('kerko.search') }}">
-            {# <span class="fas fa-arrow-up" aria-hidden="true"></span> {{ _("Full bibliography") }} #}
-        </a>
-    </div>
-</div>
-{%- endif %}
-<div class="row">
-    <div class="{% block item_heading_wrapper_classes %}col-auto my-3{% endblock %}">
-        <h1 class="{% block item_heading_classes %}h2 mb-0{% endblock %}">
-            {{- badges(item, mode='item') -}}
-            {{- title|escape -}}
-        </h1>
-    </div>
-</div>
+{%- include "item-header/item-header.jinja2" %}
 {%- endblock content_header %}
 
 {%- block body_scripts %}
 {{- super() }}
 {%- block kerko_item_js %}
-<script src="{{ url_for('kerko.static', filename='kerkoapp/js/item.js') }}?202008101934"></script>
+<script src="{{ url_for('kerko.static', filename='kerko/js/item.js') }}?202008101934"></script>
 {%- if config.kerko.features.open_in_zotero_app or config.kerko.features.open_in_zotero_web %}
-<script src="{{ url_for('kerko.static', filename='kerkoapp/js/open_in_zotero.js') }}?20221016"></script>
+<script src="{{ url_for('kerko.static', filename='kerko/js/open_in_zotero.js') }}?20221016"></script>
 {%- endif %}
 {%- endblock kerko_item_js %}
 {%- block kerko_print_js %}
 {%- if config.kerko.features.print_item %}
-<script src="{{ url_for('kerko.static', filename='kerkoapp/js/print.js') }}"></script>
+<script src="{{ url_for('kerko.static', filename='kerko/js/print.js') }}"></script>
 {%- endif %}
 {%- endblock kerko_print_js %}
 {%- endblock body_scripts %}

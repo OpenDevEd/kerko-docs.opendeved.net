@@ -1,0 +1,7 @@
+{%- block item_facets %}
+{%- if item.facet_results %}
+{%- for f in config.kerko_composer.get_ordered_specs('facets') if f.item_view and f.key in item.facet_results %}
+{{ f.render(item.facet_results[f.key], 'field') }}
+{%- endfor %}
+{%- endif %}
+{%- endblock item_facets %}

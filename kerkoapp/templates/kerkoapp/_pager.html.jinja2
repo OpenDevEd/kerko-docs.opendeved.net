@@ -79,7 +79,6 @@
                 <span class="page-link">{% trans current=pager.current[0].page_num_formatted|safe,
                     total=page_count_formatted|safe %}Page {{ current }} of {{ total }}{% endtrans %}</span>
             </li>
-
             {%- if pager.next %}
             {{ page_next_item(pager.next[0].url) }}
             {%- endif %}

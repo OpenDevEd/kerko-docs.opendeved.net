@@ -156,49 +156,14 @@
     {%- endblock search_results %}
     {%- endblock content_inner %}
 
-    {%- block sidebar_inner %}
-    {%- block facet_results %}
-    {%- if facet_results and search_results %}
-    <div id="facets-container" class="d-none d-lg-block d-print-none">
-        {# <h2 class="{% block facets_heading_classes %}mt-2 mb-4{% endblock %}">{{ _("Explore") }}</h2> #}
-        <div id="facets" class="facets">
-            {%- for f in config.kerko_composer.get_ordered_specs('facets') %}
-            {{ f.render(facet_results[f.key], 'search') }}
-            {%- endfor %}
-        </div>
-    </div>
-    <div id="facets-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="facets-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="facets-modal-label" class="modal-title">{{ _("Explore") }}</h2>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" {{ title_aria_label(_('Close
-                        Explore panel')) }}>
-                        <span class="fas fa-times" aria-hidden="true"></span>
-                    </button>
-                </div>
-                <div id="facets-modal-body" class="modal-body">
-                    <div class="my-3 text-right">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            aria-label="{{ _('Close Explore panel') }}">{{ _("Close") }}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {%- endif %}
-    {%- endblock facet_results %}
-    {%- endblock sidebar_inner %}
-
     {%- block body_scripts %}
     {{- super() }}
     {%- block kerko_search_js %}
-    <script src="{{ url_for('kerko.static', filename='kerkoapp/js/search.js') }}?20221229"></script>
+    <script src="{{ url_for('kerko.static', filename='kerko/js/search.js') }}?20221229"></script>
     {%- endblock kerko_search_js %}
     {%- block kerko_print_js %}
     {%- if show_print_link %}
-    <script src="{{ url_for('kerko.static', filename='kerkoapp/js/print.js') }}"></script>
+    <script src="{{ url_for('kerko.static', filename='kerko/js/print.js') }}"></script>
     {%- endif %}
     {%- endblock kerko_print_js %}
     {%- endblock body_scripts %}

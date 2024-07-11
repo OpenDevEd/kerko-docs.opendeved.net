@@ -46,7 +46,6 @@ item = "kerkoapp/item.html.jinja2"
 atom_feed = "kerkoapp/atom.xml.jinja2"
 search = "kerkoapp/search.html.jinja2"
 
-
 [kerko.zotero]
 
 locale = "en-GB"
@@ -124,3 +123,12 @@ x_proto = 1
 x_host = 0
 x_port = 0
 x_prefix = 0
+
+# # footer
+# [kerkoapp.footer]
+# [[kerkoapp.footer.links]]
+# text = "Privacy Policy"
+# url = "https://opendeved.net/privacy-policy/"
+# [[kerkoapp.footer.links]]
+# text = "Terms of Service"
+# url = "https://opendeved.net/terms-of-service/"

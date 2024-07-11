@@ -1,5 +1,6 @@
-{% macro toggleOffIcon(class_) %}
-<svg class="{{ class_ }}" width="32" height="16" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+{% macro toggleOffIcon(class_, width, height) %}
+<svg class="{{ class_ }}" width="{{ width }}" height="{{ height }} viewBox=" 0 0 32 16" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
     <rect x="0.25" y="0.25" width="31.5" height="15.5" rx="7.75" fill="black" fill-opacity="0.2" stroke="#A4A4A5"
         stroke-width="0.5" />
     <circle cx="8" cy="8" r="6" fill="white" fill-opacity="0.8" />

@@ -1,4 +1,7 @@
 {%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
+{% from "macros/icons/toggleOffIcon.jinja2" import toggleOffIcon %}
+{% from "macros/icons/exitIcon.jinja2" import exitIcon %}
+
 
 <div class="modal fade" id="preferences-modal" tabindex="-1" role="dialog" aria-labelledby="preferences-modal-label"
     aria-hidden="true">
@@ -7,13 +10,13 @@
             <div class="modal-header">
                 {%- block preferences_modal_header %}
                 <h2 class="modal-title" id="preferences-modal-label">{{ _("Preferences") }}</h2>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" {{ title_aria_label(_('Close
+                <button type="button" class="btn btn-exit" data-dismiss="modal" {{ title_aria_label(_('Close
                     preferences')) }}>
-                    <span class="fas fa-times" aria-hidden="true"></span>
+                    {{ exitIcon("", 24, 24) }}
                 </button>
                 {%- endblock preferences_modal_header %}
             </div>
-            <div class="modal-body text-left">
+            <div class="modal-body text-left p-4">
                 {%- block preferences_modal_inner %}
                 {%- block preferences_open_in_zotero %}
                 {%- if config.kerko.features.open_in_zotero_app %}
@@ -53,7 +56,7 @@
                 {%- endblock preferences_modal_inner %}
                 {%- block preferences_modal_footer %}
                 <div class="my-3 text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    <button type="button" class="btn btn-secondary w-100 close-preferences" data-dismiss="modal"
                         aria-label="{{ _('Close preferences') }}">{{ _("Close") }}</button>
                 </div>
                 {%- endblock preferences_modal_footer %}

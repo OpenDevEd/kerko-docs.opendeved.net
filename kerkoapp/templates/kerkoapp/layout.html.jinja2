@@ -122,15 +122,7 @@
 {# {% block footer_attributes %}Deliberately empty!{% endblock %} #}
 
 {%- block footer %}
-<footer {% block footer_attributes %}class="bg-dark text-white" {% endblock %}>
-    {%- block footer_inner %}
-    {# <div class="text-center pt-3 pb-3">
-        {{ _('Powered by {zotero} and {kerko}.').format(
-        zotero='<a href="https://zotero.org">Zotero</a>',
-        kerko='<a href="https://github.com/whiskyechobravo/kerko">Kerko</a>') }}
-    </div> #}
-    {%- endblock footer_inner %}
-</footer>
+{%- include "footer/app-footer.jinja2"%}
 {%- endblock footer %}
 
 {% block body_scripts %}
@@ -147,10 +139,8 @@
     {# {%- endblock breadcrumb %} #}
     {%- block search_criteria %}
     <div>
-        <div class="">
-            {%- include "kerkoapp/_breadbox.html.jinja2" %}
-            {%- include "kerkoapp/_search-form.html.jinja2" %}
-        </div>
+        {# {%- include "kerkoapp/_breadbox.html.jinja2" %} #}
+        {# {%- include "kerkoapp/_search-form.html.jinja2" %} #}
     </div>
     {%- endblock search_criteria %}
     {%- block main_inner %}
@@ -176,6 +166,7 @@
             {%- endfor %}
             {%- endwith %}
             {%- endblock messages %}
+            {%- include "kerkoapp/_search-form.html.jinja2" %}
             {%- block content_inner %}
             {%- endblock content_inner %}
             {%- block content_footer %}
@@ -186,6 +177,38 @@
         {%- if self.sidebar_inner() %}
         <div {% block sidebar_attributes %}class="col-12 col-lg-4 order-lg-1" {% endblock %}>
             {%- block sidebar_inner %}
+            {%- block facet_results %}
+            {%- if facet_results and search_results %}
+            <div id="facets-container" class="d-none d-lg-block d-print-none">
+                {# <h2 class="{% block facets_heading_classes %}mt-2 mb-4{% endblock %}">{{ _("Explore") }}</h2> #}
+                <div id="facets" class="facets">
+                    {%- for f in config.kerko_composer.get_ordered_specs('facets') %}
+                    {{f.render(facet_results[f.key], 'search')}}
+                    {%- endfor %}
+                </div>
+            </div>
+            <div id="facets-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="facets-modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="facets-modal-label" class="modal-title">{{ _("Explore") }}</h2>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" {{
+                                title_aria_label(_('Close Explore panel')) }}>
+                                <span class="fas fa-times" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div id="facets-modal-body" class="modal-body">
+                            <div class="my-3 text-right">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    aria-label="{{ _('Close Explore panel') }}">{{ _("Close") }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- endif %}
+            {%- endblock facet_results %}
             {%- endblock sidebar_inner %}
         </div>
         {%- endif %}

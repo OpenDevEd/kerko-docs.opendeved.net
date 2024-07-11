@@ -1,0 +1,63 @@
+{%- block item_field_relations %}
+{%- set relations_ns = namespace(active_tab=None) %}
+{%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
+{%- if not relations_ns.active_tab %}
+{%- if item[rel.field.key] %}
+{%- set relations_ns.active_tab = rel.key %}
+{%- elif rel.reverse and item[rel.reverse_field_key] %}
+{%- set relations_ns.active_tab = rel.reverse_key %}
+{%- endif %}
+{%- endif %}
+{%- endfor %}
+{%- if relations_ns.active_tab %}
+
+<div class="row">
+    <div class="col-md-4 col-lg-3 font-weight-bold break-word mb-2 mt-md-2 d-print-none">{{
+        _('Relations') }}</div>
+    <div class="col-md-8 col-lg-9 break-word">
+        <ul class="nav nav-tabs d-print-none" role="tablist">
+            {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
+            {%- set isFirst = loop.first %}
+            {%- set islast = loop.last %}
+            {%- if item[rel.field.key] %}
+            <li class="nav-item {% if isFirst %}first-item{% endif %} {%- if islast %}last-item{% endif %}" role="tab">
+                <a id="tab-{{ rel.key }}" href="#{{ rel.key }}"
+                    class="nav-link {% if rel.key == relations_ns.active_tab %}active{% endif %}" data-toggle="tab"
+                    aria-controls="{{ rel.key }}" {% if rel.key==relations_ns.active_tab %}aria-selected="true" {% endif
+                    %}>
+                    {{ rel.label }}
+                </a>
+            </li>
+            {%- endif %}
+            {%- if rel.reverse and item[rel.reverse_field_key] %}
+            <li class="nav-item {% if isFirst %}first-item{% endif %} {%- if islast %}last-item{% endif %}" role="tab">
+                <a id="tab-{{ rel.reverse_key }}" href="#{{ rel.reverse_key }}"
+                    class="nav-link {% if rel.reverse_key == relations_ns.active_tab %}active{% endif %}"
+                    data-toggle="tab" aria-controls="{{ rel.reverse_key }}" {% if
+                    rel.reverse_key==relations_ns.active_tab %}aria-selected="true" {% endif %}>
+                    {{ rel.reverse_label}}
+                </a>
+            </li>
+            {%- endif %}
+            {%- endfor %}
+        </ul>
+        <div class="tab-content">
+            {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
+            {%- if item[rel.field.key] %}
+            {%- with key=rel.key, field=rel.field.key, label=rel.label, is_active=rel.key == relations_ns.active_tab
+            %}
+            {%- include "kerkoapp/_item-relations.html.jinja2" %}
+            {%- endwith %}
+            {%- endif %}
+            {%- if rel.reverse and item[rel.reverse_field_key] %}
+            {%- with key=rel.reverse_key, field=rel.reverse_field_key, label=rel.reverse_label,
+            is_active=rel.reverse_key == relations_ns.active_tab %}
+            {%- include "kerkoapp/_item-relations.html.jinja2" %}
+            {%- endwith %}
+            {%- endif %}
+            {%- endfor %}
+        </div>
+    </div>
+</div>
+{%- endif %}
+{%- endblock item_field_relations %}

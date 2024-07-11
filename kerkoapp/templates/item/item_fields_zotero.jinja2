@@ -1,0 +1,23 @@
+{%- from "item/item_field_permalink.jinja2" import permalink -%}
+{%- block item_fields_zotero %}
+{%- for f in item.item_fields %}
+{%- if item.data[f.field] %}
+{%- if f.field == 'accessDate' %}
+{{- field(f.localized, item.data[f.field]|kerko_reformat_date(convert_tz=True)|escape) }}
+{%- elif f.field in ['date', 'dateDecided', 'dateEnacted', 'filingDate', 'issueDate'] %}
+{{- field(f.localized, item.data[f.field]|kerko_reformat_date|escape) }}
+{%- elif f.field == 'DOI' %}
+{{- field(f.localized, item.data[f.field]|escape|kerko_urlize_doi(target='_blank')) }}
+{%- elif f.field == 'extra' %}
+{{- field(f.localized,
+item.data[f.field]|escape|urlize(target='_blank')|kerko_parse_and_urlize_doi(target='_blank'),
+value_class='pre-line') }}
+{%- elif f.localized == 'URL' %}
+{{- field(f.localized, permalink(item.data[f.field]|escape)) }}
+{%- else %}
+{{- field(f.localized, item.data[f.field]|escape|urlize(target='_blank'), value_class='pre-line' if f.field ==
+'abstractNote') }}
+{%- endif %}
+{%- endif %}
+{%- endfor %}
+{%- endblock item_fields_zotero %}
