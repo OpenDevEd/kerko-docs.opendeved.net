@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
 // This is a customized Bootstrap theme, following instructions from
 // https://getbootstrap.com/docs/4.6/getting-started/theming/
 
@@ -6,10 +8,9 @@
 
 $white: #fff;
 $black: #1b1f22;
-$accent: #e68124;  // Custom variable.
+$accent: #e68124; // Custom variable.
 
-$theme-colors:
-(
+$theme-colors: (
   "accent": $accent,
 );
 
@@ -31,8 +32,8 @@ $container-max-widths: (
 $border-color: #efefef;
 $border-radius: 0;
 
-$font-family-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-$font-family-oswald: 'Oswald', "Helvetica Neue", helvetica, arial, sans-serif;  // Custom variable.
+$font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+$font-family-oswald: "Oswald", "Helvetica Neue", helvetica, arial, sans-serif; // Custom variable.
 $font-size-base: 1rem;
 $headings-font-family: $font-family-oswald;
 $headings-font-weight: 700;
@@ -45,17 +46,17 @@ $h5-font-size: $font-size-base * 1.1;
 $h6-font-size: $font-size-base;
 
 $nav-link-padding-x: 1.3rem;
-$nav-link-font-family: $font-family-oswald;  // Custom variable.
-$nav-link-font-size: $font-size-base * 1.125;  // Custom variable.
-$nav-link-font-weight: 400;  // Custom variable.
+$nav-link-font-family: "Ubuntu"; // Custom variable.
+$nav-link-font-size: 16px; // Custom variable.
+$nav-link-font-weight: 400; // Custom variable.
 $navbar-padding-x: 2rem;
 $navbar-padding-y: 1.125rem;
 $navbar-brand-padding-y: 0;
 $navbar-brand-font-size: 1.6rem;
-$navbar-toggler-padding-y: .5rem;
+$navbar-toggler-padding-y: 0.5rem;
 $navbar-light-color: $black;
 $navbar-light-active-color: $black;
-$navbar-light-hover-color: rgba(0,0,0,.7);
+$navbar-light-hover-color: rgba(0, 0, 0, 0.7);
 $navbar-light-toggler-border-color: $border-color;
 
 $card-border-color: $border-color;
@@ -65,7 +66,7 @@ $pagination-border-color: $border-color;
 $pagination-disabled-border-color: $border-color;
 $breadcrumb-bg: #f8f9fa;
 
-$dropdown-link-hover-bg: #dee2e6;  // $gray-300
+$dropdown-link-hover-bg: #dee2e6; // $gray-300
 
 // Import selected Bootstrap components.
 // Full list of imports in 'assets/vendor/bootstrap/scss/bootstrap.scss'.
@@ -115,10 +116,8 @@ $dropdown-link-hover-bg: #dee2e6;  // $gray-300
 // WARNING: Webfonts are manually copied to the 'static' directory. If upgrading
 // FontAwesome, please manually copy the new webfonts,
 
-
 // WARNING: Some styles below are copied from Kerko. Kerko's stylesheet is not
 // used, thus any change to Kerko's stylesheet might need to be applied here.
-
 
 // General.
 
@@ -142,7 +141,7 @@ h3,
   text-decoration: underline;
 }
 .break-word {
-  word-wrap: break-word;  // Older, non-standard name for overflow-wrap.
+  word-wrap: break-word; // Older, non-standard name for overflow-wrap.
   overflow-wrap: break-word;
 }
 .pre-line {
@@ -200,15 +199,16 @@ main {
   padding-right: 0;
   border-bottom: $border-width solid $border-color;
   text-align: center;
+  height: 56px;
   .nav-item {
     padding: 0 $navbar-padding-x;
     font-family: $nav-link-font-family;
     font-size: $nav-link-font-size;
     font-weight: $nav-link-font-weight;
-    text-transform: uppercase;
-    letter-spacing: .8px;
+    // text-transform: uppercase;
+    letter-spacing: 0.8px;
     @include media-breakpoint-up(lg) {
-      padding: $nav-link-padding-y 0;
+      padding: $nav-link-padding-y / 2 0;
       margin-left: $nav-link-padding-x;
       margin-right: $nav-link-padding-x;
       &:first-child {
@@ -257,10 +257,10 @@ main {
   font-size: $nav-link-font-size;
   font-weight: $nav-link-font-weight;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 .navbar-toggler-icon {
-  font-size: $font-size-base * .75;
+  font-size: $font-size-base * 0.75;
   vertical-align: top;
 }
 .navbar-nav {
@@ -287,18 +287,18 @@ main {
   font-weight: $headings-font-weight;
   line-height: 1.25;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   color: $black;
   @include hover() {
     color: $black;
-    opacity: .7;
+    opacity: 0.7;
     text-decoration: none;
   }
 }
 .brand-subtitle {
   font-size: $font-size-base;
   color: $primary;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 
 // Badge.
@@ -318,7 +318,7 @@ main {
 // Dropdown.
 
 .dropdown-item {
-  white-space: normal;  // Override Bootstrap's no-wrap default.
+  white-space: normal; // Override Bootstrap's no-wrap default.
 }
 .dropdown-width-300 {
   width: 300px;
@@ -396,21 +396,21 @@ main {
   }
 }
 .search-abstract {
-  font-size: .875em;  // Match .btn-sm font-size.
+  font-size: 0.875em; // Match .btn-sm font-size.
   .search-print-preview & {
-    margin-left: 1em;  // Match APA style indent.
+    margin-left: 1em; // Match APA style indent.
   }
 }
 .ode-badge {
   width: auto;
   height: 2.5rem;
-  margin-top: -.25em;
+  margin-top: -0.25em;
   margin-left: 1rem;
 }
 .text-badge {
   color: #212529;
   border: 1px solid #212529;
-  font-size: .75rem;
+  font-size: 0.75rem;
   margin-left: 1rem;
 }
 .text-badge-item {

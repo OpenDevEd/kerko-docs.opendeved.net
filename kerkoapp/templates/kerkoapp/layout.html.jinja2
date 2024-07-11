@@ -1,77 +1,69 @@
 {% extends 'kerko/layout.html.jinja2' %}
+{% from "icons/menu-icon.jinja2" import menu %}
 
 {% block meta_title_inner -%}
-    {%- if title %}{{ title|striptags|escape }} – {% endif %}{{ config.kerko.meta.title|striptags|escape -}}
+{%- if title %}{{ title|striptags|escape }} – {% endif %}{{ config.kerko.meta.title|striptags|escape -}}
 {% endblock %}
 
 {%- block metas %}
-    {{- super() }}
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='dist/images/favicon.png') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='dist/images/favicon.png') }}">
-    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='dist/images/favicon.png') }}">
+{{- super() }}
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='dist/images/favicon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='dist/images/favicon.png') }}">
+<meta name="msapplication-TileImage" content="{{ url_for('static', filename='dist/images/favicon.png') }}">
 {%- endblock metas %}
 
 {% block styles %}
-    {%- assets "css_styles" %}
-        <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {%- endassets %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Oswald:400,700&display=swap&subset=latin-ext">
+{%- assets "css_styles" %}
+<link rel="stylesheet" href="{{ ASSET_URL }}">
+{%- endassets %}
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Oswald:400,700&display=swap&subset=latin-ext">
 {% endblock styles %}
-
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-white d-print-none">
-        <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light d-print-none">
+    <div class="w-100 d-lg-flex px-3 px-lg-5">
+        <div class="d-flex align-items-center justify-content-between">
             {%- block navbar_brand %}
-                <div class="navbar-brand">
-                    <a class="d-block brand-title" href="{{ config.HOME_URL }}">{{ config.HOME_TITLE }}</a>
-                    {% if config.HOME_SUBTITLE %}<span class="d-block brand-subtitle text-primary">{{ config.HOME_SUBTITLE }}</span>{% endif %}
-                </div>
+            <div class="navbar-brand w-auto">
+                {# <a class="d-block brand-title" href="{{ config.HOME_URL }}">{{ config.HOME_TITLE }}</a> #}
+                <a class="d-block brand-title" href="{{ config.HOME_URL }}">
+                    <img src="{{ url_for('static', filename='dist/images/opendeved-logo-light.png') }}"
+                        alt="{{ config.HOME_TITLE }}" class="brand-logo" style="width: 150px">
+                </a>
+                {% if config.HOME_SUBTITLE %}<span class="d-block brand-subtitle text-primary">{{ config.HOME_SUBTITLE
+                    }}</span>{% endif %}
+            </div>
             {%- endblock navbar_brand %}
             {%- block navbar_toggler %}
-                <div class="d-lg-none m-auto">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="{{ _('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                        <span class="navbar-toggler-text">{{ _('Menu') }}</span>
-                    </button>
-                </div>
+            <div class="d-lg-none">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
+                    aria-controls="navbar-content" aria-expanded="false" aria-label="{{ _('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon">
+                        {# {{ menu() }} #}
+                    </span>
+                    {# <span class="navbar-toggler-text">{{ _('Menu') }}</span> #}
+                </button>
+            </div>
             {%- endblock navbar_toggler %}
-            {%- block navbar_content %}
-                <div id="navbar-content" class="collapse navbar-collapse">
-                    <ul class="navbar-nav justify-content-end">
-                        {%- block navbar_items %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://opendeved.net/about/">{{ _('About') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://opendeved.net/programmes/">{{ _('Programmes') }}</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ url_for('kerko.search') }}" aria-current="true">{{ _("Evidence Library") }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://opendeved.net/partners/">{{ _('Partners') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://opendeved.net/blog/">{{ _('Blog') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://opendeved.net/jobs/">{{ _('Jobs') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://opendeved.net/contact-us/">{{ _('Contact Us') }}</a>
-                            </li>
-                        {%- endblock navbar_items %}
-                    </ul>
-                </div>
-            {%- endblock navbar_content %}
         </div>
-    </nav>
+        {%- block navbar_content %}
+        <div id="navbar-content" class="collapse navbar-collapse">
+            <ul class="navbar-nav justify-content-end">
+                {%- block navbar_items %}
+                {%- include "kerkoapp/_navbar_items.html.jinja2" %}
+                {%- endblock navbar_items %}
+            </ul>
+        </div>
+        {%- endblock navbar_content %}
+    </div>
+</nav>
 {% endblock navbar %}
+
 
 {% block footer_attributes %}{# Deliberately empty! #}{% endblock %}
 
 {% block body_scripts %}
-    {%- assets "common_js" %}
-        <script src="{{ ASSET_URL }}"></script>
-    {%- endassets %}
+{%- assets "common_js" %}
+<script src="{{ ASSET_URL }}"></script>
+{%- endassets %}
 {% endblock body_scripts %}
