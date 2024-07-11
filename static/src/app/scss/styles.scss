@@ -199,7 +199,7 @@ main {
   padding-right: 0;
   border-bottom: $border-width solid $border-color;
   text-align: center;
-  height: 56px;
+  // height: 56px;
   .nav-item {
     padding: 0 $navbar-padding-x;
     font-family: $nav-link-font-family;
@@ -238,8 +238,8 @@ main {
 }
 .navbar-brand {
   width: 100%;
-  padding-bottom: $navbar-padding-y;
-  border-bottom: $border-width solid $border-color;
+  // padding-bottom: $navbar-padding-y;
+  // border-bottom: $border-width solid $border-color;
   margin-right: 0;
   white-space: normal;
   @include media-breakpoint-up(lg) {
@@ -252,7 +252,7 @@ main {
 }
 .navbar-toggler {
   display: block;
-  margin-top: $navbar-padding-y;
+  // margin-top: $navbar-padding-y;
   font-family: $nav-link-font-family;
   font-size: $nav-link-font-size;
   font-weight: $nav-link-font-weight;
