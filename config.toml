@@ -47,7 +47,7 @@ item = "kerkoapp/item.html.jinja2"
 [kerko.zotero]
 
 locale = "en-GB"
-
+batch_size = 20
 # CAUTION: The URL's query string (after the '?') must be changed after any edit
 # to the CSL style, otherwise zotero.org might still use a previously cached
 # version of the file.
@@ -74,7 +74,17 @@ child_exclude_re = ""
     type = "collection"
     collection_key = "JUDM2WBF"
     filter_key = "featured"
-    title = "Featured publisher"
+    title = "Our programmes"
+    weight = 10
+    initial_limit = 15
+    initial_limit_leeway = 5
+
+    [kerko.facets.organisations]
+    enabled = true
+    type = "collection"
+    collection_key = "JHBN8UGK"
+    filter_key = "organisations"
+    title = "Organisations, collaborators and clients"
     weight = 10
     initial_limit = 15
     initial_limit_leeway = 5
