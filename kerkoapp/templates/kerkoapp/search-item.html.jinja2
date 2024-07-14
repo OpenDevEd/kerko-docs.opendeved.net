@@ -3,9 +3,17 @@
 {% block search_heading_classes %}h2 col-auto mr-auto pr-1 d-inline d-print-none{% endblock %}
 
 {% block search_results %}
-    {%- include "kerko/_pager.html.jinja2" %}
-    <h2 class="h1 rule mb-3 clearfix">
-        {{- badges(item, mode='item') -}}
-        {{- title|escape -}}
-    </h2>
+{%- include "kerko/_pager.html.jinja2" %}
+<h2 class="h1 rule ">
+    {{- title|escape -}}
+    {{- badges(item, mode='item') -}}
+</h2>
+<h5 class="h4 mb-3">
+    {% for tag in item.data.tags %}
+    {% if tag.tag == '_comingsoon' %}
+    <span class="badge badge-danger badge-pill">NOT YET PUBLISHED</span>
+    {% endif %}
+    {% endfor %}
+</h5>
+
 {% endblock search_results %}
