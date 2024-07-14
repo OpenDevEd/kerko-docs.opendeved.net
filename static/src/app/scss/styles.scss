@@ -16,23 +16,35 @@ $primary: $accent;
 
 // add color variable to be access in the css  #F4F2EE
 :root {
-  --white: #fff;
+  --font-80: rgba(0, 0, 0, 0.8);
+  --font-60: rgba(0, 0, 0, 0.6);
+  --font-40: rgba(0, 0, 0, 0.4);
   --background: #f4f2ee;
+  --primary: #e68124;
+  --border: rgba(0, 0, 0, 0.2);
+  --blue: #5cacfd;
+  --card-background: #fff;
+
+  --white: #fff;
   --background2: #fff;
   --foreground: #0f0f0f;
-  --primary: #e68124;
-  --border: rgba(0, 0, 0, 0.1);
   --dummy: rgba(0, 0, 0, 0.6);
   --dummy-secondary: rgba(0, 0, 0, 0.8);
 }
 
 :root.dark-mode {
-  --white: rgba(255, 255, 255, 0.02);
+  --font-80: rgba(255, 255, 255, 0.8);
+  --font-60: rgba(255, 255, 255, 0.6);
+  --font-40: rgba(255, 255, 255, 0.4);
   --background: #0f0f0f;
-  --background2: #1b1c1e;
-  --foreground: #f4f2ee;
   --primary: #e68124;
   --border: rgba(255, 255, 255, 0.08);
+  --blue: #5cacfd99;
+  --card-background: rgba(255, 255, 255, 0.08);
+
+  --white: rgba(255, 255, 255, 0.02);
+  --background2: #1b1c1e;
+  --foreground: #f4f2ee;
   --dummy: rgba(255, 255, 255, 0.4);
   --dummy-secondary: rgba(255, 255, 255, 0.6);
 }
@@ -142,14 +154,6 @@ $dropdown-link-hover-bg: #dee2e6; // $gray-300
 
 // General.
 
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3 {
-  // text-transform: uppercase;
-}
 .list-no-bullets {
   list-style-type: none;
 }
@@ -839,7 +843,6 @@ main {
   color: var(--foreground);
 }
 
-// pagination
 .pagination {
   gap: 16px;
   display: flex;
@@ -872,7 +875,6 @@ main {
   background: var(--white);
   border-top: 1px solid var(--border);
   color: var(--foreground);
-  // padding: 16px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -917,4 +919,34 @@ main {
       border-radius: 0px 12px 12px 0px;
     }
   }
+}
+
+// header above the results
+#search-container {
+  #search-title {
+    color: var(--font-60);
+    font-size: 20px;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    @include media-breakpoint-up(lg) {
+      font-size: 34px;
+      font-weight: 500;
+    }
+  }
+}
+
+// buttons
+.btn-normal {
+  display: inline-flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--
 }

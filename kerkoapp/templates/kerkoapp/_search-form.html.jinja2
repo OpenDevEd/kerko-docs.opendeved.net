@@ -4,10 +4,10 @@
 {%- from "macros/svgs.jinja2" import expandIcon %}
 
 {%- if search_results %}
-<div class="px-0 py-0" style="display: grid; gap: 13px">
-    <div class="w-100 d-flex justify-content-between">
+<div class="px-0 py-0" style="display: grid; gap: 13px" id="search-container">
+    <div class="w-100 d-flex justify-content-between align-items-center">
         <div id=" search-title" class="d-flex align-items-center">
-            <h1 class="h2 mb-0">
+            <h1 class="h2 mb-0" id="search-title">
                 {%- if is_searching %}
                 {{ _("Search results") }}
                 {%- else %}
@@ -15,8 +15,8 @@
                 {%- endif %}
             </h1>
         </div>
-        <div class="d-flex" style="gap: 5px;" id="help-sort-btns">
-            <div class="{% block help_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
+        <div class="d-flex align-items-center" style="gap: 5px;" id="help-sort-btns">
+            <div class="{% block help_link_wrapper_classes %}d-inline-block d-print-none{% endblock %}">
                 <button class="{% block help_btn_classes %} helpBtn btn {% endblock %}" data-toggle="modal"
                     data-target="#search-help">
                     {{ _("Help") }}
@@ -25,9 +25,7 @@
             </div>
 
             {%- if search_results %}
-            <div class="{% block sorter_wrapper_classes %} {% endblock %}">
-                {%- include "kerkoapp/_sorter.html.jinja2" %}
-            </div>
+            {%- include "kerkoapp/_sorter.html.jinja2" %}
             {%- endif %}
         </div>
     </div>

@@ -8,8 +8,9 @@
 
 {%- if sorter %}
 <div class="dropdown">
-    <button class="{% block sorter_btn_classes %}btn btn-secondary btn-light{% endblock %}" type="button"
-        id="sort-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    <button
+        class="{% block sorter_btn_classes %} btn-normal {% endblock %} d-flex justify-content-center align-items-center"
+        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         aria-label="{{ _('Sort by...') }}">
         <span aria-hidden="true">{{ _('Sort by: {sort_option}').format(sort_option=sorter.active) }}</span>
         {{ expandIcon("", 20, 20) }}
