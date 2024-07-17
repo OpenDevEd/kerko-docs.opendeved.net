@@ -124,11 +124,47 @@ x_host = 0
 x_port = 0
 x_prefix = 0
 
-# # footer
-# [kerkoapp.footer]
-# [[kerkoapp.footer.links]]
-# text = "Privacy Policy"
-# url = "https://opendeved.net/privacy-policy/"
-# [[kerkoapp.footer.links]]
-# text = "Terms of Service"
-# url = "https://opendeved.net/terms-of-service/"
+# footer
+[footer]
+contactUsButtonLink = "https://opendeved.net/contact/"
+[[footer.links]]
+text = "Privacy Policy"
+url = "https://opendeved.net/privacy-policy/"
+[[footer.links]]
+text = "Terms of Service"
+url = "https://opendeved.net/terms-of-service/"
+
+# contact
+[[footer.contact.items]]
+field = "Email"
+value = "support@opendeved.net"
+[[footer.contact.items]]
+field = "Phone"
+value = "+1-123-456-7890"
+[[footer.contact.items]]
+field = "Office Address"
+value = "123 Creativity Lane, Designville"
+
+# navbar
+[navbar]
+[[navbar.items]]
+text = "About"
+url = "https://opendeved.net/about/"
+[[navbar.items]]
+text = "Programmes"
+url = "https://opendeved.net/programmes/"
+[[navbar.items]]
+text = "Evidence Library"
+url = "/"
+[[navbar.items]]
+text = "Partners"
+url = "https://opendeved.net/partners/"
+[[navbar.items]]
+text = "Blog"
+url = "https://opendeved.net/blog/"
+[[navbar.items]]
+text = "Jobs"
+url = "https://opendeved.net/jobs/"
+[[navbar.items]]
+text = "Contact Us"
+url = "https://opendeved.net/contact-us/"

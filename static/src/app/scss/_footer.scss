@@ -1,0 +1,100 @@
+@import "./variables-style";
+
+.footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  color: var(--foreground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  .footer-brand-icon {
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+  }
+  .contact-info {
+    .contact-info-title {
+      color: var(--font-80);
+      font-size: $font-size-base;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    .contact-info-value {
+      color: var(--font-80);
+      font-size: $font-size-base;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+  }
+  .quick-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    flex: 1;
+    div {
+      width: fit-content;
+    }
+    h5 {
+      color: var(--font-80);
+      font-size: $h5-font-size;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    li {
+      a {
+        color: var(--font-60);
+        font-size: $h5-font-size;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .stay-connected {
+    h5 {
+      color: var(--font-80);
+      font-size: $h5-font-size;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    .social-icon {
+      color: var(--font-80);
+    }
+  }
+  .contact-us {
+    a {
+      display: flex;
+      padding: 12px 18px;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      border-radius: $border-radius-base;
+      border: 1px solid var(--border);
+      background: var(--primary);
+      color: #fff;
+    }
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    a {
+      color: var(--font-80);
+    }
+  }
+}

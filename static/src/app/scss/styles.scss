@@ -14,40 +14,7 @@ $theme-colors: (
 );
 $primary: $accent;
 
-// add color variable to be access in the css  #F4F2EE
-:root {
-  --font-80: rgba(0, 0, 0, 0.8);
-  --font-60: rgba(0, 0, 0, 0.6);
-  --font-40: rgba(0, 0, 0, 0.4);
-  --background: #f4f2ee;
-  --primary: #e68124;
-  --border: rgba(0, 0, 0, 0.2);
-  --blue: #5cacfd;
-  --card-background: #fff;
-
-  --white: #fff;
-  --background2: #fff;
-  --foreground: #0f0f0f;
-  --dummy: rgba(0, 0, 0, 0.6);
-  --dummy-secondary: rgba(0, 0, 0, 0.8);
-}
-
-:root.dark-mode {
-  --font-80: rgba(255, 255, 255, 0.8);
-  --font-60: rgba(255, 255, 255, 0.6);
-  --font-40: rgba(255, 255, 255, 0.4);
-  --background: #0f0f0f;
-  --primary: #e68124;
-  --border: rgba(255, 255, 255, 0.08);
-  --blue: #5cacfd99;
-  --card-background: rgba(255, 255, 255, 0.08);
-
-  --white: rgba(255, 255, 255, 0.02);
-  --background2: #1b1c1e;
-  --foreground: #f4f2ee;
-  --dummy: rgba(255, 255, 255, 0.4);
-  --dummy-secondary: rgba(255, 255, 255, 0.6);
-}
+@import "./variables-style";
 
 $grid-breakpoints: (
   // Remove Bootstrap's xs.
@@ -67,16 +34,8 @@ $border-radius: 0;
 
 $font-family-sans-serif: "Ubuntu", "Helvetica Neue", helvetica, arial, sans-serif; // Custom variable.
 $font-family-oswald: "Ubuntu", "Helvetica Neue", helvetica, arial, sans-serif; // Custom variable.
-$font-size-base: 1rem;
 $headings-font-family: $font-family-oswald;
 $headings-font-weight: 700;
-
-$h1-font-size: $font-size-base * 2.125;
-$h2-font-size: $font-size-base * 1.75;
-$h3-font-size: $font-size-base * 1.5;
-$h4-font-size: $font-size-base * 1.25;
-$h5-font-size: $font-size-base * 1.1;
-$h6-font-size: $font-size-base;
 
 $nav-link-padding-x: 1.3rem;
 $nav-link-font-family: $font-family-oswald; // Custom variable.
@@ -223,119 +182,6 @@ main {
   background-color: var(--background) !important;
 }
 
-// Navbar.
-.navbar {
-  padding-left: 0;
-  padding-right: 0;
-  border-bottom: $border-width solid var(--background) / 2;
-  color: var(--foreground);
-  background-color: var(--white);
-  text-align: center;
-  padding: 10px 0px;
-  .nav-item {
-    padding: 0 $navbar-padding-x;
-    font-size: $nav-link-font-size;
-    font-weight: $nav-link-font-weight;
-    letter-spacing: 0.8px;
-    @include media-breakpoint-up(lg) {
-      padding: $nav-link-padding-y 0;
-      margin-left: $nav-link-padding-x / 1.5;
-      margin-right: $nav-link-padding-x / 1.5;
-      &:first-child {
-        margin-left: 0;
-      }
-    }
-  }
-  .nav-link {
-    color: var(--foreground);
-    padding: 10px 0 !important;
-    border-bottom: 3px solid transparent;
-    margin-top: 3px;
-    text-align: left;
-    white-space: nowrap;
-    @include media-breakpoint-up(lg) {
-      padding: 0 !important;
-      margin-top: 0;
-      display: inline-block;
-    }
-    @include hover-focus {
-      color: $primary;
-      border-bottom-color: $primary;
-    }
-  }
-  .nav-item.active .nav-link {
-    border-bottom-color: $primary;
-  }
-}
-.navbar-brand {
-  .brand-logo {
-    width: 150px;
-    @include hover() {
-    }
-  }
-  // width: 100%;
-  // padding-bottom: $navbar-padding-y;
-  // border-bottom: $border-width solid $border-color;
-  // margin-right: 0;
-  // white-space: normal;
-  // @include media-breakpoint-up(lg) {
-  //   width: auto;
-  //   padding-bottom: 0;
-  //   border-bottom: 0;
-  //   margin-right: $navbar-padding-x;
-  //   text-align: left;
-  // }
-}
-.navbar-toggler {
-  display: block;
-  // margin-top: $navbar-padding-y;
-  font-family: $nav-link-font-family;
-  font-size: $nav-link-font-size;
-  font-weight: $nav-link-font-weight;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 0;
-}
-.navbar-toggler-icon {
-  font-size: $font-size-base * 0.9;
-  vertical-align: top;
-  color: var(--foreground);
-}
-.navbar-nav {
-  color: var(--foreground);
-  padding-top: $navbar-padding-y;
-  padding-bottom: $navbar-padding-y;
-  margin-top: $navbar-padding-y;
-  margin-left: 0;
-  margin-right: 0;
-  @include media-breakpoint-up(lg) {
-    padding: 0;
-    margin-top: 0;
-    margin-left: auto !important;
-    margin-right: -$nav-link-padding-x;
-    background: transparent;
-  }
-}
-.brand-title {
-  font-family: $headings-font-family;
-  font-size: 1.25rem;
-  @include media-breakpoint-up(lg) {
-    font-size: $navbar-brand-font-size;
-  }
-  font-weight: $headings-font-weight;
-  line-height: 1.25;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  @include hover() {
-    text-decoration: none;
-  }
-}
-.brand-subtitle {
-  font-size: $font-size-base;
-  color: $primary;
-  letter-spacing: 0.05em;
-}
-
 // Badge.
 
 .heading-results > .badge {
@@ -348,20 +194,6 @@ main {
   @media print {
     border: none;
   }
-}
-
-// Dropdown.
-
-.dropdown-item {
-  white-space: normal; // Override Bootstrap's no-wrap default.
-}
-.dropdown-item-help-text {
-  color: var(--foreground);
-  font-size: 14px;
-}
-.dropdown-width-300 {
-  width: 300px;
-  max-width: 90vw;
 }
 
 // Expand/collapse.
@@ -405,48 +237,7 @@ main {
     }
   }
 }
-.search-item {
-  border-radius: 24px;
-  border-top: 1px solid var(rgba(0, 0, 0, 0.1));
-  border-bottom: 1px solid var(rgba(0, 0, 0, 0.1));
-  background: var(--white);
-  display: flex;
-  padding: 24px 32px 32px 32px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 12px;
 
-  margin-top: 1em;
-  margin-bottom: 1em;
-  a {
-    color: var(--foreground);
-    .csl-block:first-of-type {
-      font-weight: bold;
-      font-size: $h5-font-size;
-      font-style: normal;
-      font-weight: 500;
-      text-transform: capitalize;
-    }
-    @include hover {
-      color: var(--foreground);
-      text-decoration: none;
-      .csl-block:first-of-type {
-        color: var(--foreground);
-      }
-    }
-  }
-  .btn-link {
-    transition: none;
-    @include hover {
-      color: var(--foreground) !important;
-      span {
-        color: var(--foreground) !important;
-        text-decoration: underline;
-      }
-    }
-  }
-}
 .ode-badge {
   width: auto;
   height: 2.5rem;
@@ -510,49 +301,17 @@ main {
   }
 }
 
-#search-item-link {
-  font-size: 16px;
-  color: var(--dummy-secondary);
-  font-style: italic;
-  font-weight: 500;
-  text-transform: capitalize;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3px;
-}
-
-.search-abstract {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: normal;
-  text-transform: capitalize;
-  color: var(--dummy);
-
-  .search-print-preview & {
-    margin-left: 1em; // Match APA style indent.
-  }
-}
-
-.info {
-  color: var(--dummy-secondary);
-}
-
-.institution-class {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  text-transform: capitalize;
-}
-#searchResultContainer {
-  border: 1px solid var(--border);
-  .search-result-title {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    text-transform: capitalize;
-  }
-}
+// #search-item-link {
+//   font-size: 16px;
+//   color: var(--dummy-secondary);
+//   font-style: italic;
+//   font-weight: 500;
+//   text-transform: capitalize;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// gap: 3px;
+// }
 
 // facets
 .facets {
@@ -649,7 +408,7 @@ main {
   overflow: hidden;
   &:hover {
     text-decoration: none;
-    color: var(--foreground);
+    color: #fff;
   }
 }
 
@@ -677,8 +436,8 @@ main {
 
 .search-input-group {
   display: flex;
-  height: 40px;
-  padding: 12px 24px 12px 16px;
+  // height: 40px;
+  padding: 10px 18px 10px 18px;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
@@ -731,33 +490,40 @@ main {
 }
 
 .search-form-select {
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  font-size: 16px;
-  color: var(--foreground);
-  padding: 0px 8px 0px 0px;
-  width: 100%;
-  height: 40px;
+  // border-radius: 16px;
+  // border: 1px solid var(--border);
+  // background: var(--white);
+  // font-size: 16px;
+  // color: var(--foreground);
+  // padding: 10px 26px 10px 18px;
+  // width: 100%;
+  // height: 40px;
 
-  @include media-breakpoint-up(lg) {
-    width: 150px;
-  }
+  // @include media-breakpoint-up(lg) {
+  //   width: 150px;
+  // }
 
   select {
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    font-size: 16px;
     color: var(--foreground);
-    background: transparent;
-    border: none;
-    width: 100%;
-    appearance: none;
-    -webkit-appearance: none;
+    // padding: 10px 26px 10px 18px;
+
+    color: var(--foreground);
+    // background: transparent;
+    // border: none;
+    // width: 160px;
+    // appearance: none;
+    // -webkit-appearance: none;
     font-size: 16px;
 
     &:focus {
+      // background: transparent;
+      // border: none;
       outline: none;
-      background: transparent;
       box-shadow: none;
-      border: none;
       color: var(--foreground);
     }
     &:focus-visible {
@@ -770,37 +536,6 @@ main {
       border: 0;
     }
   }
-}
-
-.regular-btn {
-  display: flex;
-  padding: 12px 14px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--foreground);
-  &:hover {
-    text-decoration: none;
-    color: var(--foreground);
-  }
-}
-
-.return-button {
-  display: flex;
-  padding: 12px 14px;
-  align-items: flex-start;
-  gap: 8px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--foreground);
-}
-
-.bottom-btns-area {
-  gap: 8px;
 }
 
 // cards
@@ -871,20 +606,6 @@ main {
   }
 }
 
-.footer {
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  color: var(--foreground);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  .social-icon {
-    color: var(--foreground);
-    font-size: 24px;
-  }
-}
-
 .nav-tabs {
   border-bottom: none;
 
@@ -921,7 +642,7 @@ main {
   }
 }
 
-// header above the results
+// above the results (search)
 #search-container {
   #search-title {
     color: var(--font-60);
@@ -941,12 +662,50 @@ main {
 // buttons
 .btn-normal {
   display: inline-flex;
-  padding: 12px 24px;
+  padding: 10px 18px;
   justify-content: center;
   align-items: center;
   gap: 8px;
 
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--
+  border-radius: $border-radius-base;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--font-60);
 }
+
+.regular-btn {
+  display: flex;
+  padding: 10px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: $border-radius-base;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--font-60);
+  &:hover {
+    text-decoration: none;
+    color: var(--font-60);
+  }
+}
+
+// .return-button {
+//   display: flex;
+//   padding: 12px 14px;
+//   align-items: flex-start;
+//   gap: 8px;
+//   border-radius: 16px;
+//   border: 1px solid var(--border);
+//   background: var(--white);
+//   color: var(--foreground);
+// }
+
+.bottom-btns-area {
+  gap: 8px;
+}
+
+@import "./_footer.scss";
+@import "./_header.scss";
+@import "./_search-result.scss";
+@import "./search-form";
+@import "./dropdown-style";

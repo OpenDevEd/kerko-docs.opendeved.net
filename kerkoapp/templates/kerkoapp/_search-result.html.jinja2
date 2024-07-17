@@ -11,13 +11,11 @@
     {%- else -%}
     {%- block search_item_display %}
     <div class="d-flex">
-        <a class="{% block search_item_classes %}d-block mw-100 mr-auto{% endblock %} search-title"
-            href="{{ result_url }}" title="{{ _('View details') }}">
+        <a class="{% block search_item_classes %}d-block mw-100 mr-auto{% endblock %}" href="{{ result_url }}"
+            title="{{ _('View details') }}">
             {{- badges(result, mode='result') -}}
             {%- block search_item_formatted_display %}
-            <span class="search-result-title">
-                {{- result.data['title'] -}}
-            </span>
+            <span class="searchResultTitle">{{- result.data['title'] -}}</span>
             {%- endblock search_item_formatted_display %}
         </a>
         {%- if result.coins %}
@@ -28,20 +26,18 @@
 
     {%- block Info %}
     <div class="info d-flex flex-row flex-wrap">
-
         {%- if result.data['institution'] %}
         <div class="d-flex align-items-center institution-class">
             {%- if result.data['institution'] == "Open Development & Education"%}
             <img src="{{ url_for('static', filename='dist/images/logo.png') }}" alt="ODE" class="institution-icon"
                 style="width: 20px; height: 20px; margin-right: 4px" />
-            {%- elif result.data['institution'] == "Open Development & Education (ODE)"%}
             {%- endif %}
-            {{ result.data['institution'] }}
+            <span style="font-weight: 500;">{{ result.data['institution'] }}</span>
         </div>
         <span class="text-muted mx-2">|</span>
         {%- endif %}
 
-        {%- if result.data['creators']|length %}
+        {%- if result.data['creators']|length and result.data['institution'] != "Open Development & Education" %}
         {{ result.data['creators']|format_creators(40) }}
         <span class="text-muted mx-2">|</span>
         {%- endif %}

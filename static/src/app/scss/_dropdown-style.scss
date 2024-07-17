@@ -1,0 +1,15 @@
+.dropdown-item {
+  white-space: normal; // Override Bootstrap's no-wrap default.
+  &:hover {
+    background-color: var(--primary);
+    color: #eee;
+  }
+}
+.dropdown-item-help-text {
+  color: var(--foreground);
+  font-size: 14px;
+}
+.dropdown-width-300 {
+  width: 300px;
+  max-width: 90vw;
+}

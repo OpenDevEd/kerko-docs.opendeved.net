@@ -276,12 +276,12 @@ The following procedure has to be performed only once.
    `/srv/data/web/vhosts/default/`. See step 2 of [Installing the application
    locally](#installing-the-application-locally) for details.
 
-9.  Synchronize data from zotero.org:
+9. Synchronize data from zotero.org:
 
-    ```bash
-    cd /srv/data/web/vhosts/default
-    /srv/data/web/vhosts/default/local/bin/flask kerko sync
-    ```
+   ```bash
+   cd /srv/data/web/vhosts/default
+   /srv/data/web/vhosts/default/local/bin/flask kerko sync
+   ```
 
 10. In a browser, check that the site works.
 

@@ -1,0 +1,50 @@
+// colors
+
+:root {
+  --font-80: rgba(0, 0, 0, 0.8);
+  --font-60: rgba(0, 0, 0, 0.6);
+  --font-40: rgba(0, 0, 0, 0.4);
+  --background: #f4f2ee;
+  --primary: #e68124;
+  --border: rgba(0, 0, 0, 0.2);
+  --blue: #5cacfd;
+  --card-background: #fff;
+
+  --white: #fff;
+  --background2: #fff;
+  --foreground: #0f0f0f;
+  --dummy: rgba(0, 0, 0, 0.6);
+  --dummy-secondary: rgba(0, 0, 0, 0.8);
+}
+
+:root.dark-mode {
+  --font-80: rgba(255, 255, 255, 0.8);
+  --font-60: rgba(255, 255, 255, 0.6);
+  --font-40: rgba(255, 255, 255, 0.4);
+  --background: #0f0f0f;
+  --primary: #e68124;
+  --border: rgba(255, 255, 255, 0.08);
+  --blue: #5cacfd99;
+  --card-background: rgba(255, 255, 255, 0.08);
+
+  --white: rgba(255, 255, 255, 0.02);
+  --background2: #1b1c1e;
+  --foreground: #f4f2ee;
+  --dummy: rgba(255, 255, 255, 0.4);
+  --dummy-secondary: rgba(255, 255, 255, 0.6);
+}
+
+// border-radius
+$border-radius-base: 16px;
+
+// font-size
+html {
+  font-size: 16px;
+}
+$font-size-base: 1rem;
+$h1-font-size: $font-size-base * 2.125;
+$h2-font-size: $font-size-base * 1.75;
+$h3-font-size: $font-size-base * 1.5;
+$h4-font-size: $font-size-base * 1.25;
+$h5-font-size: $font-size-base * 1.1;
+$h6-font-size: $font-size-base;

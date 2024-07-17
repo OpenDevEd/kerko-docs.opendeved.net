@@ -1,0 +1,104 @@
+.navbar {
+  padding-left: 0;
+  padding-right: 0;
+  border-bottom: $border-width solid var(--background) / 2;
+  color: var(--foreground);
+  background-color: var(--white);
+  text-align: center;
+  padding: 10px 0px;
+
+  .nav-item {
+    padding: 0 $navbar-padding-x;
+    font-size: $nav-link-font-size;
+    font-weight: $nav-link-font-weight;
+    letter-spacing: 0.8px;
+    @include media-breakpoint-up(lg) {
+      padding: $nav-link-padding-y 0;
+      margin-left: $nav-link-padding-x / 1.5;
+      margin-right: $nav-link-padding-x / 1.5;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .nav-link {
+    color: var(--foreground);
+    padding: 10px 0 !important;
+    border-bottom: 3px solid transparent;
+    margin-top: 3px;
+    text-align: left;
+    white-space: nowrap;
+    @include media-breakpoint-up(lg) {
+      padding: 0 !important;
+      margin-top: 0;
+      display: inline-block;
+    }
+    @include hover-focus {
+      color: $primary;
+      border-bottom-color: $primary;
+    }
+  }
+
+  .nav-item.active .nav-link {
+    border-bottom-color: $primary;
+  }
+}
+
+.navbar-brand {
+  .brand-logo {
+    width: 150px;
+  }
+}
+
+.navbar-toggler {
+  display: block;
+  font-size: $nav-link-font-size;
+  font-weight: $nav-link-font-weight;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 0;
+}
+
+.navbar-toggler-icon {
+  font-size: $font-size-base * 0.9;
+  vertical-align: top;
+  color: var(--foreground);
+}
+
+.navbar-nav {
+  color: var(--foreground);
+  padding-top: $navbar-padding-y;
+  padding-bottom: $navbar-padding-y;
+  margin-top: $navbar-padding-y;
+  margin-left: 0;
+  margin-right: 0;
+  @include media-breakpoint-up(lg) {
+    padding: 0;
+    margin-top: 0;
+    margin-left: auto !important;
+    margin-right: -$nav-link-padding-x;
+    background: transparent;
+  }
+}
+
+.brand-title {
+  font-family: $headings-font-family;
+  font-size: 1.25rem;
+  @include media-breakpoint-up(lg) {
+    font-size: $navbar-brand-font-size;
+  }
+  font-weight: $headings-font-weight;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  @include hover() {
+    text-decoration: none;
+  }
+}
+
+.brand-subtitle {
+  font-size: $font-size-base;
+  color: $primary;
+  letter-spacing: 0.05em;
+}

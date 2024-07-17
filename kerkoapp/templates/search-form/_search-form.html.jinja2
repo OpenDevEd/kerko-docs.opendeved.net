@@ -4,7 +4,7 @@
 {%- from "macros/svgs.jinja2" import expandIcon %}
 
 {%- if search_results %}
-<div class="px-0 py-0" style="display: grid; gap: 13px" id="search-container">
+<div class="px-0 py-0" style="display: grid; gap: 20px" id="search-container">
     <div class="w-100 d-flex justify-content-between align-items-center">
         <div id=" search-title" class="d-flex align-items-center">
             <h1 class="h2 mb-0" id="search-title">
@@ -17,7 +17,7 @@
         </div>
         <div class="d-flex align-items-center" style="gap: 5px;" id="help-sort-btns">
             <div class="{% block help_link_wrapper_classes %}d-inline-block d-print-none{% endblock %}">
-                <button class="{% block help_btn_classes %} helpBtn btn {% endblock %}" data-toggle="modal"
+                <button class="{% block help_btn_classes %} btn-normal {% endblock %}" data-toggle="modal"
                     data-target="#search-help">
                     {{ _("Help") }}
                     {{ helpIcon('helpIcon', 20, 20) }}
@@ -44,32 +44,20 @@
                     {# <label for="{{ form.keywords.id }}" class="sr-only">{{ placeholder }}</label> #}
                     {# {{- form.keywords(class_="form-control" + keywords_validation_class, placeholder=placeholder)
                     }} #}
-                    <div class="d-flex w-100" style="gap:5px">
+                    <div class="d-flex w-100" style="gap: 5px">
                         <div class="search-input-group">
                             <span class="search-icon">
-                                {{ searchIcon('searchIcon mb-1', 20, 20) }}
+                                {{ searchIcon('searchIcon mb-1', 24, 24) }}
                             </span>
                             <input maxlength="1000" name="keywords" placeholder="Search for..." type="search" value="">
+
                         </div>
+
+                        {%- include "search-form/search-in-dropdown.jinja2" %}
+                        {# {%- include "search-form/search-button.jinja2" %} #}
+
                         {# <label for="scope" class="sr-only">{{ _('Search in...') }}</label> #}
                         {# {{- form.scope(class_="search-select-filter" + scope_validation_class) }} #}
-                        <div class="d-flex filter-searchButton-area">
-                            <div class="search-form-select d-flex align-items-center">
-                                <select name="scope" id="scope" class="form-control search-select-filter">
-                                    {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
-                                    <option value="{{ scopes.key }}">{{ scopes.selector_label }}</option>
-                                    {%- endfor %}
-                                </select>
-                                {{ expandIcon("", 20, 20) }}
-                            </div>
-                            {# <div class="col-auto px-1 search-submit-button">
-                                <button id="submit" type="submit" {% block search_button_attributes
-                                    %}class="{% block search_btn_classes %}btn btn-primary{% endblock %}" {% endblock %}
-                                    {{ title_aria_label(_('Search')) }}>
-                                    <span class="fas fa-search" aria-hidden="true"></span>
-                                </button>
-                            </div> #}
-                        </div>
                     </div>
                 </div>
                 {%- if form.errors %}

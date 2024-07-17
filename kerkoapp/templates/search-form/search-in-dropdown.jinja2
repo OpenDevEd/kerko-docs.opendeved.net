@@ -1,0 +1,40 @@
+{% block searchInDropdown%}
+<div class="search-form-select d-flex align-items-center">
+    <select name="scope" id="scope" class="form-control search-select-filter" style="display: none;">
+        {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
+        <option value="{{ scopes.key }}">{{ scopes.selector_label }}</option>
+        {%- endfor %}
+    </select>
+</div>
+<div class="dropdown" id="search-in-dropdown">
+    <button class="btn-normal" type="button" id="search-in-dropdown-menu-button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <span id="search-in-dropdown-menu-button-text">
+            {{config.kerko_composer.get_ordered_specs('scopes')[0].selector_label }}
+        </span>
+        {{ expandIcon("", 20, 20) }}
+    </button>
+    <div class="dropdown-menu search-in-dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
+        <a class="dropdown-item" href="#" data-value="{{ scopes.key }}">{{
+            scopes.selector_label
+            }}</a>
+        {%- endfor %}
+    </div>
+    <script>
+        document.querySelectorAll('#search-in-dropdown .dropdown-item').forEach(item => {
+            item.addEventListener('click', event => {
+                // update the dropdown button text when an item is clicked
+                document.getElementById('search-in-dropdown-menu-button-text').innerText = event.target.innerText;
+                // update the hidden select field when an item is clicked
+                document.getElementById('scope').value = event.target.getAttribute('data-value');
+                // remove active class from the other items and add it to the clicked item
+                document.querySelectorAll('#search-in-dropdown .dropdown-item').forEach(item => {
+                    item.classList.remove('active');
+                })
+                event.target.classList.add('active');
+            })
+        })
+    </script>
+</div>
+{% endblock %}

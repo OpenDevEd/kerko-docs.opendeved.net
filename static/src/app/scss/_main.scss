@@ -1,0 +1,14 @@
+@import "./variables-style.scss";
+
+main {
+  transform: scale(0.8deg);
+  min-height: calc(100vh - 6rem - 5.6125rem);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: var(--foreground);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+  }
+}

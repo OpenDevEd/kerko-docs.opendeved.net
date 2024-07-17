@@ -1,0 +1,71 @@
+.info {
+  color: var(--font-60);
+}
+
+.search-abstract {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  color: var(--font-40);
+
+  .search-print-preview & {
+    margin-left: 1em; // Match APA style indent.
+  }
+}
+
+.institution-class {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.search-item {
+  border: 1px solid var(--border);
+  .searchResultTitle {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: var(--font-80);
+  }
+  border-radius: 24px;
+  background: var(--white);
+  display: flex;
+  padding: 24px 32px 32px 32px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-top: 1em;
+  margin-bottom: 1em;
+  a {
+    color: var(--font-80);
+    .csl-block:first-of-type {
+      font-weight: bold;
+      font-size: $h5-font-size;
+      font-style: normal;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+    @include hover {
+      color: var(--font-80);
+      text-decoration: none;
+      .csl-block:first-of-type {
+        color: var(--font-80);
+      }
+    }
+  }
+  .btn-link {
+    transition: none;
+    @include hover {
+      color: var(--foreground) !important;
+      span {
+        color: var(--foreground) !important;
+        text-decoration: underline;
+      }
+    }
+  }
+}

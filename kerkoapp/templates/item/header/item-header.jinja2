@@ -1,6 +1,7 @@
 {% from "macros/icons/leftArrowIcon.jinja2" import leftArrowIcon %}
 {% from "macros/icons/printIcon.jinja2" import printIcon %}
 {% from "macros/icons/downloadIcon.jinja2" import downloadIcon %}
+{% from "macros/icons/exitIcon.jinja2" import exitIcon %}
 
 {%- block content_header %}
 <div class="d-flex justify-content-between align-items-center">
@@ -100,7 +101,7 @@
                         class="fas fa-external-link-alt" aria-hidden="true"></span> {{ _("View on zotero.org") }}</a>
             </div>
             {%- endif %}
-            {% include "item-header/preferences/preferences.jinja2" %}
+            {% include "item/header/preferences.jinja2" %}
         </div>
     </div>
     {%- endif %}

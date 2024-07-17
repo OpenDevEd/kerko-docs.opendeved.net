@@ -1,0 +1,11 @@
+{% block searchButton %}
+<div class="d-flex filter-searchButton-area">
+    <div class="col-auto px-1 search-submit-button">
+        <button id="submit" type="submit" {% block search_button_attributes
+            %}class="{% block search_btn_classes %}btn btn-primary{% endblock %}" {% endblock %} {{
+            title_aria_label(_('Search')) }}>
+            <span class="fas fa-search" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+{% endblock %}
