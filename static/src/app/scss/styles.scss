@@ -288,7 +288,6 @@ main {
 }
 
 // search results
-
 #results-counts {
   font-style: normal;
   font-weight: 400;
@@ -298,55 +297,6 @@ main {
   color: var(--foreground);
   .result-counts-text {
     font-size: 16px;
-  }
-}
-
-// #search-item-link {
-//   font-size: 16px;
-//   color: var(--dummy-secondary);
-//   font-style: italic;
-//   font-weight: 500;
-//   text-transform: capitalize;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// gap: 3px;
-// }
-
-// facets
-.facets {
-  display: inline-flex;
-  padding: 32px 24px;
-  align-items: flex-start;
-  gap: 8px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--foreground);
-  h3 {
-    color: var(--foreground);
-
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500 !important;
-    line-height: normal;
-    text-transform: capitalize;
-  }
-
-  ul {
-    li {
-      .facet-item-label {
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        text-transform: capitalize;
-        color: var(--foreground);
-      }
-      .facet-item-count {
-        color: var(--foreground);
-      }
-    }
   }
 }
 
@@ -364,16 +314,6 @@ main {
   &:hover {
     text-decoration: none;
   }
-}
-
-// facets
-
-#facets {
-  width: 100%;
-}
-
-.expandIcon-expand {
-  transform: rotate(-90deg);
 }
 
 .sort-help-container {
@@ -409,24 +349,6 @@ main {
   &:hover {
     text-decoration: none;
     color: #fff;
-  }
-}
-
-.dropdown-menu {
-  background-color: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 8px;
-  a {
-    color: var(--foreground);
-    font-size: 15px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    &:hover {
-      text-decoration: none;
-      color: var(--foreground);
-      background-color: var(--primary);
-    }
   }
 }
 
@@ -485,55 +407,6 @@ main {
     &:hover {
       text-decoration: none;
       color: var(--foreground);
-    }
-  }
-}
-
-.search-form-select {
-  // border-radius: 16px;
-  // border: 1px solid var(--border);
-  // background: var(--white);
-  // font-size: 16px;
-  // color: var(--foreground);
-  // padding: 10px 26px 10px 18px;
-  // width: 100%;
-  // height: 40px;
-
-  // @include media-breakpoint-up(lg) {
-  //   width: 150px;
-  // }
-
-  select {
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    background: var(--white);
-    font-size: 16px;
-    color: var(--foreground);
-    // padding: 10px 26px 10px 18px;
-
-    color: var(--foreground);
-    // background: transparent;
-    // border: none;
-    // width: 160px;
-    // appearance: none;
-    // -webkit-appearance: none;
-    font-size: 16px;
-
-    &:focus {
-      // background: transparent;
-      // border: none;
-      outline: none;
-      box-shadow: none;
-      color: var(--foreground);
-    }
-    &:focus-visible {
-      color: var(--foreground);
-      text-shadow: none;
-    }
-    option {
-      color: var(--foreground);
-      background-color: var(--white);
-      border: 0;
     }
   }
 }
@@ -659,53 +532,14 @@ main {
   }
 }
 
-// buttons
-.btn-normal {
-  display: inline-flex;
-  padding: 10px 18px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-
-  border-radius: $border-radius-base;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--font-60);
-}
-
-.regular-btn {
-  display: flex;
-  padding: 10px 18px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: $border-radius-base;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--font-60);
-  &:hover {
-    text-decoration: none;
-    color: var(--font-60);
-  }
-}
-
-// .return-button {
-//   display: flex;
-//   padding: 12px 14px;
-//   align-items: flex-start;
-//   gap: 8px;
-//   border-radius: 16px;
-//   border: 1px solid var(--border);
-//   background: var(--white);
-//   color: var(--foreground);
-// }
-
 .bottom-btns-area {
   gap: 8px;
 }
 
-@import "./_footer.scss";
-@import "./_header.scss";
-@import "./_search-result.scss";
+@import "./footer";
+@import "./header";
+@import "./search-result";
 @import "./search-form";
 @import "./dropdown-style";
+@import "./custom-buttons";
+@import "./facets";

@@ -1,4 +1,5 @@
 {%- from "kerkoapp/_badges.html.jinja2" import badges %}
+{%- from "macros/icons/opendeved-small-icon.jinja2" import opendevedSmallIcon %}
 
 <li class="{% block search_list_item_classes %} search-item break-word {% endblock %}" id="searchResultContainer">
     {%- if print_preview -%}
@@ -29,15 +30,14 @@
         {%- if result.data['institution'] %}
         <div class="d-flex align-items-center institution-class">
             {%- if result.data['institution'] == "Open Development & Education"%}
-            <img src="{{ url_for('static', filename='dist/images/logo.png') }}" alt="ODE" class="institution-icon"
-                style="width: 20px; height: 20px; margin-right: 4px" />
+            <span class="mr-1">{{ opendevedSmallIcon("", 24, 24) }}</span>
             {%- endif %}
             <span style="font-weight: 500;">{{ result.data['institution'] }}</span>
         </div>
         <span class="text-muted mx-2">|</span>
         {%- endif %}
 
-        {%- if result.data['creators']|length and result.data['institution'] != "Open Development & Education" %}
+        {%- if result.data['creators']|length and not result.data['institution']%}
         {{ result.data['creators']|format_creators(40) }}
         <span class="text-muted mx-2">|</span>
         {%- endif %}
@@ -56,7 +56,7 @@
 
     {%- endif -%}
     {%- if show_abstracts and result.data['abstractNote']|trim|length %}
-    <p class="{% block search_abstract_classes %}search-abstract pre-line my-2{% endblock %}">
+    <p class="{% block search_abstract_classes %}search-abstract pre-line p-0 m-0{% endblock %}">
         {%- if config.kerko.features.results_abstracts_max_length > 0 %}
         {{- result.data['abstractNote']|truncate(
         config.kerko.features.results_abstracts_max_length,

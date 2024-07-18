@@ -1,0 +1,29 @@
+// buttons
+.btn-normal {
+  display: inline-flex;
+  padding: 10px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: $border-radius-base;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--font-60);
+}
+
+.regular-btn {
+  display: flex;
+  padding: 10px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: $border-radius-base;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--font-60);
+  &:hover {
+    text-decoration: none;
+    color: var(--font-60);
+  }
+}

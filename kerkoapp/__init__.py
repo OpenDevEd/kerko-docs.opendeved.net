@@ -19,6 +19,8 @@ from .config_helpers import KerkoAppModel, load_config_files
 from .extensions import babel, bootstrap
 from flask import (session)
 
+from .composer import Composer
+
 from dateutil import parser
 from typing import List, Dict
 
@@ -60,7 +62,7 @@ def create_app() -> Flask:
         parse_config(app.config, 'kerkoapp', KerkoAppModel)
 
     # Initialize the Composer object.
-    app.config['kerko_composer'] = kerko.composer.Composer(app.config)
+    app.config['kerko_composer'] = Composer(app.config)
 
     # Update the Composer object.
     update_composer(app.config['kerko_composer'])

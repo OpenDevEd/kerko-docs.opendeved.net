@@ -1,14 +1,24 @@
-.dropdown-item {
-  white-space: normal; // Override Bootstrap's no-wrap default.
-  &:hover {
-    background-color: var(--primary);
-    color: #eee;
+.dropdown-menu {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px;
+
+  .dropdown-item {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    white-space: normal; // Override Bootstrap's no-wrap default.
+    color: var(--foreground);
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    &:hover {
+      background-color: var(--primary);
+      color: #eee;
+    }
   }
 }
-.dropdown-item-help-text {
-  color: var(--foreground);
-  font-size: 14px;
-}
+
 .dropdown-width-300 {
   width: 300px;
   max-width: 90vw;

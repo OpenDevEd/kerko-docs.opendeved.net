@@ -23,10 +23,18 @@
                     {{ helpIcon('helpIcon', 20, 20) }}
                 </button>
             </div>
-
-            {%- if search_results %}
-            {%- include "kerkoapp/_sorter.html.jinja2" %}
+            {%- if facet_results and search_results %}
+            <div class="{% block facets_link_wrapper_classes %}d-inline-block d-lg-none d-print-none{% endblock %}">
+                <button id="facets-modal-toggle" class="{% block facets_btn_classes %}btn-normal{% endblock %}">
+                    <span class="fas fa-compass" aria-hidden="true"></span> {{ _("Explore") }}
+                </button>
+            </div>
             {%- endif %}
+            <div class="d-none d-lg-flex">
+                {%- if search_results %}
+                {%- include "kerkoapp/_sorter.html.jinja2" %}
+                {%- endif %}
+            </div>
         </div>
     </div>
     <form method="post" role="search" {% block search_form_attributes %}class="form d-print-none w-100" {% endblock %}>
@@ -50,9 +58,7 @@
                                 {{ searchIcon('searchIcon mb-1', 24, 24) }}
                             </span>
                             <input maxlength="1000" name="keywords" placeholder="Search for..." type="search" value="">
-
                         </div>
-
                         {%- include "search-form/search-in-dropdown.jinja2" %}
                         {# {%- include "search-form/search-button.jinja2" %} #}
 
@@ -76,17 +82,9 @@
         </div>
         {%- if is_searching or facet_results %}
         <div class="col-auto pl-0 ml-auto text-right pr-0">
-            {%- if facet_results and search_results %}
-            <div
-                class="{% block facets_link_wrapper_classes %}d-inline-block d-lg-none d-print-none mt-0 mb-2{% endblock %}">
-                <button id="facets-modal-toggle" class="{% block facets_btn_classes %}btn btn-primary{% endblock %}">
-                    <span class="fas fa-compass" aria-hidden="true"></span> {{ _("Explore") }}
-                </button>
-            </div>
-            {%- endif %}
             {%- if is_searching %}
             <div class="{% block reset_link_wrapper_classes %}d-inline-block d-print-none mt-0 mb-2{% endblock %}">
-                <a class="{% block reset_btn_classes %}btn btn-danger{% endblock %}"
+                <a class="{% block reset_btn_classes %}btn btn-normal{% endblock %}"
                     href="{{ url_for('kerko.search') }}">
                     <span class="fas fa-trash-alt" aria-hidden="true"></span> {{ _("Reset search") }}
                 </a>
@@ -95,5 +93,10 @@
         </div>
         {%- endif %}
     </div>
+</div>
+<div class="d-lg-none d-flex">
+    {%- if search_results %}
+    {%- include "kerkoapp/_sorter.html.jinja2" %}
+    {%- endif %}
 </div>
 {%- endif %}

@@ -47,13 +47,14 @@ top_level=False
             {% endif %}>
             {{- noCheckSquare('', 20, 20) -}}
         </span>{% endif %}
-        <span class="facet-item-label parent-decorate ml-2">{{ label }}</span>
+        <span class="facet-item-label parent-decorate ml-2" style="color: var(--font-60);">{{ label }}</span>
     </a>
     {%- else -%}
     {{- label }}
     {% endif %}
-    {% if not item.remove_url and item.count > 0 %}<span class="facet-item-count"> ({{ item.count_formatted|safe }})
-    </span>{% endif %}
+    {% if not item.remove_url and item.count > 0 %}
+    <span class="facet-item-count" style="color: var(--font-60);"> ({{ item.count_formatted|safe }})</span>
+    {% endif %}
     {%- if subtree %}
     {%- if list_id and item.id %}
     {{- expand_collapse_buttons(
@@ -121,7 +122,7 @@ list_class_top='list-unstyled'
 -%}
 {%- if items %}
 <{{ wrap_tag }}{% if wrap_class %} class="{{ wrap_class }}" {% endif %}>
-    <{{ heading_tag }}{% if heading_class %} class="{{ heading_class }}" {% endif %}>
+    <{{ heading_tag }}{% if heading_class %} class="{{ heading_class }}" style="color: var(--font-80);" {% endif %}>
         {{ title }}
     </{{ heading_tag }}>
     <{{ body_tag }}{% if body_class %} class="{{ body_class }}" {% endif %}>

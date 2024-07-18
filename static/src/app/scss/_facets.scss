@@ -1,0 +1,43 @@
+.facets {
+  display: inline-flex;
+  padding: 24px 24px;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--foreground);
+  h3 {
+    color: var(--foreground);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  ul {
+    li {
+      .facet-item-label {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: capitalize;
+        color: var(--foreground);
+      }
+      .facet-item-count {
+        color: var(--foreground);
+      }
+    }
+  }
+}
+
+#facets {
+  width: 100%;
+}
+
+.expandIcon-expand {
+  transform: rotate(-90deg);
+}

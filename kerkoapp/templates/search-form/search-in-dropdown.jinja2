@@ -16,9 +16,9 @@
     </button>
     <div class="dropdown-menu search-in-dropdown-menu" aria-labelledby="dropdownMenuButton">
         {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
-        <a class="dropdown-item" href="#" data-value="{{ scopes.key }}">{{
-            scopes.selector_label
-            }}</a>
+        <a class="dropdown-item {%- if loop.first %} active {%- endif %}" href="#" data-value="{{ scopes.key }}">
+            {{scopes.selector_label}}
+        </a>
         {%- endfor %}
     </div>
     <script>

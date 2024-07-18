@@ -4,7 +4,7 @@ import re
 from flask_babel import gettext as _
 from kerko import extractors, transformers
 from kerko.renderers import TemplateRenderer
-from kerko.specs import BadgeSpec, FieldSpec, SortSpec
+from .specs import BadgeSpec, FieldSpec, SortSpec
 from whoosh.fields import BOOLEAN, STORED
 
 from .extractors import MatchesTagExtractor

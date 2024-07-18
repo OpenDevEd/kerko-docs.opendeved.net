@@ -16,15 +16,15 @@
 {%- endblock breadcrumb %}
 
 {%- block content_inner %}
-{%- block search_criteria %}
-{%- if is_searching %}
+{# {%- block search_criteria %} #}
+{# {%- if is_searching %}
 <div class="{% block search_criteria_wrapper_classes %}card breadbox mb-4 d-print-none{% endblock %}">
     <div class="card-body">
         {%- include "kerkoapp/_breadbox.html.jinja2" %}
     </div>
 </div>
-{%- endif %}
-{%- endblock search_criteria %}
+{%- endif %} #}
+{# {%- endblock search_criteria %} #}
 {%- block search_results %}
 {%- endblock search_results %}
 {{- super() }}

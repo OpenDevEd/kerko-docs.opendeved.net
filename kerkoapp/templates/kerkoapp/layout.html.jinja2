@@ -65,83 +65,17 @@
 </nav>
 {% endblock navbar %}
 
-{# {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-light bg-white d-print-none">
-    <div class="container">
-        {%- block navbar_brand %}
-        <div class="navbar-brand">
-            <a class="d-block brand-title" href="{{ config.HOME_URL }}">{{ config.HOME_TITLE }}</a>
-            {% if config.HOME_SUBTITLE %}<span class="d-block brand-subtitle text-primary">{{ config.HOME_SUBTITLE
-                }}</span>{% endif %}
-        </div>
-        {%- endblock navbar_brand %}
-        {%- block navbar_toggler %}
-        <div class="d-lg-none m-auto">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
-                aria-controls="navbar-content" aria-expanded="false" aria-label="{{ _('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-text">{{ _('Menu') }}</span>
-            </button>
-        </div>
-        {%- endblock navbar_toggler %}
-        {%- block navbar_content %}
-        <div id="navbar-content" class="collapse navbar-collapse">
-            <ul class="navbar-nav justify-content-end">
-                {%- block navbar_items %}
-                <li class="nav-item">
-                    <a class="nav-link" href="https://opendeved.net/about/">{{ _('About') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://opendeved.net/programmes/">{{ _('Programmes') }}</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('kerko.search') }}" aria-current="true">{{ _("Evidence
-                        Library") }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://opendeved.net/partners/">{{ _('Partners') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://opendeved.net/blog/">{{ _('Blog') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://opendeved.net/jobs/">{{ _('Jobs') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://opendeved.net/contact-us/">{{ _('Contact Us') }}</a>
-                </li>
-                {%- endblock navbar_items %}
-            </ul>
-        </div>
-        {%- endblock navbar_content %}
-    </div>
-</nav>
-{% endblock navbar %} #}
-
-{# {% block footer_attributes %}Deliberately empty!{% endblock %} #}
-
-{%- block footer %}
-{%- include "footer/app-footer.jinja2"%}
-{%- endblock footer %}
-
-{% block body_scripts %}
-{%- assets "common_js" %}
-<script src="{{ ASSET_URL }}"></script>
-{%- endassets %}
-{% endblock body_scripts %}
-
-
 {%- block main %}
 <main {% block main_attributes %}class="container" {% endblock %}>
     {# {%- block breadcrumb %} #}
     {# {{ breadcrumb([title]) }} #}
     {# {%- endblock breadcrumb %} #}
-    {%- block search_criteria %}
-    <div>
+    {# {%- block search_criteria %} #}
+    {# <div> #}
         {# {%- include "kerkoapp/_breadbox.html.jinja2" %} #}
         {# {%- include "kerkoapp/_search-form.html.jinja2" %} #}
-    </div>
-    {%- endblock search_criteria %}
+        {# </div> #}
+    {# {%- endblock search_criteria %} #}
     {%- block main_inner %}
     <div {% block main_inner_attributes %}class="row" {% endblock %}>
         {%- block content %}
@@ -171,48 +105,26 @@
             {%- block content_footer %}
             {%- endblock content_footer %}
         </div>
-        {%- endblock content %}
         {%- block sidebar %}
         {%- if self.sidebar_inner() %}
         <div {% block sidebar_attributes %}class="col-12 col-lg-4 order-lg-1" {% endblock %}>
             {%- block sidebar_inner %}
-            {%- block facet_results %}
-            {%- if facet_results and search_results %}
-            <div id="facets-container" class="d-none d-lg-block d-print-none">
-                {# <h2 class="{% block facets_heading_classes %}mt-2 mb-4{% endblock %}">{{ _("Explore") }}</h2> #}
-                <div id="facets" class="facets">
-                    {%- for f in config.kerko_composer.get_ordered_specs('facets') %}
-                    {{f.render(facet_results[f.key], 'search')}}
-                    {%- endfor %}
-                </div>
-            </div>
-            <div id="facets-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="facets-modal-label"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 id="facets-modal-label" class="modal-title">{{ _("Explore") }}</h2>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" {{
-                                title_aria_label(_('Close Explore panel')) }}>
-                                <span class="fas fa-times" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                        <div id="facets-modal-body" class="modal-body">
-                            <div class="my-3 text-right">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                    aria-label="{{ _('Close Explore panel') }}">{{ _("Close") }}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {%- endif %}
-            {%- endblock facet_results %}
             {%- endblock sidebar_inner %}
         </div>
         {%- endif %}
         {%- endblock sidebar %}
+        {%- endblock content %}
     </div>
     {%- endblock main_inner %}
 </main>
 {%- endblock main %}
+
+{%- block footer %}
+{%- include "footer/app-footer.jinja2"%}
+{%- endblock footer %}
+
+{% block body_scripts %}
+{%- assets "common_js" %}
+<script src="{{ ASSET_URL }}"></script>
+{%- endassets %}
+{% endblock body_scripts %}

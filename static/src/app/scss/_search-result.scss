@@ -5,7 +5,6 @@
 .search-abstract {
   font-size: 16px;
   font-weight: 400;
-  line-height: normal;
   text-transform: capitalize;
   color: var(--font-40);
 
@@ -24,7 +23,7 @@
 .search-item {
   border: 1px solid var(--border);
   .searchResultTitle {
-    font-size: 24px;
+    font-size: $h4-font-size;
     font-style: normal;
     font-weight: 500;
     text-transform: capitalize;

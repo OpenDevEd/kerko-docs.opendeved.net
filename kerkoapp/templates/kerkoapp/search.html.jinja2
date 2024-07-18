@@ -3,6 +3,9 @@
 {% from "kerkoapp/_breadcrumb.html.jinja2" import breadcrumb %}
 {% from "macros/svgs.jinja2" import toggleOff, toggleOn %}
 {% from "macros/rrsIcon.jinja2" import rssIcon %}
+{% from "kerkoapp/_facets.html.jinja2" import facet_items %}
+{% from "macros/icons/printIcon.jinja2" import printIcon %}
+{% from "macros/icons/downloadIcon.jinja2" import downloadIcon %}
 
 {%- set show_print_link = config.kerko.features.print_results_max_count == 0 or total_count <=
     config.kerko.features.print_results_max_count %} {%- set show_print_link=show_print_link and
@@ -14,14 +17,6 @@
     super() }} {%- include "kerkoapp/_search-metas.html.jinja2" %} {%- endblock metas %} {%- block breadcrumb %} {%- if
     is_searching %} {{ breadcrumb([_("Your search")]) }} {%- else %} {{ breadcrumb() }} {%- endif %} {%- endblock
     breadcrumb %} {%- block content_header %} <div class="my-2 row">
-    {# <h1
-        class="{% block search_heading_classes %}h2 col-auto pr-1 mr-auto d-inline{% endblock %}{% if not is_searching %} d-print-none{% endif %}">
-        {%- if is_searching %}
-        {{ _("Your search") }}
-        {%- else %}
-        {{ _("Search") }}
-        {%- endif -%}
-    </h1> #}
     </div>
     {%- block search_help %}
     {%- include "kerkoapp/_search-help.html.jinja2" %}
@@ -29,12 +24,10 @@
     {%- endblock content_header %}
 
     {%- block content_inner %}
-
     {%- block search_results %}
     <div class="my-1 row d-flex">
         <div class="col-auto mr-auto d-flex align-items-center">
             <p class="{% block results_heading_classes %}d-inline mb-0{% endblock %}" id="results-counts">
-                {# {{- title }} #}
                 {%- if search_results %}
                 <span class="">
                     {% trans count=total_count, count_formatted=total_count_formatted|safe%}
@@ -91,7 +84,8 @@
             <div class="{% block print_link_wrapper_classes %}d-none d-md-inline-block d-print-none mb-1{% endblock %}">
                 <button id="print-link" class="{% block print_btn_classes %}regular-btn{% endblock %}" type="button"
                     data-url="{{ print_url }}">
-                    <span class="fas fa-print" aria-hidden="true"></span> {% trans count=total_count,
+                    {{ printIcon("", 20, 20) }}
+                    {% trans count=total_count,
                     count_formatted=total_count_formatted|safe %}Print this citation{% pluralize %}Print {{
                     count_formatted }} citations{% endtrans %}
                 </button>
@@ -103,7 +97,7 @@
                     <button class="{% block download_btn_classes %}regular-btn dropdown-toggle{% endblock %}"
                         type="button" id="download-options" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <span class="fas fa-download" aria-hidden="true"></span> {% trans count=total_count,
+                        {{ downloadIcon("", 20, 20) }} {% trans count=total_count,
                         count_formatted=total_count_formatted|safe %}Download this record{% pluralize %}Download {{
                         count_formatted }} records{% endtrans -%}
                     </button>
@@ -155,6 +149,41 @@
     {%- endif %}
     {%- endblock search_results %}
     {%- endblock content_inner %}
+
+    {%- block sidebar_inner %}
+    {%- block facet_results %}
+    {%- if facet_results and search_results %}
+    <div id="facets-container" class="d-none d-lg-block d-print-none mt-4">
+        {# <h2 class="{% block facets_heading_classes %}mt-2 mb-4{% endblock %}">{{ _("Explore") }}</h2> #}
+        <div id="facets" class="facets">
+            {%- for f in config.kerko_composer.get_ordered_specs('facets') %}
+            {{ f.render(facet_results[f.key], 'search') }}
+            {%- endfor %}
+        </div>
+    </div>
+    <div id="facets-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="facets-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="facets-modal-label" class="modal-title">{{ _("Explore") }}</h2>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" {{ title_aria_label(_('Close
+                        Explore panel')) }}>
+                        <span class="fas fa-times" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div id="facets-modal-body" class="modal-body">
+                    <div class="my-3 text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            aria-label="{{ _('Close Explore panel') }}">{{ _("Close") }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%- endif %}
+    {%- endblock facet_results %}
+    {%- endblock sidebar_inner %}
 
     {%- block body_scripts %}
     {{- super() }}

@@ -6,6 +6,7 @@ main {
   padding-top: 1rem;
   padding-bottom: 1rem;
   color: var(--foreground);
+  font-size: $font-size-md;
 
   @include media-breakpoint-up(lg) {
     padding-top: 1.5rem;
