@@ -10,6 +10,11 @@
   border: 1px solid var(--border);
   background: var(--white);
   color: var(--font-60);
+
+  &:hover {
+    text-decoration: none;
+    color: var(--font-60);
+  }
 }
 
 .regular-btn {

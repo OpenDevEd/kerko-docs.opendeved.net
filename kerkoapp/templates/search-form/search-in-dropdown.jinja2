@@ -7,9 +7,9 @@
     </select>
 </div>
 <div class="dropdown" id="search-in-dropdown">
-    <button class="btn-normal" type="button" id="search-in-dropdown-menu-button" data-toggle="dropdown"
+    <button class="btn-normal" type="button" id="search-dropdown-menu-button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <span id="search-in-dropdown-menu-button-text">
+        <span id="search-dropdown-menu-button-text">
             {{config.kerko_composer.get_ordered_specs('scopes')[0].selector_label }}
         </span>
         {{ expandIcon("", 20, 20) }}
@@ -25,7 +25,7 @@
         document.querySelectorAll('#search-in-dropdown .dropdown-item').forEach(item => {
             item.addEventListener('click', event => {
                 // update the dropdown button text when an item is clicked
-                document.getElementById('search-in-dropdown-menu-button-text').innerText = event.target.innerText;
+                document.getElementById('search-dropdown-menu-button-text').innerText = event.target.innerText;
                 // update the hidden select field when an item is clicked
                 document.getElementById('scope').value = event.target.getAttribute('data-value');
                 // remove active class from the other items and add it to the clicked item

@@ -1,0 +1,55 @@
+.modal-title {
+  color: var(--font-80);
+}
+
+.modal-body {
+  padding-left: 30px;
+  padding-right: 30px;
+  p {
+    color: var(--font-60);
+  }
+
+  h3 {
+    color: var(--font-80);
+  }
+
+  code {
+    color: var(--blue);
+  }
+
+  ul {
+    li {
+      color: var(--font-60);
+    }
+  }
+}
+
+// modal dialog scrollable
+.modal-dialog-scrollable {
+  .btn-exit {
+    color: var(--foreground);
+  }
+  .modal-header {
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-content {
+    background: var(--background2);
+    color: var(--font-80);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .form-group {
+    #open-in-zotero-app-toggle,
+    #open-in-zotero-web-toggle {
+      color: var(--foreground);
+    }
+    small {
+      color: var(--dummy-secondary);
+    }
+  }
+}
+
+.close-preferences,
+.close-btn-model {
+  border-radius: 12px;
+}

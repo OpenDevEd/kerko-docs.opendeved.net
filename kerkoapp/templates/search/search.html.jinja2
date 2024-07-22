@@ -6,6 +6,7 @@
 {% from "kerkoapp/_facets.html.jinja2" import facet_items %}
 {% from "macros/icons/printIcon.jinja2" import printIcon %}
 {% from "macros/icons/downloadIcon.jinja2" import downloadIcon %}
+{% from "macros/icons/exitIcon.jinja2" import exitIcon %}
 
 {%- set show_print_link = config.kerko.features.print_results_max_count == 0 or total_count <=
     config.kerko.features.print_results_max_count %} {%- set show_print_link=show_print_link and
@@ -25,35 +26,7 @@
 
     {%- block content_inner %}
     {%- block search_results %}
-    <div class="my-1 row d-flex">
-        <div class="col-auto mr-auto d-flex align-items-center">
-            <p class="{% block results_heading_classes %}d-inline mb-0{% endblock %}" id="results-counts">
-                {%- if search_results %}
-                <span class="">
-                    {% trans count=total_count, count_formatted=total_count_formatted|safe%}
-                    {{ count_formatted }} <span class="result-counts-text">resource</span>
-                    {% pluralize %}
-                    {{ count_formatted }} <span class="result-counts-text">resources</span>
-                    {% endtrans %}
-                </span>
-                {%- endif %}
-            </p>
-        </div>
-        {%- if config.kerko.features.results_abstracts_toggler %}
-        <div class="col-auto ml-auto pl-0">
-            {%- block abstracts_toggler %}
-            <a class="show-abstract-btn" href="{{ abstracts_toggler_url }}" title="{{ abstracts_toggler_title }}"
-                aria-label="{{ abstracts_toggler_title }}">
-                {% if show_abstracts %}
-                {{ toggleOn() }}
-                {% else %}
-                {{ toggleOff() }}
-                {% endif %}
-                {{ _("Abstracts") }}</a>
-            {%- endblock abstracts_toggler %}
-        </div>
-        {%- endif %}
-    </div>
+    {%- include "search/results_heading.jinja2" %}
     {%- if search_results %}
     {%- if pager or config.kerko.features.results_abstracts_toggler %}
     <div class="row mb-2">
@@ -154,10 +127,9 @@
     {%- block facet_results %}
     {%- if facet_results and search_results %}
     <div id="facets-container" class="d-none d-lg-block d-print-none mt-4">
-        {# <h2 class="{% block facets_heading_classes %}mt-2 mb-4{% endblock %}">{{ _("Explore") }}</h2> #}
         <div id="facets" class="facets">
             {%- for f in config.kerko_composer.get_ordered_specs('facets') %}
-            {{ f.render(facet_results[f.key], 'search') }}
+            {{ f.render(facet_results[f.key], 'sidebar') }}
             {%- endfor %}
         </div>
     </div>
@@ -167,14 +139,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 id="facets-modal-label" class="modal-title">{{ _("Explore") }}</h2>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" {{ title_aria_label(_('Close
-                        Explore panel')) }}>
-                        <span class="fas fa-times" aria-hidden="true"></span>
+                    <button type="button" class="btn" style="color: var(--font-80);" data-dismiss="modal" {{
+                        title_aria_label(_('Close Explore panel')) }}>
+                        {{ exitIcon("", 20, 20) }}
                     </button>
                 </div>
                 <div id="facets-modal-body" class="modal-body">
                     <div class="my-3 text-right">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        <button type="button" class="btn btn-secondary btn-normal" data-dismiss="modal"
                             aria-label="{{ _('Close Explore panel') }}">{{ _("Close") }}</button>
                     </div>
                 </div>

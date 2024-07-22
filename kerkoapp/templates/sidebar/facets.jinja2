@@ -1,6 +1,9 @@
 {%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
 {%- from "kerkoapp/_collapse.html.jinja2" import expand_collapse_buttons %}
 {%- from "macros/svgs.jinja2" import checkSquare, noCheckSquare %}
+{%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
+{%- from "macros/svgs.jinja2" import expandIcon %}
+{%- from "sidebar/utils.jinja2" import itemLabel, itemsCount %}
 
 {%- macro facet_item(
 missing_label,
@@ -23,55 +26,12 @@ top_level=False
 )
 -%}
 {%- if item.label or missing_label -%}
-<{{ item_tag }}{% if icon_left %} class="position-relative" {% endif %}{% if top_level and icon_left %}
-    style="margin-left:{{ icon_left }};" {% endif %}>
-    {%- set label = item.label|escape|trim(' _') or (('<em>' + missing_label + '</em>')|safe) -%}
-    {%- if item.remove_url -%}
-    <a class="no-decorate" href="{{ item.remove_url }}" {{ title_aria_label(remove_title.format(label|striptags|escape))
-        }} rel="nofollow">
-        {%- if remove_icon %}
-        <span class="{% if icon_left %} position-absolute{% endif %}" aria-hidden="true" {% if icon_left %}
-            style="margin-left:1px;{% if icon_top %}top:{{ icon_top }};{% endif %}left:-{{ icon_left }};{% if icon_line_height %}line-height:1.5;{% endif %}"
-            {% endif %}>
-            {{- checkSquare('', 20, 20) -}}
-        </span>
-        {% endif %}
-        <span class="facet-item-label parent-decorate ml-2">{{ label }}</span>
-    </a>
-    {%- elif item.add_url -%}
-    <a class="no-decorate my-2" href="{{ item.add_url }}" {{ title_aria_label(add_title.format(label|striptags|escape))
-        }} rel="nofollow">
-        {%- if add_icon %}<span class="f{% if icon_left %} position-absolute{% endif %}" aria-hidden="true" {% if
-            icon_left %}
-            style="margin-left:1px;{% if icon_top %}top:{{ icon_top }};{% endif %}left:-{{ icon_left }};{% if icon_line_height %}line-height:1.5;{% endif %}"
-            {% endif %}>
-            {{- noCheckSquare('', 20, 20) -}}
-        </span>{% endif %}
-        <span class="facet-item-label parent-decorate ml-2" style="color: var(--font-60);">{{ label }}</span>
-    </a>
-    {%- else -%}
-    {{- label }}
-    {% endif %}
-    {% if not item.remove_url and item.count > 0 %}
-    <span class="facet-item-count" style="color: var(--font-60);"> ({{ item.count_formatted|safe }})</span>
-    {% endif %}
-    {%- if subtree %}
-    {%- if list_id and item.id %}
-    {{- expand_collapse_buttons(
-    collapse_id=list_id + '-' + item.id|string,
-    btn_class='btn btn-link px-0 py-0 border-0 align-baseline',
-    expand_label='',
-    expand_description=expand_title,
-    expand_icon=expand_icon,
-    collapse_label='',
-    collapse_description=collapse_title,
-    collapse_icon=collapse_icon,
-    icons_width='1rem',
-    expand_default=item.remove_url
-    )
-    -}}
-    {%- endif %}
-    {{ subtree|safe }}
+<{{ item_tag }}{% if icon_left %} class="position-relative" {% endif %}>
+    {%- set label_text = item.label|escape|trim(' _') or (('<em>' + missing_label + '</em>')|safe) -%}
+    {%- if not subtree %}
+    {%- include "sidebar/itemtree.jinja2" %}
+    {%- else %}
+    {%- include "sidebar/subtree.jinja2" %}
     {%- endif %}
 </{{ item_tag }}>
 {%- endif -%}
@@ -115,7 +75,7 @@ list_id='',
 initial_limit=0,
 initial_limit_leeway=2,
 wrap_tag='div', wrap_class='',
-heading_tag='h3', heading_class='h6 font-weight-bold',
+heading_tag='h3', heading_class='h6 facet-heading',
 body_tag='div', body_class='',
 list_class_top='list-unstyled'
 )
@@ -125,7 +85,7 @@ list_class_top='list-unstyled'
     <{{ heading_tag }}{% if heading_class %} class="{{ heading_class }}" {% endif %}>
         {{ title }}
     </{{ heading_tag }}>
-    <{{ body_tag }}{% if body_class %} class=" {{ body_class }}" {% endif %}>
+    <{{ body_tag }}{% if body_class %} class="{{ body_class }}" {% endif %}>
         {%- if list_id and initial_limit and items|length > initial_limit + initial_limit_leeway %}
         {#- Note: initial_limit can't be enabled without a list_id, hence the above check. #}
         {{- facet_items(missing_label, items[:initial_limit], list_id=list_id, list_class_top=[list_class_top, 'mb-0',

@@ -10,8 +10,8 @@
 </div>
 <footer class="footer py-4">
     <div class="container pt-2">
-        <div class="info d-lg-flex" style="gap: 30px; flex: 1">
-            <div>
+        <div class="d-flex footer-content">
+            <div class="company-info">
                 <a class="d-block footer-brand-icon" href="{{ config.HOME_URL }}">
                     {%- if theme == 'dark' %}
                     <img src="{{ url_for('static', filename='dist/images/opendeved-logo-light.png') }}"
@@ -33,53 +33,52 @@
                 </div>
             </div>
             <div class="quick-links">
-                <div>
-                    <h5 class="h5">Quick Links</h5>
-                    <div class="row">
-                        <div class="col">
-                            {%- if config.navbar['items'] %}
-                            <ul class="list-unstyled" style="margin: 0; padding: 0;">
-                                {%- for item in config.navbar['items'][:config.navbar['items']|length//2] %}
-                                <li class="mb-2">
-                                    <a href="{{ item.url }} ">{{ item.text }}</a>
-                                </li>
-                                {%- endfor %}
-                            </ul>
-                            {%- endif %}
-                        </div>
-                        <div class="col">
-                            {%- if config.navbar['items'] %}
-                            <ul class="list-unstyled" style="margin: 0; padding: 0;">
-                                {%- for item in config.navbar['items'][config.navbar['items']|length//2:] %}
-                                <li class="mb-2">
-                                    <a href="{{ item.url }} ">{{ item.text }}</a>
-                                </li>
-                                {%- endfor %}
-                            </ul>
-                            {%- endif %}
-                        </div>
+                <h5 class="h5">Quick Links</h5>
+                <div class="row">
+                    <div class="col">
+                        {%- if config.navbar['items'] %}
+                        <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                            {%- for item in config.navbar['items'][:config.navbar['items']|length//2] %}
+                            <li class="mb-2">
+                                <a href="{{ item.url }} ">{{ item.text }}</a>
+                            </li>
+                            {%- endfor %}
+                        </ul>
+                        {%- endif %}
+                    </div>
+                    <div class="col">
+                        {%- if config.navbar['items'] %}
+                        <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                            {%- for item in config.navbar['items'][config.navbar['items']|length//2:] %}
+                            <li class="mb-2">
+                                <a href="{{ item.url }} ">{{ item.text }}</a>
+                            </li>
+                            {%- endfor %}
+                        </ul>
+                        {%- endif %}
                     </div>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1" class="stay-connected">
-                <h5 class="mb-2 h5">Stay connected</h5>
-                <div class="d-flex" style="gap: 18px; color: var(--foreground)">
-                    <a href="https://www.linkedin.com/company/opendeved" target="_blank" rel="noopener"
-                        class="social-icon">
-                        {{ linkedin('social-icon', 28, 28) }}
-                    </a>
-                    <a href="https://www.facebook.com/opendeved" target="_blank" rel="noopener" class="social-icon">
-                        {{ facebookIcon('social-icon', 28, 28) }}
-                    </a>
-                    <a href="https://www.x.com/opendeved" target="_blank" rel="noopener" class="social-icon">
-                        {{ xIcon('social-icon', 28, 28) }}
-                    </a>
+            <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1">
+                <div class="stay-connected">
+                    <h5 class="mb-2 h5">Stay connected</h5>
+                    <div class="d-flex" style="gap: 18px; color: var(--foreground)">
+                        <a href="https://www.linkedin.com/company/opendeved" target="_blank" rel="noopener"
+                            class="social-icon">
+                            {{ linkedin('social-icon', 24, 24) }}
+                        </a>
+                        <a href="https://www.facebook.com/opendeved" target="_blank" rel="noopener" class="social-icon">
+                            {{ facebookIcon('social-icon', 24, 24) }}
+                        </a>
+                        <a href="https://www.x.com/opendeved" target="_blank" rel="noopener" class="social-icon">
+                            {{ xIcon('social-icon', 24, 24) }}
+                        </a>
+                    </div>
+
                 </div>
                 <div class="contact-us">
                     <p class="my-4 h5">Contact Us</p>
-                    <div class="d-flex" style="gap: 18px;">
-                        <a href="{{ config.footer.contactUsButtonLink }}" class="btn regular-btn">Contact Us</a>
-                    </div>
+                    <a href="{{ config.footer.contactUsButtonLink }}" class="btn regular-btn">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -87,7 +86,7 @@
         <div class="mt-4 footer-bottom-links">
             {%- for link in config.footer.links %}
             <a href="{{ link.url }}">{{ link.text }}</a>
-            {% if not loop.last %}|{% endif %}
+            {% if not loop.last %}<span class="divider">|</span>{% endif %}
             {%- endfor %}
         </div>
         {%- endif %}

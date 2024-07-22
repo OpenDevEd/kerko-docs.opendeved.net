@@ -1,15 +1,31 @@
 .info {
+  color: var(--font-80);
+}
+
+.dark-mode .info {
   color: var(--font-60);
 }
 
-.search-abstract {
+.dark-mode .search-abstract {
   font-size: 16px;
   font-weight: 400;
   text-transform: capitalize;
   color: var(--font-40);
 
+  a {
+    color: var(--font-40);
+  }
+
   .search-print-preview & {
     margin-left: 1em; // Match APA style indent.
+  }
+}
+
+.search-abstract {
+  color: var(--font-60);
+
+  a {
+    color: var(--font-6 0);
   }
 }
 
@@ -22,14 +38,7 @@
 
 .search-item {
   border: 1px solid var(--border);
-  .searchResultTitle {
-    font-size: $h4-font-size;
-    font-style: normal;
-    font-weight: 500;
-    text-transform: capitalize;
-    color: var(--font-80);
-  }
-  border-radius: 24px;
+  border-radius: $border-radius-lg;
   background: var(--white);
   display: flex;
   padding: 24px 32px 32px 32px;
@@ -37,24 +46,35 @@
   justify-content: center;
   align-items: flex-start;
   gap: 12px;
-
   margin-top: 1em;
   margin-bottom: 1em;
-  a {
-    color: var(--font-80);
-    .csl-block:first-of-type {
-      font-weight: bold;
-      font-size: $h5-font-size;
+
+  .searchResultTitle {
+    span {
+      font-size: $h4-font-size;
       font-style: normal;
       font-weight: 500;
       text-transform: capitalize;
+      color: var(--font-80);
     }
-    @include hover {
+    &:hover {
+      text-decoration: none;
+      span {
+        color: var(--font-60);
+      }
+    }
+  }
+
+  #search-item-link {
+    color: var(--font-80);
+    font-weight: bold;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-style: italic;
+
+    &:hover {
       color: var(--font-80);
       text-decoration: none;
-      .csl-block:first-of-type {
-        color: var(--font-80);
-      }
     }
   }
   .btn-link {

@@ -32,7 +32,7 @@
             {%- endif %}
             <div class="d-none d-lg-flex">
                 {%- if search_results %}
-                {%- include "kerkoapp/_sorter.html.jinja2" %}
+                {%- include "search-form/_sorter.html.jinja2" %}
                 {%- endif %}
             </div>
         </div>
@@ -45,7 +45,7 @@
                     {%-
                     set placeholder = _("Search within results for...")
                     if is_searching
-                    else _("Search for...")
+                    else _("Search")
                     %}
                     {%- set keywords_validation_class = " is-invalid" if 'keywords' in form.errors else "" %}
                     {%- set scope_validation_class = " is-invalid" if 'scope' in form.errors else "" %}
@@ -54,16 +54,19 @@
                     }} #}
                     <div class="d-flex w-100" style="gap: 5px">
                         <div class="search-input-group">
-                            <span class="search-icon">
-                                {{ searchIcon('searchIcon mb-1', 24, 24) }}
-                            </span>
-                            <input maxlength="1000" name="keywords" placeholder="Search for..." type="search" value="">
+                            <div>
+                                <span class="search-icon">
+                                    {{ searchIcon('searchIcon mb-1', 24, 24) }}
+                                </span>
+                            </div>
+                            <input maxlength="1000" name="keywords" placeholder="Search" type="search" value="">
+                            <div class="d-none d-lg-block">
+                                {%- include "search-form/search-in-dropdown.jinja2" %}
+                            </div>
                         </div>
+                    </div>
+                    <div class="d-flex d-lg-none search-in-dropdown-container-mobile">
                         {%- include "search-form/search-in-dropdown.jinja2" %}
-                        {# {%- include "search-form/search-button.jinja2" %} #}
-
-                        {# <label for="scope" class="sr-only">{{ _('Search in...') }}</label> #}
-                        {# {{- form.scope(class_="search-select-filter" + scope_validation_class) }} #}
                     </div>
                 </div>
                 {%- if form.errors %}
@@ -93,10 +96,5 @@
         </div>
         {%- endif %}
     </div>
-</div>
-<div class="d-lg-none d-flex">
-    {%- if search_results %}
-    {%- include "kerkoapp/_sorter.html.jinja2" %}
-    {%- endif %}
 </div>
 {%- endif %}

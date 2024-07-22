@@ -292,9 +292,8 @@ main {
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
-  line-height: 20px; /* 111.111% */
   text-transform: capitalize;
-  color: var(--foreground);
+  color: var(--font-80);
   .result-counts-text {
     font-size: 16px;
   }
@@ -306,13 +305,14 @@ main {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  border-radius: 8px;
+  border-radius: $border-radius-sm;
   border: 1px solid var(--border);
   background: var(--white);
-  color: var(--foreground);
+  color: var(--font-60);
   font-size: 14px;
   &:hover {
     text-decoration: none;
+    color: var(--font-60);
   }
 }
 
@@ -356,38 +356,6 @@ main {
   gap: 8px;
 }
 
-.search-input-group {
-  display: flex;
-  // height: 40px;
-  padding: 10px 18px 10px 18px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--foreground);
-  width: 100%;
-  gap: 8px !important;
-  // @include media-breakpoint-up(lg) {
-  //   width: 450px;
-  // }
-
-  input {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: capitalize;
-    color: var(--foreground);
-    border: none;
-    background: transparent;
-    width: 100%;
-    &:focus-visible {
-      outline: none;
-    }
-  }
-}
-
 .filter-searchButton-area {
   width: 100%;
   // make it width: 100% just in mobile
@@ -416,35 +384,6 @@ main {
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 16px;
-}
-
-// modal dialog scrollable
-.modal-dialog-scrollable {
-  .btn-exit {
-    color: var(--foreground);
-  }
-  .modal-header {
-    border-bottom: 1px solid var(--border);
-  }
-  .modal-content {
-    background: var(--background2);
-    color: var(--foreground);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-  }
-  .form-group {
-    #open-in-zotero-app-toggle,
-    #open-in-zotero-web-toggle {
-      color: var(--foreground);
-    }
-    small {
-      color: var(--dummy-secondary);
-    }
-  }
-}
-
-.close-preferences {
-  border-radius: 12px;
 }
 
 .icon-normal {
@@ -519,16 +458,15 @@ main {
 #search-container {
   #search-title {
     color: var(--font-60);
-    font-size: 20px;
-    font-size: 34px;
+    font-size: $h2-font-size;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
-    @include media-breakpoint-up(lg) {
-      font-size: 34px;
-      font-weight: 500;
-    }
+    // @include media-breakpoint-up(lg) {
+    //   font-size: $h2-font-size;
+    //   font-weight: 500;
+    // }
   }
 }
 
@@ -543,3 +481,4 @@ main {
 @import "./dropdown-style";
 @import "./custom-buttons";
 @import "./facets";
+@import "./model-style";

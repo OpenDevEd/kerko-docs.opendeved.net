@@ -1,34 +1,77 @@
 .facets {
   display: inline-flex;
-  padding: 24px 24px;
   align-items: flex-start;
   gap: 8px;
   border-radius: 20px;
   border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--foreground);
-  h3 {
-    color: var(--foreground);
 
-    font-size: 16px;
-    font-style: normal;
+  @include media-breakpoint-up(lg) {
+    background: var(--white);
+    padding: 22px 22px;
+  }
+
+  .facet-heading {
+    font-size: $h4-font-size;
+    color: var(--font-60);
     font-weight: 500 !important;
-    line-height: normal;
     text-transform: capitalize;
   }
 
   ul {
     li {
+      color: var(--font-60);
+
+      &:hover {
+        color: var(--font-80);
+      }
+
       .facet-item-label {
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         text-transform: capitalize;
+        color: var(--font-60);
+        text-align: left;
+      }
+
+      .active {
         color: var(--foreground);
       }
+
       .facet-item-count {
-        color: var(--foreground);
+        color: inherit;
+        font-size: $font-size-sm;
+      }
+      .btn-expand,
+      .btn-collapse {
+        display: flex;
+        flex-wrap: wrap;
+        background: none;
+        border: none;
+        color: inherit;
+        font-size: $font-size-md;
+        padding: 0;
+      }
+      // if the facet is expanded set display to hidden
+      .btn-expand[aria-expanded="true"] {
+        display: none;
+      }
+      // if the facet is collapsed set display to flex
+      .btn-expand[aria-expanded="true"] + .btn-collapse {
+        display: flex;
+      }
+
+      .expandIcon-expanded {
+        transform: rotate(-90deg);
+      }
+
+      .checkSquare,
+      .noCheckSquare {
+        &:hover {
+          fill: var(--primary);
+          opacity: 0.8;
+        }
       }
     }
   }
@@ -38,6 +81,26 @@
   width: 100%;
 }
 
-.expandIcon-expand {
-  transform: rotate(-90deg);
+.dark-mode {
+  .facets {
+    border: 0px;
+
+    .facet-heading {
+      color: var(--font-80);
+    }
+
+    ul {
+      li {
+        color: var(--font-40) !important;
+
+        .facet-item-label {
+          color: var(--font-40);
+        }
+
+        .active {
+          color: var(--foreground);
+        }
+      }
+    }
+  }
 }

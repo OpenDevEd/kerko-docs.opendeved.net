@@ -19,7 +19,7 @@
     {%- if item.attachments or show_download_link or config.kerko.features.print_item or
     config.kerko.features.open_in_zotero_app or config.kerko.features.open_in_zotero_web %}
     <div class="row my-2">
-        <div class="col-auto ml-auto text-right">
+        <div class="col-auto ml-auto text-right d-flex" style="gap: 8px;">
             {%- if item.attachments|length > 1 %}
             <div class="{% block attachment_links_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
                 <div class="dropdown">

@@ -1,0 +1,11 @@
+{%- from "sidebar/facets.jinja2" import facet %}
+
+{{- facet(
+spec.title,
+spec.missing_label,
+items,
+initial_limit=spec.initial_limit,
+initial_limit_leeway=spec.initial_limit_leeway,
+list_id='f-' + spec.filter_key|string
+)
+}}

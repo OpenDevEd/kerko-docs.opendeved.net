@@ -44,7 +44,7 @@ layout = "kerkoapp/layout.html.jinja2"
 search_item = "kerkoapp/search-item.html.jinja2"
 item = "kerkoapp/item.html.jinja2"
 atom_feed = "kerkoapp/atom.xml.jinja2"
-search = "kerkoapp/search.html.jinja2"
+search = "search/search.html.jinja2"
 
 [kerko.zotero]
 

@@ -12,11 +12,11 @@
     {%- else -%}
     {%- block search_item_display %}
     <div class="d-flex">
-        <a class="{% block search_item_classes %}d-block mw-100 mr-auto{% endblock %}" href="{{ result_url }}"
-            title="{{ _('View details') }}">
+        <a class="searchResultTitle {% block search_item_classes %}d-block mw-100 mr-auto{% endblock %}"
+            href="{{ result_url }}" title="{{ _('View details') }}">
             {{- badges(result, mode='result') -}}
             {%- block search_item_formatted_display %}
-            <span class="searchResultTitle">{{- result.data['title'] -}}</span>
+            <span>{{- result.data['title'] -}}</span>
             {%- endblock search_item_formatted_display %}
         </a>
         {%- if result.coins %}
@@ -34,17 +34,17 @@
             {%- endif %}
             <span style="font-weight: 500;">{{ result.data['institution'] }}</span>
         </div>
-        <span class="text-muted mx-2">|</span>
+        <span class="mx-2">|</span>
         {%- endif %}
 
         {%- if result.data['creators']|length and not result.data['institution']%}
         {{ result.data['creators']|format_creators(40) }}
-        <span class="text-muted mx-2">|</span>
+        <span class="mx-2">|</span>
         {%- endif %}
 
         {%- if result.data['date'] %}
         {{ result.data['date']|format_date() }}
-        <span class="text-muted mx-2">|</span>
+        <span class="mx-2">|</span>
         {%- endif %}
 
         {%- if result.data['itemType'] %}

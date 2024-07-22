@@ -1,0 +1,41 @@
+{%- if list_id and item.id %}
+{%- set collapse_id = list_id + '-' + item.id|string -%}
+{%- set expand_default = item.remove_url -%}
+
+<div class="d-flex mb-2">
+    {%- if item.remove_url -%}
+    <a class="no-decorate" href="{{ item.remove_url }}" {{
+        title_aria_label(remove_title.format(label_text|striptags|escape)) }} rel="nofollow">
+        {%- if remove_icon %}
+        <div style="width: 20px; margin-top: -5px;">
+            {{- checkSquare('checkSquare', "100%", "100%") -}}
+        </div>
+        {% endif %}
+    </a>
+    {%- elif item.add_url -%}
+    <a class="no-decorate" href="{{ item.add_url }}" {{ title_aria_label(add_title.format(label_text|striptags|escape))
+        }} rel="nofollow">
+        {%- if add_icon %}
+        <div style="width: 20px; margin-top: -5px;">
+            {{- noCheckSquare('noCheckSquare', "100%", "100%") -}}
+        </div>
+        {% endif %}
+    </a>
+    {%- else -%}
+    {{- label_text }}
+    {% endif %}
+
+    <button class="{{ ['btn-expand']|join(' ') }}" data-toggle="collapse" data-target="#{{ collapse_id }}"
+        aria-controls="{{ collapse_id }}" aria-expanded="{% if expand_default %}true{% else %}false{% endif %}" {% if
+        expand_description %}{{ title_aria_label(expand_description) }}{% endif %}>
+        {{- itemLabel(item, false, label_text, expandIcon('expandIcon pl-1', 20, 20), item.remove_url) }}
+    </button>
+
+    <button class="{{ ['btn-collapse']|join(' ') }}" data-toggle="collapse" data-target="#{{ collapse_id }}"
+        aria-controls="{{ collapse_id }}" aria-expanded="{% if expand_default %}false{% else %}true{% endif %}" {% if
+        collapse_description %}{{ title_aria_label(collapse_description) }}{% endif %}>
+        {{- itemLabel(item, false, label_text, expandIcon('expandIcon-expanded pl-1', 20, 20), item.remove_url) }}
+    </button>
+</div>
+{%- endif %}
+{{ subtree|safe }}

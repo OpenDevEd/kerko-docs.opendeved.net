@@ -258,11 +258,11 @@ msgid "Search within results for..."
 msgstr ""
 
 #: src/kerko/templates/kerko/_search-form.html.jinja2:7
-msgid "Search for..."
+msgid "Search"
 msgstr ""
 
 #: src/kerko/templates/kerko/_search-form.html.jinja2:12
-msgid "Search in..."
+msgid "Search"
 msgstr ""
 
 #: src/kerko/templates/kerko/_search-form.html.jinja2:15

@@ -1,0 +1,14 @@
+{%- macro itemLabel(item, subtree, label_text, icon, active) -%}
+{%- if not subtree %}
+<span class="facet-item-label parent-decorate ml-2 my-auto {{ 'active' if active else '' }}">{{ label_text }} {{
+    itemsCount(item) }} {{ icon }}</span>
+{%- endif %}
+{% endmacro %}
+
+{%- macro itemsCount(item) -%}
+{% if not item.remove_url and item.count > 0 %}
+<span class="facet-item-count">
+    ({{ item.count_formatted|safe}})
+</span>
+{% endif %}
+{% endmacro %}
