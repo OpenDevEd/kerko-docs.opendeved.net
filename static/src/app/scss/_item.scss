@@ -1,0 +1,47 @@
+.item-content {
+  background: var(--white);
+  border: 0;
+  margin-top: 1em;
+  color: var(--font-80);
+
+  .field-title {
+    color: var(--font-60);
+    font-size: $font-size-lg;
+  }
+
+  .field-value {
+    font-size: $font-size-md;
+  }
+
+  .row {
+    gap: 4px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: 0px 21px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 32px;
+
+    .row {
+      gap: 0px;
+    }
+
+    .field-title {
+      color: var(--font-60);
+      font-size: $font-size-md;
+    }
+
+    .field-value {
+      font-size: $font-size-md;
+    }
+  }
+}
+
+.item-title {
+  font-size: $font-size-xl;
+
+  @include media-breakpoint-up(lg) {
+    font-size: $font-size-3xl;
+  }
+}

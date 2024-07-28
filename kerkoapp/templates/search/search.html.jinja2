@@ -17,7 +17,7 @@
     abstracts_toggler_title=_('Hide abstracts') if show_abstracts else _('Show abstracts') %} {%- block metas %} {{-
     super() }} {%- include "kerkoapp/_search-metas.html.jinja2" %} {%- endblock metas %} {%- block breadcrumb %} {%- if
     is_searching %} {{ breadcrumb([_("Your search")]) }} {%- else %} {{ breadcrumb() }} {%- endif %} {%- endblock
-    breadcrumb %} {%- block content_header %} <div class="my-2 row">
+    breadcrumb %} {%- block content_header %} <div class="my-1 row">
     </div>
     {%- block search_help %}
     {%- include "kerkoapp/_search-help.html.jinja2" %}
@@ -29,7 +29,7 @@
     {%- include "search/results_heading.jinja2" %}
     {%- if search_results %}
     {%- if pager or config.kerko.features.results_abstracts_toggler %}
-    <div class="row mb-2">
+    {# <div class="row mb-2">
         {%- if pager %}
         <div class="col-auto mr-auto">
             {%- block pager_top %}
@@ -37,7 +37,7 @@
             {%- endblock pager_top %}
         </div>
         {%- endif %}
-    </div>
+    </div> #}
     {%- endif %}
     {%- block search_results_list %}
     <ul class="mb-4 list-unstyled {% if print_preview %}search-print-preview{% endif %}">
@@ -55,7 +55,7 @@
         <div class="col-auto ml-auto mt-2 mb-4 text-right d-flex bottom-btns-area">
             {%- if show_print_link %}
             <div class="{% block print_link_wrapper_classes %}d-none d-md-inline-block d-print-none mb-1{% endblock %}">
-                <button id="print-link" class="{% block print_btn_classes %}regular-btn{% endblock %}" type="button"
+                <button id="print-link" class="{% block print_btn_classes %}btn-normal{% endblock %}" type="button"
                     data-url="{{ print_url }}">
                     {{ printIcon("", 20, 20) }}
                     {% trans count=total_count,
@@ -67,7 +67,7 @@
             {%- if show_download_link %}
             <div class="{% block download_link_wrapper_classes %}d-inline-block d-print-none mb-1{% endblock %}">
                 <div class="dropdown">
-                    <button class="{% block download_btn_classes %}regular-btn dropdown-toggle{% endblock %}"
+                    <button class="{% block download_btn_classes %}btn-normal dropdown-toggle{% endblock %}"
                         type="button" id="download-options" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         {{ downloadIcon("", 20, 20) }} {% trans count=total_count,
@@ -90,7 +90,7 @@
             {%- endif %}
             {%- if atom_feed_url %}
             <div class="{% block atom_feed_link_wrapper_classes %}d-inline-block d-print-none mb-1{% endblock %}">
-                <a class="{% block atom_feed_btn_classes %} regular-btn {% endblock %}" href="{{ atom_feed_url }}"
+                <a class="{% block atom_feed_btn_classes %} btn-normal {% endblock %}" href="{{ atom_feed_url }}"
                     type="application/atom+xml" {% if atom_feed_help %}title="{{ atom_feed_help|escape }}" {% endif %}
                     target="_blank">
                     {{rssIcon("", 20, 20)}} {{ atom_feed_title }}
@@ -145,7 +145,7 @@
                     </button>
                 </div>
                 <div id="facets-modal-body" class="modal-body">
-                    <div class="my-3 text-right">
+                    <div class="text-right">
                         <button type="button" class="btn btn-secondary btn-normal" data-dismiss="modal"
                             aria-label="{{ _('Close Explore panel') }}">{{ _("Close") }}</button>
                     </div>

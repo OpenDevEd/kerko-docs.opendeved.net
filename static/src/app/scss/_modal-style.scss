@@ -37,6 +37,7 @@
     color: var(--font-80);
     border: 1px solid var(--border);
     border-radius: 16px;
+    margin: 14px;
   }
   .form-group {
     #open-in-zotero-app-toggle,
@@ -51,5 +52,16 @@
 
 .close-preferences,
 .close-btn-model {
-  border-radius: 12px;
+  border-radius: $border-radius-sm;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+}
+
+.dark-mode .close-preferences,
+.dark-mode .close-btn-model {
+  border-radius: $border-radius-sm;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

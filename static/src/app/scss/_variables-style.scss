@@ -1,50 +1,69 @@
 // colors
 
 :root {
+  // fonts color
   --font-80: rgba(0, 0, 0, 0.8);
   --font-60: rgba(0, 0, 0, 0.6);
   --font-40: rgba(0, 0, 0, 0.4);
-  --background: #f4f2ee;
-  --primary: #e68124;
-  --border: rgba(0, 0, 0, 0.2);
-  --blue: #5cacfd;
-  --card-background: #fff;
+  --font-blue-80: rgba(30, 91, 152, 1);
+  --foreground: #0f0f0f;
 
-  --white: #fff;
+  --background-primary: #f4f2ee;
+  --background-secondary: rgba(255, 255, 255, 1);
+  --background-third: #1b1c1e;
+
   --background2: #fff;
   --background3: rgba(92, 172, 253, 0.1);
-  --foreground: #0f0f0f;
+  --background-blue: rgba(92, 172, 253, 0.6);
+  --card-background: #fff;
+  --white: #fff;
+
+  --primary: #e68124;
+  --border: rgba(0, 0, 0, 0.2);
+  --border-blue: #1e5b98;
+  --blue: #5cacfd;
+  --hover: #e68124;
+
   --dummy: rgba(0, 0, 0, 0.6);
   --dummy-secondary: rgba(0, 0, 0, 0.8);
 }
 
 :root.dark-mode {
+  // fonts color
   --font-80: rgba(255, 255, 255, 0.8);
   --font-60: rgba(255, 255, 255, 0.6);
   --font-40: rgba(255, 255, 255, 0.4);
-  --background: #0f0f0f;
-  --primary: #e68124;
-  --border: rgba(255, 255, 255, 0.08);
-  --blue: #5cacfd99;
-  --card-background: rgba(255, 255, 255, 0.08);
+  --foreground: #f4f2ee;
 
-  --white: rgba(255, 255, 255, 0.02);
+  --background-primary: #0f0f0f;
+  --background-secondary: rgba(30, 30, 30, 1);
+  --background-third: #1b1c1e;
+
   --background2: #1b1c1e;
   --background3: rgba(92, 172, 253, 0.1);
-  --foreground: #f4f2ee;
+  --card-background: rgba(255, 255, 255, 0.08);
+  --background-blue: rgba(92, 172, 253, 0.2);
+  --white: rgba(255, 255, 255, 0.02);
+
+  --primary: #e68124;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-blue: #1e5b98;
+  --blue: #5cacfd99;
+  --hover: rgba(255, 255, 255, 10%);
+
   --dummy: rgba(255, 255, 255, 0.4);
   --dummy-secondary: rgba(255, 255, 255, 0.6);
 }
 
 // border-radius
-$border-radius-base: 16px;
 $border-radius-sm: 8px;
-$border-radius-lg: 20px;
 $border-radius-md: 12px;
+$border-radius-base: 16px;
+$border-radius-lg: 20px;
 
 // font-size
 html {
-  font-size: 14px;
+  font-size: 16px;
 
   @media (min-width: 768px) {
     font-size: 16px;
@@ -59,6 +78,10 @@ $h4-font-size: $font-size-base * 1.25; // 20px
 $h5-font-size: $font-size-base * 1.1; // 17.6px
 $h6-font-size: $font-size-base; // 16px
 
+$font-size-4xl: $font-size-base * 2.5; // 40px
+$font-size-3xl: $font-size-base * 2; // 32px
+$font-size-2xl: $font-size-base * 1.75; // 28px
+$font-size-xl: $font-size-base * 1.5; // 24px
 $font-size-lg: $font-size-base * 1.25; // 20px
 $font-size-md: $font-size-base; // 16px
 $font-size-sm: $font-size-base * 0.875; // 14px

@@ -32,34 +32,21 @@
                     {%- endif %}
                 </div>
             </div>
-            <div class="quick-links">
-                <h5 class="h5">Quick Links</h5>
-                <div class="row">
-                    <div class="col">
-                        {%- if config.navbar['items'] %}
-                        <ul class="list-unstyled" style="margin: 0; padding: 0;">
-                            {%- for item in config.navbar['items'][:config.navbar['items']|length//2] %}
-                            <li class="mb-2">
-                                <a href="{{ item.url }} ">{{ item.text }}</a>
-                            </li>
-                            {%- endfor %}
-                        </ul>
-                        {%- endif %}
-                    </div>
-                    <div class="col">
-                        {%- if config.navbar['items'] %}
-                        <ul class="list-unstyled" style="margin: 0; padding: 0;">
-                            {%- for item in config.navbar['items'][config.navbar['items']|length//2:] %}
-                            <li class="mb-2">
-                                <a href="{{ item.url }} ">{{ item.text }}</a>
-                            </li>
-                            {%- endfor %}
-                        </ul>
-                        {%- endif %}
-                    </div>
+            <div class="quick-links d-flex align-items-center">
+                <div>
+                    <h5 class="h5">Quick Links</h5>
+                    {%- if config.navbar['items'] %}
+                    <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                        {%- for item in config.navbar['items'] %}
+                        <li class="mb-2">
+                            <a href="{{ item.url }} ">{{ item.text }}</a>
+                        </li>
+                        {%- endfor %}
+                    </ul>
+                    {%- endif %}
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1">
+            <div style="display: flex; flex-direction: column; flex: 1">
                 <div class="stay-connected">
                     <h5 class="mb-2 h5">Stay connected</h5>
                     <div class="d-flex" style="gap: 18px; color: var(--foreground)">
@@ -78,7 +65,7 @@
                 </div>
                 <div class="contact-us">
                     <p class="my-4 h5">Contact Us</p>
-                    <a href="{{ config.footer.contactUsButtonLink }}" class="btn regular-btn">Contact Us</a>
+                    <a href="{{ config.footer.contactUsButtonLink }}" class="btn btn-normal">Contact Us</a>
                 </div>
             </div>
         </div>

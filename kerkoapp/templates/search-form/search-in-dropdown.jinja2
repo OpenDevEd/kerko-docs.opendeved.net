@@ -6,7 +6,7 @@
         {%- endfor %}
     </select>
 </div>
-<div class="dropdown" id="search-in-dropdown">
+<div class="dropdown desktop-only" id="search-in-dropdown">
     <button class="btn-normal" type="button" id="search-dropdown-menu-button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <span id="search-dropdown-menu-button-text">
@@ -30,6 +30,45 @@
                 document.getElementById('scope').value = event.target.getAttribute('data-value');
                 // remove active class from the other items and add it to the clicked item
                 document.querySelectorAll('#search-in-dropdown .dropdown-item').forEach(item => {
+                    item.classList.remove('active');
+                })
+                event.target.classList.add('active');
+            })
+        })
+    </script>
+</div>
+<div class="dropdown mobile-only" id="search-in-dropdown">
+    <button class="btn-normal" style="display: block;" type="button" id="search-dropdown-menu-button"
+        data-toggle="collapse" data-target="#search-in-collapse" aria-expanded="false" aria-controls="collapseExample">
+        <div class="btn-normal w-100"
+            style="display: flex; justify-content: space-between; margin: 0; padding: 0; background: none; border: 0">
+            <span class="search-collapse-menu-button-text">
+                {{config.kerko_composer.get_ordered_specs('scopes')[0].selector_label }}
+            </span>
+            {{ expandIcon("", 20, 20) }}
+        </div>
+        <div class="collapse" id="search-in-collapse">
+            <div class="searchin-collapse-body">
+                {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
+                <a class="{%- if loop.first %} active {%- endif %}" href="#" data-value="{{ scopes.key }}">
+                    {{scopes.selector_label}}
+                </a>
+                {%- endfor %}
+            </div>
+        </div>
+    </button>
+    <script>
+        document.querySelectorAll('.searchin-collapse-body a').forEach(item => {
+            item.addEventListener('click', event => {
+                console.log(document.getElementById('search-collapse-menu-button-text'))
+                // update the dropdown button text when an item is clicked
+                document.querySelectorAll('.search-collapse-menu-button-text').forEach(item => {
+                    item.innerText = event.target.innerText;
+                })
+                // update the hidden select field when an item is clicked
+                document.getElementById('scope').value = event.target.getAttribute('data-value');
+                // remove active class from the other items and add it to the clicked item
+                document.querySelectorAll('.searchin-collapse-body a').forEach(item => {
                     item.classList.remove('active');
                 })
                 event.target.classList.add('active');

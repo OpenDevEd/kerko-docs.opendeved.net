@@ -1,11 +1,11 @@
 .navbar {
   padding-left: 0;
   padding-right: 0;
-  border-bottom: $border-width solid var(--background) / 2;
+  border-bottom: $border-width solid var(--border);
   color: var(--foreground);
   background-color: var(--white);
   text-align: center;
-  padding: 15px 0px;
+  padding: 24px 16px;
 
   @include media-breakpoint-up(lg) {
     padding: 10px 0px;
@@ -51,7 +51,10 @@
 
 .navbar-brand {
   .brand-logo {
-    width: 150px;
+    width: 140px;
+    @include media-breakpoint-up(lg) {
+      width: 150px;
+    }
   }
 }
 
@@ -71,7 +74,7 @@
 }
 
 .navbar-nav {
-  color: var(--foreground);
+  color: var(--font-80);
   padding-top: $navbar-padding-y;
   padding-bottom: $navbar-padding-y;
   margin-top: $navbar-padding-y;

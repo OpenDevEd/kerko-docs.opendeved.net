@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-md-4 col-lg-3 font-weight-bold break-word mb-2 mt-md-2 d-print-none">{{
         _('Relations') }}</div>
-    <div class="col-md-8 col-lg-9 break-word">
+    <div class="col-md-8 col-lg-9 break-word field-value">
         <ul class="nav nav-tabs d-print-none" role="tablist">
             {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
             {%- set isFirst = loop.first %}

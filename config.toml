@@ -153,9 +153,9 @@ url = "https://opendeved.net/about/"
 [[navbar.items]]
 text = "Programmes"
 url = "https://opendeved.net/programmes/"
-[[navbar.items]]
-text = "Evidence Library"
-url = "/"
+# [[navbar.items]]
+# text = "Evidence Library"
+# url = "/"
 [[navbar.items]]
 text = "Partners"
 url = "https://opendeved.net/partners/"
@@ -165,6 +165,6 @@ url = "https://opendeved.net/blog/"
 [[navbar.items]]
 text = "Jobs"
 url = "https://opendeved.net/jobs/"
-[[navbar.items]]
-text = "Contact Us"
-url = "https://opendeved.net/contact-us/"
+# [[navbar.items]]
+# text = "Contact Us"
+# url = "https://opendeved.net/contact-us/"

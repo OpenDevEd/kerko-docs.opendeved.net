@@ -8,7 +8,8 @@
             <div class="modal-header">
                 {%- block search_help_header %}
                 <h2 class="modal-title" id="search-help-label">{{ _("Help") }}</h2>
-                <button type="button" class="btn" data-dismiss="modal" {{ title_aria_label(_('Close Help panel')) }}>
+                <button type="button" class="btn close-button-model" data-dismiss="modal" {{ title_aria_label(_('Close
+                    Help panel')) }}>
                     <span aria-hidden="true">
                         {{ exitIcon('exitIcon', 20, 20) }}
                     </span>
@@ -137,7 +138,7 @@
                         results.").format(explore=_("Explore")) }}</li>
                     {%- endif %}
                 </ul>
-                <div class="my-3 text-right">
+                <div class="text-right">
                     <button type="button" class="btn btn-secondary close-btn-model w-100" data-dismiss="modal"
                         aria-label="{{ _('Close Help panel') }}">{{ _("Close") }}</button>
                 </div>

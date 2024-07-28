@@ -1,12 +1,13 @@
 {% from "macros/icons/preferencesIcon.jinja2" import preferencesIcon %}
+{%- from "macros/svgs.jinja2" import toggleOn, toggleOff %}
 
 {%- block preferences %}
 {%- if config.kerko.features.open_in_zotero_app or config.kerko.features.open_in_zotero_web %}
 
 <div class="{% block print_link_wrapper_classes %}d-none d-md-inline-block d-print-none mb-2{% endblock %}">
-    <button class="btn regular-btn" data-toggle="modal" data-target="#preferences-modal">
+    <button class="btn btn-normal" data-toggle="modal" data-target="#preferences-modal">
         <span class="" aria-hidden="true">
-            {{ preferencesIcon("icon-normal icon-sm", 20, 20) }}
+            {{ preferencesIcon("", 20, 20) }}
         </span> {{ _("Preferences") }}
     </button>
 </div>
@@ -30,13 +31,15 @@
                     {%- block preferences_open_in_zotero %}
                     {%- if config.kerko.features.open_in_zotero_app %}
                     <div class="form-group">
-                        <button id="open-in-zotero-app-toggle" class="btn btn-toggle pl-0" data-toggle="button" {% if
-                            open_in_zotero_app %}active{% endif %}
-                            aria-pressed="{% if open_in_zotero_app %}true{% else %}false{% endif %}"
+                        <button id="open-in-zotero-app-toggle" class="btn btn-toggle pl-0 d-flex align-items-center p-2"
+                            style="border-radius: 12px;" data-toggle="button" {% if open_in_zotero_app %}active{% endif
+                            %} aria-pressed="{% if open_in_zotero_app %}true{% else %}false{% endif %}"
                             aria-describedby="open-in-zotero-app-toggle-help">
-                            <span class="btn-toggle-icon-off fas fa-toggle-off" aria-hidden="true"></span>
-                            <span class="btn-toggle-icon-on fas fa-toggle-on" aria-hidden="true"></span>
-                            {{ _('"{}" button').format(_("Open in Zotero")) }}
+                            {{- toggleOn("btn-toggle-icon-on") }}
+                            {{- toggleOff("btn-toggle-icon-off") }}
+                            <span class="ml-2">
+                                {{ _('"{}" button').format(_("Open in Zotero")) }}
+                            </span>
                         </button>
                         <small id="open-in-zotero-app-toggle-help" class="form-text">{{ _('Show or hide the "{}"
                             button on full bibliographic record pages. This button allows you to open the record in the
@@ -48,13 +51,15 @@
                     {%- endif %}
                     {%- if config.kerko.features.open_in_zotero_web %}
                     <div class="form-group">
-                        <button id="open-in-zotero-web-toggle" class="btn btn-toggle pl-0" data-toggle="button" {% if
-                            open_in_zotero_web %}active{% endif %}
-                            aria-pressed="{% if open_in_zotero_web %}true{% else %}false{% endif %}"
+                        <button id="open-in-zotero-web-toggle" class="btn btn-toggle pl-0 d-flex align-items-center p-2"
+                            style="border-radius: 12px;" data-toggle="button" {% if open_in_zotero_web %}active{% endif
+                            %} aria-pressed="{% if open_in_zotero_web %}true{% else %}false{% endif %}"
                             aria-describedby="open-in-zotero-web-toggle-help">
-                            <span class="btn-toggle-icon-off fas fa-toggle-off" aria-hidden="true"></span>
-                            <span class="btn-toggle-icon-on fas fa-toggle-on" aria-hidden="true"></span>
-                            {{ _('"{}" button').format(_("View on zotero.org")) }}
+                            {{- toggleOn("btn-toggle-icon-on") }}
+                            {{- toggleOff("btn-toggle-icon-off") }}
+                            <span class="ml-2">
+                                {{ _('"{}" button').format(_("View on zotero.org")) }}
+                            </span>
                         </button>
                         <small id="open-in-zotero-web-toggle-help" class="form-text">{{ _('Show or hide the "{}"
                             button on full bibliographic record pages. This button allows you to view the record on
@@ -66,7 +71,7 @@
                     {%- endblock preferences_open_in_zotero %}
                     {%- endblock preferences_modal_inner %}
                     {%- block preferences_modal_footer %}
-                    <div class="my-3 text-right">
+                    <div class="text-right">
                         <button type="button" class="btn btn-secondary w-100 close-preferences" data-dismiss="modal"
                             aria-label="{{ _('Close preferences') }}">{{ _("Close") }}</button>
                     </div>

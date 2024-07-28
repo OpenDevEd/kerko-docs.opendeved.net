@@ -1,13 +1,15 @@
 .facets {
   display: inline-flex;
   align-items: flex-start;
+  flex-direction: column;
   gap: 8px;
   border-radius: 20px;
-  border: 1px solid var(--border);
+  border: 0px;
 
   @include media-breakpoint-up(lg) {
     background: var(--white);
     padding: 22px 22px;
+    border: 1px solid var(--border);
   }
 
   .facet-heading {
@@ -15,6 +17,7 @@
     color: var(--font-60);
     font-weight: 500 !important;
     text-transform: capitalize;
+    margin-bottom: 12px;
   }
 
   ul {
@@ -61,17 +64,24 @@
       .btn-expand[aria-expanded="true"] + .btn-collapse {
         display: flex;
       }
-
-      .expandIcon-expanded {
-        transform: rotate(-90deg);
+      .checkbox-container {
+        rect {
+          stroke: var(--font-40);
+        }
       }
 
       .checkSquare,
       .noCheckSquare {
+        stroke: var(--font-40);
         &:hover {
           fill: var(--primary);
           opacity: 0.8;
         }
+      }
+
+      .subtreeIcon {
+        width: 20px;
+        margin-top: -1px;
       }
     }
   }
@@ -102,5 +112,12 @@
         }
       }
     }
+  }
+}
+
+// for Featured publisher, Publication type, Theme, Location in item page
+.facetsListClassTop {
+  * {
+    color: var(--font-60);
   }
 }

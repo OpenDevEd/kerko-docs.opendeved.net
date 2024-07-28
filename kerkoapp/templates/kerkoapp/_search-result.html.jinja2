@@ -1,5 +1,6 @@
 {%- from "kerkoapp/_badges.html.jinja2" import badges %}
 {%- from "macros/icons/opendeved-small-icon.jinja2" import opendevedSmallIcon %}
+{%- from "macros/icons/documentIcon.jinja2" import documentIcon %}
 
 <li class="{% block search_list_item_classes %} search-item break-word {% endblock %}" id="searchResultContainer">
     {%- if print_preview -%}
@@ -14,7 +15,8 @@
     <div class="d-flex">
         <a class="searchResultTitle {% block search_item_classes %}d-block mw-100 mr-auto{% endblock %}"
             href="{{ result_url }}" title="{{ _('View details') }}">
-            {{- badges(result, mode='result') -}}
+            {# {{- badges(result, mode='result') -}} #}
+            {# {{- result.data['tags'] -}} #}
             {%- block search_item_formatted_display %}
             <span>{{- result.data['title'] -}}</span>
             {%- endblock search_item_formatted_display %}
@@ -51,6 +53,15 @@
         {{ result.data['itemType']|string }}
         {%- endif %}
 
+        {%- if result.data['tags']|length > 1 %}
+        {%- for tag in result.data['tags'] %}
+        {%- if tag['tag'] == '_comingsoon' or tag['tag'] == 'Coming soon' %}
+        <span class="mx-2">|</span>
+        <span class="in-progress-badge">In Progress</span>
+        {%- endif %}
+        {%- endfor %}
+        {%- endif %}
+
     </div>
     {%- endblock Info %}
 
@@ -80,7 +91,10 @@
                 class="{% block search_item_attachments_btn_classes %}btn btn-sm btn-link dropdown-toggle text-nowrap{% endblock %}"
                 type="button" id="attachment-options-{{ result.id|escape }}" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                <span class="fas fa-file mr-1" aria-hidden="true"></span>{{ _('Read documents') -}}
+                <span class=" mr-1" aria-hidden="true">
+                    {{ documentIcon("", 20, 20) }}
+                </span>
+                {{ _('Read documents') -}}
             </button>
             <span class="dropdown-menu dropdown-menu-right dropdown-width-300"
                 aria-labelledby="attachment-options-{{ result.id|escape }}">
@@ -97,21 +111,27 @@
         {%- endblock search_result_link_multiple_attachments %}
         {%- elif config.kerko.features.results_attachment_links and result.attachments|length == 1 %}
         {%- block search_result_link_single_attachment %}
-        <a class="{% block search_item_attachment_btn_classes %}btn btn-sm btn-link text-nowrap{% endblock %}"
+        <a id="search-item-read-document" class="{% block search_item_attachment_btn_classes %}{% endblock %}"
             href="{{ url_for('kerko.child_attachment_download', item_id=result.id, attachment_id=result.attachments[0]['id'], attachment_filename=result.attachments[0]['data']['filename']) }}"
             {% if config.kerko.features.download_attachment_new_window %} target="_blank" rel="noopener" {% endif %} {{
             title_aria_label(_('Read \'{}\'').format(result.attachments[0]['data']['filename']|escape)) }}>
-            <img src="{{ url_for('static', filename='dist/icons/Link.svg') }}" alt="external link" aria-hidden="true" />
-            <span class="fas fa-file mr-1" aria-hidden="true"></span>{{ _('Read document') -}}
+            <span class="" aria-hidden="true">
+                {{ documentIcon("mb-1", 20, 20) }}
+            </span>
+            <span class="" aria-hidden="true">
+                {{ _('Read document') -}}
+            </span>
         </a>
         {%- endblock search_result_link_single_attachment %}
         {%- elif config.kerko.features.results_url_links and result.url|kerko_url_hostname %}
         {%- block search_result_link_url %}
         <a href="{{ result.url|kerko_url_sanitize|escape }}" target="_blank" rel="noopener noreferrer"
             id="search-item-link">
-            <img src="{{ url_for('static', filename='dist/icons/Link.svg') }}" alt="external link" aria-hidden="true" />
-            <span aria-hidden="true"></span>
-            {{ _('View on {}').format(result.url|kerko_url_hostname|escape) }}
+            <img class="mb-1" src="{{ url_for('static', filename='dist/icons/Link.svg') }}" alt="external link"
+                aria-hidden="true" />
+            <span aria-hidden="true">
+                {{ _('View on {}').format(result.url|kerko_url_hostname|escape) }}
+            </span>
         </a>
         {%- endblock search_result_link_url %}
         {%- endif %}

@@ -35,7 +35,7 @@ $border-radius: 0;
 $font-family-sans-serif: "Ubuntu", "Helvetica Neue", helvetica, arial, sans-serif; // Custom variable.
 $font-family-oswald: "Ubuntu", "Helvetica Neue", helvetica, arial, sans-serif; // Custom variable.
 $headings-font-family: $font-family-oswald;
-$headings-font-weight: 700;
+$headings-font-weight: 500;
 
 $nav-link-padding-x: 1.3rem;
 $nav-link-font-family: $font-family-oswald; // Custom variable.
@@ -179,7 +179,7 @@ main {
 
 // general
 .website-body {
-  background-color: var(--background) !important;
+  background-color: var(--background-primary) !important;
 }
 
 // Badge.
@@ -279,14 +279,6 @@ main {
   }
 }
 
-.item-content {
-  background: var(--white);
-  border-radius: 16px;
-  padding: 20px 32px;
-  margin-top: 1em;
-  border: 1px solid var(--border);
-}
-
 // search results
 #results-counts {
   font-style: normal;
@@ -299,41 +291,9 @@ main {
   }
 }
 
-.show-abstract-btn {
-  display: inline-flex;
-  padding: 8px 14px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: $border-radius-sm;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--font-60);
-  font-size: 14px;
-  &:hover {
-    text-decoration: none;
-    color: var(--font-60);
-  }
-}
-
 .sort-help-container {
   display: flex;
   gap: 5px;
-}
-
-.helpBtn {
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--foreground);
-  font-size: 15px;
-  padding: 8px 24px;
-  display: flex;
-  gap: 10px;
-  &:hover {
-    text-decoration: none;
-    color: var(--foreground);
-  }
 }
 
 #sort-options {
@@ -381,7 +341,7 @@ main {
 
 // cards
 .card {
-  background: var(--background);
+  background: var(--background-primary);
   border: 1px solid var(--border);
   border-radius: 16px;
 }
@@ -463,10 +423,6 @@ main {
     font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
-    // @include media-breakpoint-up(lg) {
-    //   font-size: $h2-font-size;
-    //   font-weight: 500;
-    // }
   }
 }
 
@@ -481,4 +437,20 @@ main {
 @import "./dropdown-style";
 @import "./custom-buttons";
 @import "./facets";
-@import "./model-style";
+@import "./modal-style";
+@import "./item";
+@import "./icons";
+
+.mobile-only {
+  display: none;
+  @include media-breakpoint-down(md) {
+    display: block;
+  }
+}
+
+.desktop-only {
+  display: block;
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}

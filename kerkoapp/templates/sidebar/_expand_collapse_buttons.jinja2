@@ -1,0 +1,35 @@
+{%- from "kerkoapp/_attributes.html.jinja2" import title_aria_label %}
+{%- from "macros/svgs.jinja2" import expandIcon %}
+
+{%- macro expand_collapse_buttons(
+collapse_id,
+btn_class='btn btn-light btn-sm',
+expand_label=_("Show more"),
+expand_description='',
+expand_icon='fas fa-chevron-down',
+collapse_label=_("Show less"),
+collapse_description='',
+collapse_icon='fas fa-chevron-up',
+icons_width='',
+expand_default=False
+)
+-%}
+<button class="{{ [btn_class, 'btn-expand']|join(' ') }} btn btn-normal w-100" data-toggle="collapse"
+    data-target="#{{ collapse_id }}" aria-controls="{{ collapse_id }}"
+    aria-expanded="{% if expand_default %}true{% else %}false{% endif %}" {% if expand_description %}{{
+    title_aria_label(expand_description) }}{% endif %}>
+    {%- if expand_icon %}
+    {{ _('Show more') }}
+    {{ expandIcon('expandIcon', 18, 18)}}
+    {% endif %}
+</button>{#- No whitespace -#}
+<button class="{{ [btn_class, 'btn-collapse']|join(' ') }} btn btn-normal w-100" data-toggle="collapse"
+    data-target="#{{ collapse_id }}" aria-controls="{{ collapse_id }}"
+    aria-expanded="{% if expand_default %}false{% else %}true{% endif %}" {% if collapse_description %}{{
+    title_aria_label(collapse_description) }}{% endif %}>
+    {%- if collapse_icon %}
+    {{ _('Show less') }}
+    {{ expandIcon('expandIcon-expanded', 18, 18)}}
+    {% endif %}
+</button>
+{%- endmacro %}

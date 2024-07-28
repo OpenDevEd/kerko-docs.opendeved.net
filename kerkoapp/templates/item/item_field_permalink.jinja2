@@ -2,15 +2,15 @@
 
 {% macro permalink(url) -%}
 <a rel="bookmark" title="{{ _('Permanent link to this bibliographic record') }}" href="{{ url }}">{{ url }} {{
-    linkIcon("mb-1 ml-1", 16, 16) }}</a>
+    linkIcon("icon-blue ml-1", 16, 16) }}</a>
 {%- endmacro -%}
 
 {%- block item_field_permalink %}
 <div class="row mb-4">
-    <div class="col-md-4 col-lg-3 font-weight-bold break-word text-print-left">
+    <div class="col-md-4 col-lg-3 font-weight-bold break-word text-print-left field-title">
         {{_("Link to this record")}}
     </div>
-    <div class="col-md-8 col-lg-9 break-word">
+    <div class="col-md-8 col-lg-9 break-word field-value">
         {{permalink(item_url)}}
     </div>
 </div>

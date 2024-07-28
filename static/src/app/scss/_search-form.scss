@@ -15,13 +15,14 @@
 
 #search-dropdown-menu-button {
   background-color: var(--background3) !important;
-  border-radius: $border-radius-md;
+  border-radius: $border-radius-sm;
   width: 100%;
-  padding: 9px 16px;
+  padding: 7px 12px;
   display: flex;
   justify-content: space-between;
 
   @include media-breakpoint-up(lg) {
+    border-radius: $border-radius-md;
     width: max-content;
     padding: 9px 20px;
     display: block;
@@ -30,32 +31,105 @@
 
 .search-input-group {
   display: flex;
-  padding: 10px 4px 7px 12px;
+  padding: 6px 5px 5px 10px;
   justify-content: center;
   align-items: center;
-  border-radius: 16px;
   border: 1px solid var(--border);
-  background: var(--white);
+  background: var(--background-secondary);
   color: var(--foreground);
   width: 100%;
   gap: 8px !important;
+  border-radius: $border-radius-sm;
 
   @include media-breakpoint-up(lg) {
-    padding: 4px 4px 4px 18px;
+    padding: 3px 4px 3px 14px;
+    // border-radius: $border-radius-base;
   }
 
   input {
-    font-size: 16px;
-    font-style: normal;
+    font-size: $font-size-md;
     font-weight: 400;
-    line-height: normal;
     text-transform: capitalize;
     color: var(--foreground);
     border: none;
     background: transparent;
     width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      font-size: $font-size-lg;
+    }
+
     &:focus-visible {
       outline: none;
+    }
+  }
+}
+
+.search-input-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+
+  @include media-breakpoint-up(lg) {
+    padding: 0 14px;
+  }
+}
+
+.container-input-dropdown {
+  gap: 16px;
+
+  .searchIcon {
+    width: 18px !important;
+    height: 18px !important;
+
+    @include media-breakpoint-up(lg) {
+      width: 24px !important;
+      height: 24px !important;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    gap: 0px;
+  }
+}
+
+.searchin-collapse-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding-top: 10px;
+
+  a {
+    color: var(--font-60);
+    font-size: $font-size-md;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding: 8px 0px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    border-radius: $border-radius-sm;
+
+    @include media-breakpoint-up(lg) {
+      font-size: $font-size-lg;
+      padding: 8px 14px;
+      border-radius: $border-radius-base;
+    }
+
+    &:hover {
+      border-bottom: 0;
+      color: var(--font-80);
+      text-decoration: none;
+    }
+
+    &.active {
+      display: none;
     }
   }
 }

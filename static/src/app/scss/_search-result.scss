@@ -41,13 +41,18 @@
   border-radius: $border-radius-lg;
   background: var(--white);
   display: flex;
-  padding: 24px 32px 32px 32px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 12px;
+  gap: 16px;
   margin-top: 1em;
   margin-bottom: 1em;
+  padding: 16px;
+
+  @include media-breakpoint-up(lg) {
+    padding: 24px 32px 32px 32px;
+    gap: 12px;
+  }
 
   .searchResultTitle {
     span {
@@ -65,18 +70,20 @@
     }
   }
 
-  #search-item-link {
-    color: var(--font-80);
-    font-weight: bold;
-    font-weight: 500;
-    text-transform: capitalize;
-    font-style: italic;
+  #search-item-link,
+  #search-item-read-document {
+    color: var(--font-80) !important;
+    font-weight: bold !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+    font-style: italic !important;
 
     &:hover {
-      color: var(--font-80);
-      text-decoration: none;
+      color: var(--font-80) !important;
+      text-decoration: none !important;
     }
   }
+
   .btn-link {
     transition: none;
     @include hover {
@@ -87,4 +94,14 @@
       }
     }
   }
+}
+
+.in-progress-badge {
+  background: var(--primary);
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: $border-radius-sm;
+  transform: translateY(-2px);
 }

@@ -24,6 +24,6 @@ expand_default=False
 <button class="{{ [btn_class, 'btn-collapse']|join(' ') }}" data-toggle="collapse" data-target="#{{ collapse_id }}"
     aria-controls="{{ collapse_id }}" aria-expanded="{% if expand_default %}false{% else %}true{% endif %}" {% if
     collapse_description %}{{ title_aria_label(collapse_description) }}{% endif %}>
-    {%- if collapse_icon %}{{ expandIcon('expandIcon-expand', 20, 20)}}{% endif %}
+    {%- if collapse_icon %}{{ expandIcon('expandIcon-expanded', 20, 20)}}{% endif %}
 </button>
 {%- endmacro %}
