@@ -52,7 +52,7 @@
     {%- block search_results_footer scoped %}
     {%- if show_print_link or show_download_link or atom_feed_url %}
     <div class="row">
-        <div class="col-auto ml-auto mt-2 mb-4 text-right d-flex bottom-btns-area">
+        <div class="col-auto ml-auto mt-2 mb-4 text-right d-lg-flex bottom-btns-area">
             {%- if show_print_link %}
             <div class="{% block print_link_wrapper_classes %}d-none d-md-inline-block d-print-none mb-1{% endblock %}">
                 <button id="print-link" class="{% block print_btn_classes %}btn-normal{% endblock %}" type="button"

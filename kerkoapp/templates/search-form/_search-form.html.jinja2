@@ -9,11 +9,11 @@
     <div class="w-100 d-flex justify-content-between align-items-center">
         <div id=" search-title" class="d-flex align-items-center">
             <h1 class="h2 mb-0" id="search-title">
-                {%- if is_searching %}
+                {# {%- if is_searching %}
                 {{ _("Search results") }}
-                {%- else %}
+                {%- else %} #}
                 {{ _("Search") }}
-                {%- endif %}
+                {# {%- endif %} #}
             </h1>
         </div>
         <div class="d-flex align-items-center" style="gap: 16px;" id="help-sort-btns">
@@ -83,7 +83,7 @@
             </div>
         </div>
     </form>
-    <div class="d-flex sort-help-container">
+    <div class="d-lg-flex sort-help-container">
         <div class="w-100">
             {%- include "kerkoapp/_breadbox.html.jinja2" %}
         </div>

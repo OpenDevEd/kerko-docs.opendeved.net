@@ -1,18 +1,18 @@
 {%- if item.remove_url -%}
-<a class="no-decorate d-flex mb-1" href="{{ item.remove_url }}" {{
+<a class="no-decorate d-flex mb-1 align-items-start" href="{{ item.remove_url }}" {{
     title_aria_label(remove_title.format(label_text|striptags|escape)) }} rel="nofollow">
     {%- if remove_icon %}
-    <div style="width: 20px;" class="checkbox-container">
+    <div style="width: 20px;" class="checkbox-container flex-shrink-0">
         {{- checkSquare('checkSquare', "100%", "100%") -}}
     </div>
     {% endif %}
     {{- itemLabel(item, subtree, label_text, "", True) }}
 </a>
 {%- elif item.add_url -%}
-<a class="no-decorate d-flex mb-1" href="{{ item.add_url }}" {{
+<a class="no-decorate d-flex mb-1 align-items-start" href="{{ item.add_url }}" {{
     title_aria_label(add_title.format(label_text|striptags|escape)) }} rel="nofollow">
     {%- if add_icon %}
-    <div style="width: 20px;" class="checkbox-container">
+    <div style="width: 20px;" class="checkbox-container flex-shrink-0">
         {{- noCheckSquare('noCheckSquare', "100%", "100%") -}}
     </div>
     {% endif %}

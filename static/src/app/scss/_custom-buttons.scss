@@ -18,6 +18,12 @@
     border: 1px solid var(--border);
   }
 
+  &:active {
+    background-color: var(--background-third) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--font-80) !important;
+  }
+
   @include media-breakpoint-up(lg) {
     padding: 8px 18px;
   }
@@ -52,11 +58,23 @@
   }
 }
 
+.sidebar-expand-collapse {
+  // if it has aria-expanded attribute
+  background-color: rgba(0, 0, 0, 0.04);
+  &[aria-expanded="true"] {
+    margin-top: 15px;
+  }
+}
+
 .dark-mode {
   .show-abstract-btn {
     // if the button is active
     &[aria-label="Hide abstracts"] {
       color: var(--font-80);
     }
+  }
+
+  .sidebar-expand-collapse {
+    background-color: rgba(255, 255, 255, 0.04);
   }
 }

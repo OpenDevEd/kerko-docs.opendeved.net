@@ -1,8 +1,13 @@
 {%- block item_title %}
-<div class="row px-3 py-2">
+<div class="row px-3 pt-2 pb-3 d-block">
     <h2 class="my-3 clearfix item-title">
         {# {{- badges(item, mode='item') -}} #}
         {{- title|escape -}}
     </h2>
+    {%- if is_coming_soon(item) %}
+    <div style="width: fit-content;">
+        <span class="in-progress-badge-item">{{_("In Progress")}}</span>
+    </div>
+    {%- endif %}
 </div>
 {%- endblock %}

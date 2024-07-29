@@ -1,7 +1,7 @@
 {%- if item.attachments|length > 1 %}
 <div class="{% block attachment_links_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
     <div class="dropdown">
-        <button class="{% block attachment_links_btn_classes %}btn btn-primary btn-normal dropdown-toggle{% endblock %}"
+        <button class="{%block attachment_links_btn_classes %}btn btn-primary btn-normal dropdown-toggle{% endblock %}"
             type="button" id="attachment-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="fas fa-file" aria-hidden="true"></span> {{ _('Read documents') -}}
         </button>
@@ -27,7 +27,7 @@
 </div>
 {%- endif %}
 {%- if config.kerko.features.print_item %}
-<div class="{% block print_link_wrapper_classes %}d-none d-md-inline-block d-print-none mb-2{% endblock %}">
+<div class="{% block print_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
     <button id="print-link" class="{% block print_btn_classes %}btn btn-normal{% endblock %}" type="button">
         <span class="" aria-hidden="true">
             {{ printIcon("", 20, 20) }}
@@ -36,10 +36,10 @@
 </div>
 {%- endif %}
 {%- if show_download_link %}
-<div class="{% block download_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
+<div class="d-inline-block d-print-none mb-2">
     <div class="dropdown">
-        <button class="{% block download_btn_classes %}btn btn-normal dropdown-toggle{% endblock %}" type="button"
-            id="download-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-normal dropdown-toggle" type="button" id="download-options" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             <span class="" aria-hidden="true">
                 {{ downloadIcon("", 20, 20) }}
             </span> {% trans count=1, count_formatted='1'
@@ -78,4 +78,4 @@
     </a>
 </div>
 {%- endif %}
-{% include "item/header/preferences.jinja2" %}
+{%- include "item/header/preferences-button.jinja2" %}

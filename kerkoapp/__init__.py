@@ -109,6 +109,12 @@ def format_creators(value: List[Dict[str, str]], maxLen = 20) -> str:
     # Remove the trailing comma and space
     return creators.rstrip(', ')
 
+def is_coming_soon(result):
+    if 'tags' in result['data'] and result['data']['tags']:
+        for tag in result['data']['tags']:
+            if tag['tag'] == '_comingsoon' or tag['tag'] == 'Coming soon':
+                return True
+    return False
 
 def register_extensions(app):
     # Configure Babel to use both Kerko's translations and the app's.
@@ -126,6 +132,7 @@ def register_extensions(app):
     # Register custom Jinja filter
     app.jinja_env.filters['format_date'] = format_date
     app.jinja_env.filters['format_creators'] = format_creators
+    app.jinja_env.globals['is_coming_soon'] = is_coming_soon
    
 
 

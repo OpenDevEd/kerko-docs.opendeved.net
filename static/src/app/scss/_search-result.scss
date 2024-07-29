@@ -56,7 +56,7 @@
 
   .searchResultTitle {
     span {
-      font-size: $h4-font-size;
+      font-size: $h3-font-size;
       font-style: normal;
       font-weight: 500;
       text-transform: capitalize;
@@ -96,12 +96,27 @@
   }
 }
 
-.in-progress-badge {
+.in-progress-badge,
+.in-progress-badge-item {
   background: var(--primary);
-  color: var(--foreground);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 13px;
   font-weight: 500;
-  padding: 4px 8px;
+  padding: 5px 8px;
   border-radius: $border-radius-sm;
-  transform: translateY(-2px);
+  font-size: $font-size-md;
+
+  @include media-breakpoint-up(lg) {
+    background: var(--primary);
+    font-size: $font-size-sm;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: $border-radius-sm;
+    transform: translateY(-2px);
+  }
+}
+
+.in-progress-badge-item {
+  font-size: $font-size-md;
 }

@@ -23,6 +23,7 @@
   ul {
     li {
       color: var(--font-60);
+      padding-bottom: 5px;
 
       &:hover {
         color: var(--font-80);
@@ -118,6 +119,6 @@
 // for Featured publisher, Publication type, Theme, Location in item page
 .facetsListClassTop {
   * {
-    color: var(--font-60);
+    color: var(--font-80);
   }
 }

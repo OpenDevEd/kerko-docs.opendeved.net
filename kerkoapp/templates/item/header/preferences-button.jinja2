@@ -1,0 +1,11 @@
+{% from "macros/icons/preferencesIcon.jinja2" import preferencesIcon %}
+
+{%- if config.kerko.features.open_in_zotero_app or config.kerko.features.open_in_zotero_web %}
+<div class="{% block print_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
+    <button class="btn btn-normal" data-toggle="modal" data-target="#preferences-modal">
+        <span class="" aria-hidden="true">
+            {{ preferencesIcon("", 20, 20) }}
+        </span> {{ _("Preferences") }}
+    </button>
+</div>
+{% endif %}
