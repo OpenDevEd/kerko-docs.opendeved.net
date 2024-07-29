@@ -38,7 +38,8 @@ search_js = Bundle(  # pylint: disable=invalid-name
 )
 item_js = Bundle(  # pylint: disable=invalid-name
     'kerko/kerko/js/item.js',
-    'kerko/kerko/js/open_in_zotero.js',
+    'src/app/js/open_in_zotero.js',
+    depends='src/app/js/*.js',
     filters='jsmin',
     output='dist/js/item.min.js',
 )

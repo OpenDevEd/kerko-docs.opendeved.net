@@ -27,7 +27,7 @@
 </div>
 {%- endif %}
 {%- if config.kerko.features.print_item %}
-<div class="{% block print_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
+<div class="{% block print_link_wrapper_classes %}d-none d-lg-inline-block d-print-none mb-2{% endblock %}">
     <button id="print-link" class="{% block print_btn_classes %}btn btn-normal{% endblock %}" type="button">
         <span class="" aria-hidden="true">
             {{ printIcon("", 20, 20) }}
@@ -38,16 +38,16 @@
 {%- if show_download_link %}
 <div class="d-inline-block d-print-none mb-2">
     <div class="dropdown">
-        <button class="btn btn-normal dropdown-toggle" type="button" id="download-options" data-toggle="dropdown"
+        <a class="btn btn-normal dropdown-toggle" type="button" id="download-options" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <span class="" aria-hidden="true">
                 {{ downloadIcon("", 20, 20) }}
             </span> {% trans count=1, count_formatted='1'
             %}Download this record{% pluralize %}Download {{ count_formatted }} records{% endtrans -%}
-        </button>
+        </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-width-300" aria-labelledby="download-options">
             {%- for bib_format in config.kerko_composer.get_ordered_specs('bib_formats') %}
-            <a class="dropdown-item "
+            <a class="dropdown-item"
                 href="{{ url_for('kerko.item_bib_download', item_id=item.id, bib_format_key=bib_format.key) }}"
                 rel="alternate" type="{{ bib_format.mime_type|escape }}" {{ title_aria_label(_('Download in
                 {download_option} format').format(download_option=bib_format.label|escape)) }}>
@@ -60,8 +60,8 @@
 </div>
 {%- endif %}
 {%- if config.kerko.features.open_in_zotero_app and open_in_zotero_app_url %}
-<div id="open-in-zotero-app"
-    class="text-right d-inline-block d-print-none mb-2 {% if not open_in_zotero_app %}d-none-important{% endif %}">
+<div
+    class="open-in-zotero-app text-right d-inline-block d-print-none mb-2 {% if not open_in_zotero_app %}d-none-important{% endif %}">
     <a class="btn btn-normal" href="{{ open_in_zotero_app_url }}">
         <span aria-hidden="true">
             {{ linkIcon("", 20, 20) }}
@@ -69,8 +69,8 @@
 </div>
 {%- endif %}
 {%- if config.kerko.features.open_in_zotero_web and open_in_zotero_web_url %}
-<div id="open-in-zotero-web"
-    class="text-right d-inline-block d-print-none mb-2 {% if not open_in_zotero_web %}d-none-important{% endif %}">
+<div
+    class="open-in-zotero-web text-right d-inline-block d-print-none mb-2 {% if not open_in_zotero_web %}d-none-important{% endif %}">
     <a class="btn btn-normal" href="{{ open_in_zotero_web_url }}" target="_blank">
         <span aria-hidden="true">
             {{ linkIcon("", 20, 20) }}

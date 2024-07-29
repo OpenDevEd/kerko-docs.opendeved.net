@@ -30,11 +30,11 @@
 
     .field-title {
       color: var(--font-60);
-      font-size: $font-size-md;
+      font-size: $font-size-lg;
     }
 
     .field-value {
-      font-size: $font-size-md;
+      font-size: $font-size-lg;
     }
   }
 }
@@ -46,3 +46,14 @@
     font-size: $font-size-3xl;
   }
 }
+
+// #collapseButtonsItem {
+// @include media-breakpoint-down(lg) {
+//   background: var(--background2);
+//   border-radius: 8px;
+//   width: 100%;
+//   border: 1px solid var(--border);
+//   position: absolute;
+//   top: 50px;
+// }
+// }

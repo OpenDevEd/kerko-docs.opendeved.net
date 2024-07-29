@@ -28,7 +28,7 @@
     {%- endblock search_item_display %}
 
     {%- block Info %}
-    <div class="info d-flex flex-row flex-wrap">
+    <div class="info d-none d-lg-flex flex-row flex-wrap">
         {%- if result.data['institution'] %}
         <div class="d-flex align-items-center institution-class">
             {%- if result.data['institution'] == "Open Development & Education"%}
@@ -37,21 +37,27 @@
             <span style="font-weight: 500;">{{ result.data['institution'][:28] }}{% if result.data['institution']|length
                 > 28 %}...{% endif %}</span>
         </div>
-        <span class="mx-2">|</span>
         {%- endif %}
 
         {%- if result.data['creators']|length and not result.data['institution']%}
-        {{ result.data['creators']|format_creators(40) }}
-        <span class="mx-2">|</span>
+        <div class="d-flex align-items-center institution-class">
+            <span class="mx-2">|</span>
+            <span>{{ result.data['creators']|format_creators(40) }}</span>
+        </div>
         {%- endif %}
 
         {%- if result.data['date'] %}
-        {{ result.data['date']|format_date() }}
+        <div class="d-flex align-items-center institution-class">
+            <span class="mx-2">|</span>
+            <span>{{ result.data['date']|format_date() }}</span>
+        </div>
         {%- endif %}
 
         {%- if result.data['itemType'] and not is_coming_soon(result) %}
-        <span class="mx-2">|</span>
-        {{ result.data['itemType']|string }}
+        <div class="d-flex align-items-center institution-class">
+            <span class="mx-2">|</span>
+            <span>{{ result.data['itemType']|string }}</span>
+        </div>
         {%- endif %}
 
         {%- if is_coming_soon(result) %}
@@ -60,19 +66,41 @@
             <span class="in-progress-badge d-lg-flex d-none">In Progress</span>
         </div>
         {%- endif %}
-
     </div>
 
-    <div class="d-flex d-lg-none w-100">
-        {%- if result.data['tags']|length > 1 %}
-        {%- for tag in result.data['tags'] %}
-        {%- if tag['tag'] == '_comingsoon' or tag['tag'] == 'Coming soon' %}
-        <span class="in-progress-badge w-100 d-flex justify-content-center">In Progress</span>
+    <div class="info d-lg-none d-flex flex-column w-100" style="gap: 8px;">
+        {%- if result.data['institution'] %}
+        <div class="d-flex align-items-center institution-class">
+            {%- if result.data['institution'] == "Open Development & Education"%}
+            <span class="mr-1">{{ opendevedSmallIcon("", 24, 24) }}</span>
+            {%- endif %}
+            <span style="font-weight: 500;">{{ result.data['institution'][:28] }}{% if result.data['institution']|length
+                > 28 %}...{% endif %}</span>
+        </div>
         {%- endif %}
-        {%- endfor %}
-        {%- endif %}
-    </div>
 
+        {%- if result.data['creators']|length and not result.data['institution']%}
+        <div class="d-flex align-items-center institution-class">
+            <span>{{ result.data['creators']|format_creators(40) }}</span>
+        </div>
+        {%- endif %}
+
+        {%- if result.data['date'] %}
+        <div class="d-flex align-items-center institution-class">
+            <span>{{ result.data['date']|format_date() }}</span>
+        </div>
+        {%- endif %}
+
+        <div class="d-flex w-100">
+            {%- if result.data['tags']|length > 1 %}
+            {%- for tag in result.data['tags'] %}
+            {%- if tag['tag'] == '_comingsoon' or tag['tag'] == 'Coming soon' %}
+            <span class="in-progress-badge w-100 d-flex justify-content-center">In Progress</span>
+            {%- endif %}
+            {%- endfor %}
+            {%- endif %}
+        </div>
+    </div>
     {%- endblock Info %}
 
     {%- endif -%}

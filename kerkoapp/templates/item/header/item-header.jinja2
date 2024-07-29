@@ -6,6 +6,7 @@
 {% from "macros/icons/menuIcon.jinja2" import menuIcon %}
 
 {%- block content_header %}
+{%- set show_download_link = (config.kerko.features.download_item and config.kerko_composer.bib_formats) %}
 <div class="d-flex pt-2 mb-4 pt-lg-4" style="gap: 8px;">
     <div class="return">
         {%- if back_url %}
@@ -17,37 +18,30 @@
         {%- endif %}
     </div>
     {%- block item_actions %}
-    {%- with show_download_link = (config.kerko.features.download_item and config.kerko_composer.bib_formats) %}
     {%- if item.attachments or show_download_link or config.kerko.features.print_item or
     config.kerko.features.open_in_zotero_app or config.kerko.features.open_in_zotero_web %}
     {{- isMobile }}
 
-    <div class="dropdown d-flex flex-wrap justify-content-end w-100" style="gap: 20px;">
-        <button class="d-lg-none btn btn-primary btn-normal" type="button" data-toggle="collapse"
+    <div class="d-lg-none d-flex dropdown d-flex flex-wrap justify-content-end w-100">
+        <button class="btn btn-primary btn-normal" type="button" data-toggle="collapse"
             data-target="#collapseButtonsItem" aria-expanded="false" aria-controls="collapseExample">
             {{ menuIcon("menu-icon", 20, 20) }}
         </button>
-        <div class="collapse d-lg-flex flex-wrap justify-content-end" id="collapseButtonsItem" style="gap: 8px;">
-            {%- include "item/header/buttons.jinja2" %}
-        </div>
     </div>
-    {# <div class="d-none d-md-flex flex-wrap justify-content-end w-100 collapse" id="collapseButtonsItem"
+    <div class="d-none d-lg-flex flex-wrap justify-content-end w-100 collapse" id="collapseButtonsItem"
         style="gap: 8px;">
+        {%- set show_download_link = (config.kerko.features.download_item and config.kerko_composer.bib_formats) %}
         {%- include "item/header/buttons.jinja2" %}
-    </div> #}
-
+    </div>
     {%- endif %}
-    {%- endwith %}
     {%- endblock item_actions %}
 </div>
-{# <div class="collapse" id="collapseButtonsItem">
-    {%- include "item/header/buttons.jinja2" %}
-</div> #}
-{# <div class="collapse" id="collapseButtonsItem">
+
+<div class="collapse" id="collapseButtonsItem">
     <div class="card card-body">
-        {%- include "item/header/buttons-mobile.jinja2" %}
+        {%- include "item/header/buttons.jinja2" %}
     </div>
-</div> #}
+</div>
 
 {% include "item/header/preferences.jinja2" %}
 {%- endblock content_header %}

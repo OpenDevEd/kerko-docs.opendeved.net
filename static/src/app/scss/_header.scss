@@ -24,6 +24,10 @@
         margin-left: 0;
       }
     }
+    @include media-breakpoint-down(lg) {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .nav-link {
@@ -84,7 +88,7 @@
     padding: 0;
     margin-top: 0;
     margin-left: auto !important;
-    margin-right: -$nav-link-padding-x;
+    // margin-right: -$nav-link-padding-x;
     background: transparent;
   }
 }

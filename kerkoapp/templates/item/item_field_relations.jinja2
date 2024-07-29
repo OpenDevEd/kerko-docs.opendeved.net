@@ -12,15 +12,13 @@
 {%- if relations_ns.active_tab %}
 
 <div class="row">
-    <div class="col-md-4 col-lg-3 font-weight-bold break-word mb-2 mt-md-2 d-print-none">{{
+    <div class="col-md-4 col-lg-3 font-weight-bold break-word mb-2 mt-md-2 d-print-none field-title">{{
         _('Relations') }}</div>
     <div class="col-md-8 col-lg-9 break-word field-value">
-        <ul class="nav nav-tabs d-print-none" role="tablist">
+        <ul class="nav nav-tabs d-print-none" role="tablist" id="relations-tabs">
             {%- for rel in config.kerko_composer.get_ordered_specs('relations') %}
-            {%- set isFirst = loop.first %}
-            {%- set islast = loop.last %}
             {%- if item[rel.field.key] %}
-            <li class="nav-item {% if isFirst %}first-item{% endif %} {%- if islast %}last-item{% endif %}" role="tab">
+            <li class="nav-item" role="tab">
                 <a id="tab-{{ rel.key }}" href="#{{ rel.key }}"
                     class="nav-link {% if rel.key == relations_ns.active_tab %}active{% endif %}" data-toggle="tab"
                     aria-controls="{{ rel.key }}" {% if rel.key==relations_ns.active_tab %}aria-selected="true" {% endif
@@ -30,7 +28,7 @@
             </li>
             {%- endif %}
             {%- if rel.reverse and item[rel.reverse_field_key] %}
-            <li class="nav-item {% if isFirst %}first-item{% endif %} {%- if islast %}last-item{% endif %}" role="tab">
+            <li class="nav-item" role="tab">
                 <a id="tab-{{ rel.reverse_key }}" href="#{{ rel.reverse_key }}"
                     class="nav-link {% if rel.reverse_key == relations_ns.active_tab %}active{% endif %}"
                     data-toggle="tab" aria-controls="{{ rel.reverse_key }}" {% if

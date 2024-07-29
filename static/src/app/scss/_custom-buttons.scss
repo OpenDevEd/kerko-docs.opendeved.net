@@ -78,3 +78,20 @@
     background-color: rgba(255, 255, 255, 0.04);
   }
 }
+
+#download-options {
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+}
+
+.open-in-zotero-app,
+.open-in-zotero-web,
+.preferences-modal-button {
+  @include media-breakpoint-down(md) {
+    width: 100% !important;
+    a {
+      width: 100% !important;
+    }
+  }
+}

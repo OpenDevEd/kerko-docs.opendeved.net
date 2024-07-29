@@ -25,17 +25,19 @@
     <a class="nav-link" href="https://opendeved.net/contact-us/">{{ _('Contact Us') }}</a>
 </li>
 <li class="nav-item">
-    <div style="width: 20px; height: 100%">
-        <a href="{{ url_for('toggle_theme', current_page='/') }}" class="nav__link" style="width: 20px; height: 20px;">
-            <span class="nav__item">
-                {% if theme == "dark" %}
-                {{ sun("nav__icon") }}
-                {% else %}
-                {{ moon("nav__icon") }}
-                {% endif %}
-            </span>
-    </div>
+    <a href="{{ url_for('toggle_theme', current_page='/') }}" class="nav-link d-flex" style="gap: 5px;">
+        {% if theme == "dark" %}
+        <div style="width: 20px; height: 20px">
+            {{ sun("nav__icon") }}
+        </div>
+        <span class="d-lg-none">{{_("Switch To Dark Mode")}}</span>
+        {% else %}
+        <div style="width: 20px; height: 20px">
+            {{ moon("nav__icon") }}
+        </div>
+        <span class="d-lg-none">{{_("Switch To Light Mode")}}</span>
+        {% endif %}
+    </a>
 </li>
-</a>
 {%- endblock navbar_items %}
 {% endfor %}
