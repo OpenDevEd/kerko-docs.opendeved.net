@@ -1,8 +1,12 @@
 .item-content {
-  background: none;
+  background: var(--white);
   border: 0;
   margin-top: 1em;
   color: var(--font-80);
+  border: 1px solid var(--border);
+  padding: 0px 16px;
+  padding-bottom: 16px;
+  border-radius: $border-radius-md;
 
   .field-title {
     color: var(--font-60);
@@ -10,7 +14,7 @@
   }
 
   .field-value {
-    font-size: $font-size-md;
+    font-size: $font-size-base;
   }
 
   .row {
@@ -30,30 +34,19 @@
 
     .field-title {
       color: var(--font-60);
-      font-size: $font-size-lg;
+      font-size: $h5-font-size;
     }
 
     .field-value {
-      font-size: $font-size-lg;
+      font-size: $h5-font-size;
     }
   }
 }
 
 .item-title {
-  font-size: $font-size-xl;
+  font-size: $font-size-2xl;
 
   @include media-breakpoint-up(lg) {
     font-size: $font-size-3xl;
   }
 }
-
-// #collapseButtonsItem {
-// @include media-breakpoint-down(lg) {
-//   background: var(--background2);
-//   border-radius: 8px;
-//   width: 100%;
-//   border: 1px solid var(--border);
-//   position: absolute;
-//   top: 50px;
-// }
-// }

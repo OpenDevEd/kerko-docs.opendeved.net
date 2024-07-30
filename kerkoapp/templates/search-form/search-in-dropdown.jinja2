@@ -12,7 +12,7 @@
         <span id="search-dropdown-menu-button-text">
             {{config.kerko_composer.get_ordered_specs('scopes')[0].selector_label }}
         </span>
-        {{ expandIcon("", 20, 20) }}
+        {{ expandIcon("expandIcon", 20, 20) }}
     </button>
     <div class="dropdown-menu search-in-dropdown-menu" aria-labelledby="dropdownMenuButton">
         {%- for scopes in config.kerko_composer.get_ordered_specs('scopes') %}
@@ -45,7 +45,7 @@
             <span class="search-collapse-menu-button-text">
                 {{config.kerko_composer.get_ordered_specs('scopes')[0].selector_label }}
             </span>
-            {{ expandIcon("", 20, 20) }}
+            {{ expandIcon("expandIcon", 20, 20) }}
         </div>
         <div class="collapse" id="search-in-collapse">
             <div class="searchin-collapse-body">

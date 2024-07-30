@@ -2,7 +2,7 @@
 {%- from "macros/icons/opendeved-small-icon.jinja2" import opendevedSmallIcon %}
 {%- from "macros/icons/documentIcon.jinja2" import documentIcon %}
 
-<li class="{% block search_list_item_classes %} search-item break-word {% endblock %}" id="searchResultContainer">
+<li class="{% block search_list_item_classes %} search-item break-word {% endblock %}">
     {%- if print_preview -%}
     {%- block search_item_print %}
     {{- badges(result, mode='result') -}}
@@ -38,31 +38,35 @@
                 > 28 %}...{% endif %}</span>
         </div>
         {%- endif %}
-
-        {%- if result.data['creators']|length and not result.data['institution']%}
+        {%- if result.data['creators']|length and not result.data['institution'] %}
         <div class="d-flex align-items-center institution-class">
-            <span class="mx-2">|</span>
             <span>{{ result.data['creators']|format_creators(40) }}</span>
         </div>
         {%- endif %}
 
         {%- if result.data['date'] %}
+        {%- if result.data['creators']|length or result.data['institution'] %}
+        <span class="mx-2">|</span>
+        {%- endif %}
         <div class="d-flex align-items-center institution-class">
-            <span class="mx-2">|</span>
             <span>{{ result.data['date']|format_date() }}</span>
         </div>
         {%- endif %}
 
         {%- if result.data['itemType'] and not is_coming_soon(result) %}
+        {%- if result.data['creators']|length or result.data['institution'] or result.data['date'] %}
+        <span class="mx-2">|</span>
+        {%- endif %}
         <div class="d-flex align-items-center institution-class">
-            <span class="mx-2">|</span>
             <span>{{ result.data['itemType']|string }}</span>
         </div>
         {%- endif %}
 
         {%- if is_coming_soon(result) %}
+        {%- if result.data['creators']|length or result.data['institution'] or result.data['date'] %}
+        <span class="mx-2">|</span>
+        {%- endif %}
         <div class="d-lg-flex d-none">
-            <span class="mx-2">|</span>
             <span class="in-progress-badge d-lg-flex d-none">In Progress</span>
         </div>
         {%- endif %}

@@ -22,7 +22,7 @@
   --border: rgba(0, 0, 0, 0.2);
   --border-blue: #1e5b98;
   --blue: #5cacfd;
-  --hover: #e68124;
+  --hover: #dee2e6;
 
   --dummy: rgba(0, 0, 0, 0.6);
   --dummy-secondary: rgba(0, 0, 0, 0.8);
@@ -63,10 +63,10 @@ $border-radius-lg: 20px;
 
 // font-size
 html {
-  font-size: 16px;
+  font-size: 15px;
 
-  @media (min-width: 768px) {
-    font-size: 15px;
+  @media (min-width: 576px) {
+    font-size: 16px;
   }
 }
 $font-size-base: 1rem;

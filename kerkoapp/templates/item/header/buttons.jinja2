@@ -1,9 +1,13 @@
+{%- from "macros/icons/documentIcon.jinja2" import documentIconNoColor %}
+
 {%- if item.attachments|length > 1 %}
 <div class="{% block attachment_links_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
     <div class="dropdown">
         <button class="{%block attachment_links_btn_classes %}btn btn-primary btn-normal dropdown-toggle{% endblock %}"
             type="button" id="attachment-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="fas fa-file" aria-hidden="true"></span> {{ _('Read documents') -}}
+            <span aria-hidden="true">
+                {{ documentIconNoColor("", 20, 20) }}
+            </span> {{ _('Read documents') -}}
         </button>
         <div class="dropdown-menu dropdown-menu-right dropdown-width-300" aria-labelledby="attachment-options">
             {%- for attachment in item.attachments %}
@@ -18,46 +22,72 @@
 </div>
 {%- elif item.attachments|length == 1 %}
 <div class="{% block attachment_link_wrapper_classes %}d-inline-block d-print-none mb-2{% endblock %}">
-    <a class="{% block attachment_link_btn_classes %}btn btn-normal{% endblock %}"
+    <a class="{% block attachment_link_btn_classes %}btn btn-normal{% endblock %} w-100 w-lg-fit"
         href="{{ url_for('kerko.child_attachment_download', item_id=item.id, attachment_id=item.attachments[0]['id'], attachment_filename=item.attachments[0]['data']['filename']) }}"
         {% if config.kerko.features.download_attachment_new_window %} target="_blank" {% endif %} {{
         title_aria_label(_('Read \'{}\'').format(item.attachments[0]['data']['filename']|escape)) }}>
-        <span class="fas fa-file" aria-hidden="true"></span> {{ _('Read document') -}}
+        {{ documentIconNoColor("", 20, 20) }}
+        {{ _('Read document') -}}
     </a>
 </div>
 {%- endif %}
 {%- if config.kerko.features.print_item %}
 <div class="{% block print_link_wrapper_classes %}d-none d-lg-inline-block d-print-none mb-2{% endblock %}">
     <button id="print-link" class="{% block print_btn_classes %}btn btn-normal{% endblock %}" type="button">
-        <span class="" aria-hidden="true">
-            {{ printIcon("", 20, 20) }}
-        </span> {{ _('Print this record') }}
+        {{ printIcon("", 20, 20) }}
+        {{ _('Print this record') }}
     </button>
 </div>
 {%- endif %}
 {%- if show_download_link %}
-<div class="d-inline-block d-print-none mb-2">
+<div class="d-none d-lg-inline-block d-print-none mb-2">
     <div class="dropdown">
         <a class="btn btn-normal dropdown-toggle" type="button" id="download-options" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <span class="" aria-hidden="true">
-                {{ downloadIcon("", 20, 20) }}
-            </span> {% trans count=1, count_formatted='1'
+            {{ downloadIcon("", 20, 20) }}
+            {% trans count=1, count_formatted='1'
             %}Download this record{% pluralize %}Download {{ count_formatted }} records{% endtrans -%}
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-width-300" aria-labelledby="download-options">
             {%- for bib_format in config.kerko_composer.get_ordered_specs('bib_formats') %}
-            <a class="dropdown-item"
+            <a class="dropdown-item pt-3" style="white-space: normal; border-radius: 12px;"
                 href="{{ url_for('kerko.item_bib_download', item_id=item.id, bib_format_key=bib_format.key) }}"
                 rel="alternate" type="{{ bib_format.mime_type|escape }}" {{ title_aria_label(_('Download in
                 {download_option} format').format(download_option=bib_format.label|escape)) }}>
                 {{- bib_format.label -}}
+                <p class="text-muted">{{ bib_format.help_text }}</p>
             </a>
-            <p class="px-4 text-muted">{{ bib_format.help_text }}</p>
             {%- endfor %}
         </div>
     </div>
 </div>
+
+<div class="btn p-0 mb-1 d-lg-none">
+    <button class="btn btn-normal w-100 mb-1 d-flex flex-column" type="button" data-toggle="collapse"
+        data-target="#collapseDownloadOptions" aria-expanded="false" aria-controls="collapseExample">
+        <div style="gap: 6px;" class="d-flex dropdown-toggle justify-content-center align-items-center">
+            {{ downloadIcon("", 20, 20) }}
+            {% trans count=1, count_formatted='1'
+            %}Download this record{% pluralize %}Download {{ count_formatted }} records{% endtrans -%}
+        </div>
+        <div class="collapse" id="collapseDownloadOptions">
+            <div class="pt-2" style="text-align: start;">
+                <div class="card card-body p-1" style="text-align: start;">
+                    {%- for bib_format in config.kerko_composer.get_ordered_specs('bib_formats') %}
+                    <a class="dropdown-item pt-3" style="white-space: normal; border-radius: 12px;"
+                        href="{{ url_for('kerko.item_bib_download', item_id=item.id, bib_format_key=bib_format.key) }}"
+                        rel="alternate" type="{{ bib_format.mime_type|escape }}" {{ title_aria_label(_('Download in
+                        {download_option} format').format(download_option=bib_format.label|escape)) }}>
+                        <span>{{- bib_format.label -}}</span>
+                        <p class="text-muted">{{ bib_format.help_text }}</p>
+                    </a>
+                    {%- endfor %}
+                </div>
+            </div>
+        </div>
+    </button>
+</div>
+
 {%- endif %}
 {%- if config.kerko.features.open_in_zotero_app and open_in_zotero_app_url %}
 <div

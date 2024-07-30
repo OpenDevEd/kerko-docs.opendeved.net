@@ -1,7 +1,7 @@
 // buttons
 .btn-normal {
   display: inline-flex;
-  padding: 6px 16px;
+  padding: 8px 18px;
   justify-content: center;
   align-items: center;
   gap: 6px;
@@ -19,9 +19,7 @@
   }
 
   &:active {
-    background-color: var(--background-third) !important;
-    border: 1px solid var(--border) !important;
-    color: var(--font-80) !important;
+    background-color: none !important;
   }
 
   @include media-breakpoint-up(lg) {
@@ -44,13 +42,6 @@
   &:hover {
     text-decoration: none;
     color: var(--font-60);
-  }
-
-  // if the button is active
-  &[aria-label="Hide abstracts"] {
-    background: var(--background-blue);
-    color: var(--font-blue-80);
-    border-color: var(--border-blue);
   }
 
   @include media-breakpoint-up(lg) {

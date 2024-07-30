@@ -101,7 +101,9 @@ def format_creators(value: List[Dict[str, str]], maxLen = 20) -> str:
     creators = ""
     for i, creator in enumerate(value):
         if i >= 3: break
-        if creator.get("firstName") and creator.get("lastName"):
+        if creator.get("name"):
+            creators += f"{creator['name']}, "
+        elif creator.get("firstName") or creator.get("lastName"):
             creators += f"{creator['firstName']} {creator['lastName']}, "
     # check if the length of creators is greater than maxLen
     if len(creators) > maxLen:

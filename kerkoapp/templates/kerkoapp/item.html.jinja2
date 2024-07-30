@@ -51,8 +51,10 @@ remove_icon=''
 {%- endblock metas %}
 
 {%- block content_inner %}
+
 <div class="mb-4 item-content">
     {% include "item/title.jinja2" %}
+    {% include "item/article_status.jinja2" %}
     {% include "item/resource-type.jinja2" %}
     {% include "item/creators.jinja2" %}
     {% include "item/item_fields_zotero.jinja2" %}
@@ -64,6 +66,7 @@ remove_icon=''
     {% include "item/item_field_permalink.jinja2" %}
     {% include "item/item_field_relations.jinja2" %}
 </div>
+
 {%- block embedded_metadata_coins %}
 {{- item.coins|safe }}
 {%- endblock embedded_metadata_coins %}
