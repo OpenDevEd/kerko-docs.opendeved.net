@@ -5,12 +5,25 @@ from kerko.config_helpers import config_get
 
 from kerkoapp import create_app
 from flask import (redirect, session, request)
+from posthog import Posthog
+import uuid
 
 try:
     application = app = create_app()
 except RuntimeError as e:
     print(e, file=sys.stderr)
     sys.exit(1)
+
+# Initialize Posthog
+posthog = Posthog(
+    project_api_key=app.config.get('posthog').get("POSTHOG_API_KEY"),
+    host=app.config.get('posthog').get("POSTHOG_API_HOST")
+)
+
+@app.before_request
+def before_request():
+    if "user_id" not in session:
+        session["user_id"] = str(uuid.uuid4())
 
 @app.get("/toggle-theme")
 def toggle_theme():
@@ -19,7 +32,12 @@ def toggle_theme():
         session["theme"] = "light"
     else:
         session["theme"] = "dark"
-
+    # Capture the toggle-theme event
+    posthog.capture(
+        session["user_id"],
+        "toggle-theme",
+        properties={"theme": session["theme"], "$current_url": request.url},
+    )
     return redirect(request.referrer)
 
 @app.route('/')

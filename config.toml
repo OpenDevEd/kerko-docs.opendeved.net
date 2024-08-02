@@ -168,3 +168,7 @@ url = "https://opendeved.net/jobs/"
 # [[navbar.items]]
 # text = "Contact Us"
 # url = "https://opendeved.net/contact-us/"
+
+[posthog]
+POSTHOG_API_KEY = 
+POSTHOG_API_HOST =
