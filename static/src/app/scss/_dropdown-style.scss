@@ -9,6 +9,7 @@
 }
 
 .dropdown-item {
+  transition: all ease-in-out 0.2s;
   margin-top: 0px;
   margin-bottom: 0px;
   white-space: normal; // Override Bootstrap's no-wrap default.
