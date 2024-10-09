@@ -29,7 +29,7 @@ RUN cd /home/kerkoapp/kerkoapp && \
     . venv/bin/activate && \
     pip install --no-cache-dir -r requirements/run.txt && \
     pip install --no-cache-dir gunicorn posthog && \
-    export PATH="$(pwd)"/node_modules/.bin:${PATH} && \
+    export PATH=$(pwd)/node_modules/.bin:${PATH} && \
     flask assets build
 
-ENTRYPOINT ["/home/kerkoapp/tools/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/home/kerkoapp/tools/entrypoint.sh"]
