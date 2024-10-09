@@ -1,0 +1,28 @@
+services:
+  kerko:
+    build:
+      context: .
+      secrets:
+        - zotero_api_key
+        - zotero_library_id
+    volumes:
+      - ./instance:/home/kerkoapp/kerkoapp/instance
+    command: >
+      /home/kerkoapp/tools/root.entrypoint.sh
+    expose:
+      - "5000"
+  nginx:
+    build:
+      context: nginx
+      args:
+        SERVER_NAME: ${SERVER_NAME}
+    ports:
+      - "80:80"
+    depends_on:
+      - kerko
+
+secrets:
+  zotero_api_key:
+    environment: ZOTERO_API_KEY
+  zotero_library_id:
+    environment: ZOTERO_LIBRARY_ID

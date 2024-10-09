@@ -170,5 +170,5 @@ url = "https://opendeved.net/jobs/"
 # url = "https://opendeved.net/contact-us/"
 
 [posthog]
-POSTHOG_API_KEY = 
-POSTHOG_API_HOST =
+POSTHOG_API_KEY = "empty"
+POSTHOG_API_HOST = "empty"
