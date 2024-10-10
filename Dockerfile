@@ -5,7 +5,7 @@ COPY . /tmp/kerkoapp
 RUN --mount=type=secret,id=zotero_api_key \
     --mount=type=secret,id=zotero_library_id \
     apt-get update && apt-get install -y --no-install-recommends \
-    git npm curl && \
+    git npm curl gcc g++ make && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     groupadd --system kerkoapp && \
